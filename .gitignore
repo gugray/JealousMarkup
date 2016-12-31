@@ -1,0 +1,8 @@
+bin
+node_modules
+obj
+public
+**/wwwroot/static
+**/wwwroot/texts
+**/wwwroot/*.html
+
