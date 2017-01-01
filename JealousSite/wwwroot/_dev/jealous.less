@@ -3,12 +3,15 @@
 @fntTaglineFamily: "Open Sans", sans-serif;
 @fntTaglineSize: 0.9rem;
 @headerHeight: 9rem;
-@headerWidth: 32rem;
-@contentWidth: 40rem;
+@logoWidth: 32rem;
+@contentWidth: 36rem;
 @footerHeight: 3rem;
 @bgColor: #fbfbfb;
 @textColor: #404040;
-@linkColor: #e04e01;
+@linkColor: #b32a0b;
+@tocMetaColor: #707070;
+@tocLedeFontSize: 0.85rem;
+@tocMetaFontSize: 0.7rem;
 
 * { margin: 0; padding: 0; border: 0; }
 div, p, h1, h2, h3, ul, ol {
@@ -24,11 +27,15 @@ body {
 .header-wrap {
   position: fixed; width: 100%; height: @headerHeight;
   z-index: 1; background-color: @bgColor; color: black;
+}
+
+.content-wrap {
+  min-height: 100%; height: auto !important; height: 100%; margin-bottom: -@footerHeight;
   .header {
-    float: none; width: @headerWidth; margin: 0 auto; padding-top: 0.8em;
-    img { display: block; width: @headerWidth; margin: 0 auto; }
+    float: none; width: @contentWidth; margin: 0 auto; padding-top: 0.8em; height: @headerHeight;
+    img { display: block; width: @logoWidth; }
     .subhead { 
-      width: @headerWidth; margin: 0.5rem auto 0 auto; cursor: default;
+      margin: 0.5rem 0 0 0; cursor: default;
       .tagline {
         width: auto; padding-bottom: 0.2rem; border-bottom: 0.2rem solid #303030;
         font-size: @fntTaglineSize; font-family: @fntTaglineFamily; text-transform: uppercase;
@@ -40,15 +47,11 @@ body {
         color: black; text-decoration: none;
       }
       span { color: #303030; }
+      a { color: @linkColor; }
     }
   }
-}
-
-.content-wrap {
-  min-height: 100%; height: auto !important; height: 100%; margin-bottom: -@footerHeight;
   .content {
     width: @contentWidth; float: none; margin: 0 auto; height: auto; overflow-y: auto;
-    padding-top: @headerHeight;
   }
   .push { height: @footerHeight + 3rem; }
 }
@@ -59,12 +62,27 @@ body {
   .footer {
     display: inline-block; float: none; width: auto;
     font-size: 9pt; color: #707070;
-    a { color: desaturate(@linkColor, 30%); text-decoration: none; }
+    a { color: desaturate(@linkColor, 50%); text-decoration: none; }
   }
 }
 
 .content {
   color: @textColor; font-size: 1rem;
-  h1 { font-size: 1.8rem; }
+  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  p { margin-bottom: 0.8rem; }
+  p.lede { font-style: italic; margin-bottom: 2rem; }
   a { color: @linkColor; text-decoration: none; &:hover { text-decoration: underline; } }
+
+  .toc-item {
+    margin-bottom: 1.5rem;
+    h2 { font-size: 1rem; margin:0; font-weight: 600; }
+    .toc-meta, p { font-size: @tocLedeFontSize; color: @tocMetaColor; margin: 0; }
+    p { font-style: italic; a { color: @tocMetaColor; } }
+    .toc-meta { margin-bottom: 0.2rem; }
+    .date { color: @textColor; }
+    .filedunder { 
+      display: inline-block; margin-left: 0.5rem; font-size: @tocMetaFontSize; color: @textColor;
+      span { background-color: #f0f0f0; border-radius: 0.2rem; padding: 0 0.3rem; margin-right: 0.1rem }
+    }
+  }
 }

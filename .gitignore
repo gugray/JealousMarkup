@@ -1,8 +1,11 @@
 bin
 node_modules
 obj
+*.suo
+
 public
 **/wwwroot/static
 **/wwwroot/texts
 **/wwwroot/*.html
-
+**/wwwroot/imprint/*
+imprint.html

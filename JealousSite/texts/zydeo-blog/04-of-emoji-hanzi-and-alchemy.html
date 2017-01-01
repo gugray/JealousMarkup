@@ -1,0 +1,134 @@
+﻿<div id="x-rel">/of-emoji-hanzi-and-alchemy</div>
+<div id="x-title">Of emoji, Hanzi and alchemy</div>
+<div id="x-lede">I hate emoji. You know, those colorful icons: smiley faces, sad faces, thumbs up and their countless friends that we use all the time in short text messages and email. It’s not that I’m a purist that thinks emoji spell the end of literacy, particularly among those horrible teenagers. No, quite the contrary: I know full well that language and culture have been in constant decline since at least the time of the ancient Greek; I don’t buy into this kind of stuff. I actually like icons in text.</div>
+<div id="x-cats">Development, Chinese</div>
+<div id="x-date">2015-01-28</div>
+
+
+<h1>Of emoji, Hanzi and alchemy</h1>
+<p class="lede">{{lede}}</p>
+
+<p>
+  It’s about typography. I hate emoji because in almost every single
+  messaging app and word processor, they aggressively replace my
+  painstakingly typed ASCII emoticons and ruin the aesthetics of the
+  message. I created a couple of examples; for starters, here’s WhatsApp’s
+  emoji crime, taken straight from the Windows Phone app. Check out that
+  uneven line spacing because of the smiley face:
+</p>
+<p><a href="http://blog.zydeo.net/wp-content/uploads/2015/04/ctypo-emo-01-winphone.png"><img src="04-of-emoji-hanzi-and-alchemy_files/ctypo-emo-01-winphone.png" alt="." class="alignnone size-full wp-image-94" width="378" height="184"></a></p>
+<p>
+  You could say, and you might be justified, that this is only my
+  exaggerated sensitivity and I should seek counsel elsewhere, but read
+  on.
+</p>
+<h2>Chinese/English hybrid text</h2>
+<p>
+  Any Chinese-English dictionary will have a mix of English text and
+  Chinese Hanzi in the “body” of entries, i.e., in the part that provides
+  translations, paraphrases and other meta-information about each
+  headword. There’s a post dedicated entirely to the presentation of
+  CEDICT’s seemingly flat, structure-less entries, but let’s take a quick
+  glance at a fairly typical example here:
+</p>
+<p><a href="http://blog.zydeo.net/wp-content/uploads/2015/04/ctypo-emo-02-entry.png"><img src="04-of-emoji-hanzi-and-alchemy_files/ctypo-emo-02-entry.png" alt="." class="alignnone size-full wp-image-95" width="849" height="206"></a></p>
+<p>
+  That might seem easy enough, but in reality just about all the odds
+  are against you if you want to make this entry look good. For starters,
+  Latin text is aligned to the baseline, a horizontal line you could draw
+  under a line of text that would just touch the bottom of each character.
+  Chinese characters are built differently; they don’t have a baseline.
+  There is a lot of typographical detail about Latin and Chinese typefaces
+  in <a href="http://blog.zydeo.net/chinese-typefaces/" title="Chinese typefaces">this post</a> if you care to know.
+</p>
+<p>
+  What happens if you simply use the built-in text rendering routines
+  and pass them a string of mostly Latin letters, with a few Hanzi thrown
+  in there? This is what happens – you can try it yourself, the screenshot
+  is from Microsoft Word:
+</p>
+<p><a href="http://blog.zydeo.net/wp-content/uploads/2015/04/ctypo-emo-03-badline.png"><img src="04-of-emoji-hanzi-and-alchemy_files/ctypo-emo-03-badline.png" alt="." class="alignnone size-full wp-image-97" width="593" height="197"></a></p>
+<p>
+  Does that look familiar? Yup. It’s the emoji effect. The Latin font
+  in the text is 11pt Calibri; the Chinese font is 11pt Noto Sans Thin.
+  The Hanzi are not really aligned to anything in particular; they’re sort
+  of glued to the Latin font’s baseline, but not precisely. If you switch
+  to a different font – say, MingLiU, the Hanzi slide down a bit below
+  the baseline, and the extra line height is reduced, but not completely
+  eliminated. Remember, this is still 11pt MingLiU; I’m keeping the font
+  size constant for now.
+</p>
+<p><a href="http://blog.zydeo.net/wp-content/uploads/2015/04/ctypo-emo-04-goodline.png"><img src="04-of-emoji-hanzi-and-alchemy_files/ctypo-emo-04-goodline.png" alt="." class="alignnone size-full wp-image-98" width="605" height="187"></a></p>
+<p>
+  In reality, you need a somewhat larger typeface for Chinese text. An
+  11pt sans-serif typeface is perfectly fine on screen, but in my
+  experience, you need about 1.3 times the size for readability with
+  Hanzi. (In fact, the Chinese and Japanese editions of Windows XP were
+  shipped with a higher base font size, which effectively meant a higher
+  DPI setting – everything from text to window headers to icons was
+  somewhat larger than on a typical 96 DPI English system. This was
+  something we specifically had to deal with in the software I’m designing
+  in my day job, but curiously, I cannot find any relevant links via
+  Google now.)
+</p>
+<p>But back to hybrid text in Zydeo. With a larger font size for Hanzi, the naïve and easy way of drawing text would give you this:</p>
+<p><a href="http://blog.zydeo.net/wp-content/uploads/2015/04/ctypo-emo-03-badline.png"><img src="04-of-emoji-hanzi-and-alchemy_files/ctypo-emo-03-badline.png" alt="." class="alignnone size-full wp-image-97" width="593" height="197"></a></p>
+<h2>Reconciliation and magic constants</h2>
+<p>
+  Let’s take an inventory of the issues you need to solve to render
+  hybrid Chinese/English text so that both the Latin runs and the Hanzi
+  are readable and the whole still looks balanced and pleasant:
+</p>
+<ul>
+  <li>Whatever Latin font you’re using, you need to calculate its baseline so you can align Hanzi relative to that.</li>
+  <li>
+    Your Hanzi font’s point size should be somewhat larger (in my
+    subjective judgment, 1.3 times larger) than the Latin font’s point size.
+  </li>
+  <li>
+    You need to figure out the dimensions of the real display rectangle
+    of each Hanzi, as opposed to the dimensions reported by the system
+    routines.
+  </li>
+  <li>
+    Again, in my subjective judgment, you need to position the Hanzi so
+    that they extend below the Latin letters’ baseline; or more precisely, I
+    found that aligning the vertical center of Hanzi at about 2/3 the
+    x-height of that Latin typeface works well.
+  </li>
+  <li>
+    Ideally, you want to abstract away all this font-specific
+    information so that you can easily choose a different font with
+    different idiosyncratic properties and not mess up the entire rendering
+    of entries.
+  </li>
+</ul>
+<p>
+  There are several “magic constants” in this. I can’t explain
+  scientifically why I feel 1.3 times the point size is right for Hanzi,
+  nor why I think it’s most pleasant to align them against the Latin text
+  just the way I described it. But this is a recurring experience, whether
+  I’m dealing with the finer points of visual design or natural language
+  processing: at the end of the day, the mix typically includes a handful
+  of magic constants that you cannot explain “scientifically” – you just
+  keep experimenting until you are satisfied with the results. If I’m
+  pressed to be honest, then often what us designers and computer geeks
+  are doing is as much alchemy as science.
+</p>
+<p>
+  Particularly, finding out about the characteristics of each Chinese
+  typeface I considered was a matter of trial-and-error, and I constantly
+  had the feeling I was working against whatever system routines I had to
+  rely on, not with them. But that, too, is a familiar feeling to anyone
+  who’s been creating software for Windows.
+</p>
+<h2>One good word for Skype</h2>
+<p>
+  I can’t refrain from returning to emoji at the end of this post. I
+  wrote earlier how practically all messaging apps out there frustrate me
+  with their disregard for typographic balance when they throw in icons in
+  the middle of running text. Skype was no exception, until the very last
+  update this January. Then, much to my surprise, I discovered they did
+  something unexpected and dealt exactly with this peeve of mine. The
+  screenshot below speaks volumes.
+</p>

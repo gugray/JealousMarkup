@@ -21,9 +21,9 @@ namespace JealousSite
             wStructure.EnableRaisingEvents = true;
             wTexts = new FileSystemWatcher("./texts");
             wTexts.IncludeSubdirectories = true;
-            wTexts.Changed += onTextChanged;
-            wTexts.Created += onTextChanged;
-            wTexts.Renamed += onTextChanged;
+            wTexts.Changed += onStructureChanged;
+            wTexts.Created += onStructureChanged;
+            wTexts.Renamed += onStructureChanged;
             wTexts.Filter = "*.html";
             wTexts.EnableRaisingEvents = true;
         }
