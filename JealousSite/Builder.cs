@@ -9,11 +9,13 @@ namespace JealousSite
 {
     public class Builder
     {
+        private const string baseUrl = "https://jealousmarkup.xyz";
         private const string siteTitle = "Jealous Markup";
 
         private class TextInfo
         {
             public string Rel;
+            public bool NoIndex = false;
             public string Title = "";
             public string Lede = "";
             public DateTime Date;
@@ -40,6 +42,7 @@ namespace JealousSite
             "<script src='/static/jealous.min.js'></script>";
 
         private readonly List<TextInfo> texts = new List<TextInfo>();
+        private readonly HashSet<string> cats = new HashSet<string>();
 
         /// <summary>
         /// Regex to identify/extract metainformation included in HTML files as funny DIVs.
@@ -63,11 +66,16 @@ namespace JealousSite
         public void RebuildAll()
         {
             texts.Clear();
+            cats.Clear();
             readIndex();
             DirectoryInfo diRoot = new DirectoryInfo("./texts");
             buildTextsRecursive(diRoot);
             texts.Sort((x, y) => y.Date.CompareTo(x.Date));
+            foreach (var ti in texts)
+                foreach (var cat in ti.Cats)
+                    cats.Add(cat);
             rebuildFile("./structure/home.html", true);
+            buildSitemap();
         }
 
         private void buildTextsRecursive(DirectoryInfo di)
@@ -80,11 +88,6 @@ namespace JealousSite
             }
             var subDirs = di.GetDirectories();
             foreach (var subDir in subDirs) buildTextsRecursive(subDir);
-        }
-
-        public void RebuildText(string srcPath)
-        {
-            rebuildFile(srcPath, false);
         }
 
         private TextInfo rebuildFile(string srcPath, bool isHomePage)
@@ -115,6 +118,7 @@ namespace JealousSite
                     string key = m.Groups[1].Value;
                     string value = m.Groups[2].Value;
                     if (key == "title") ti.Title = WebUtility.HtmlDecode(value);
+                    else if (key == "noindex") ti.NoIndex = true;
                     else if (key == "rel") ti.Rel = value;
                     else if (key == "lede") ti.Lede = value;
                     else if (key == "date") ti.Date = parseDate(value);
@@ -124,9 +128,29 @@ namespace JealousSite
                     // Noindex!!!
                 }
             }
-            sbDev.Replace("{{title}}", WebUtility.HtmlEncode(ti.Title + " - " + siteTitle));
-            sbProd.Replace("{{title}}", WebUtility.HtmlEncode(ti.Title + " - " + siteTitle));
+            if (ti.Title.Trim() != "")
+            {
+                sbDev.Replace("{{title}}", WebUtility.HtmlEncode(ti.Title + " - " + siteTitle));
+                sbProd.Replace("{{title}}", WebUtility.HtmlEncode(ti.Title + " - " + siteTitle));
+            }
+            else
+            {
+                sbDev.Replace("{{title}}", WebUtility.HtmlEncode(siteTitle));
+                sbProd.Replace("{{title}}", WebUtility.HtmlEncode(siteTitle));
+            }
             sbContent.Replace("{{lede}}", ti.Lede);
+            if (!ti.NoIndex)
+            {
+                sbDev.Replace("{{noindex}}", "");
+                sbProd.Replace("{{noindex}}", "");
+            }
+            else
+            {
+                sbDev.Replace("{{noindex}}", "<meta name='robots' content='noindex,nofollow' />");
+                sbProd.Replace("{{noindex}}", "<meta name='robots' content='noindex,nofollow' />");
+            }
+
+            // If this is home aka TOC, content has extra placeholders
             if (isHomePage) generateToc(sbContent);
 
             string strContent = sbContent.ToString();
@@ -164,7 +188,7 @@ namespace JealousSite
             foreach (var x in parts)
             {
                 string trimmed = x.Trim();
-                if (x != "") res.Add(x);
+                if (x != "") res.Add(trimmed);
             }
             return res;
         }
@@ -194,7 +218,7 @@ namespace JealousSite
                 if (ti.Cats.Count != 0)
                 {
                     sb.AppendLine("<span class='filedunder'>");
-                    sb.AppendLine("<i class='fa fa-bookmark-o' aria-hidden='true'></i>");
+                    //sb.AppendLine("<i class='fa fa-bookmark-o' aria-hidden='true'></i>");
                     foreach (var cat in ti.Cats)
                         sb.AppendLine("<span>" + WebUtility.HtmlEncode(cat) + "</span>");
                     sb.AppendLine("</span>"); // <span class='filedunder'>
@@ -208,11 +232,35 @@ namespace JealousSite
                     sb.AppendLine("</span>"); // <span class='filedunder'>
                 }
                 sb.AppendLine("</div>"); // <div class='toc-meta'>
-                sb.AppendLine("<p>" + ti.Lede + "</p>");
+                //sb.AppendLine("<p>" + ti.Lede + "</p>");
                 sb.AppendLine("</div>"); // <div class='toc-item'>
             }
             sbContent.Replace("{{TOC}}", sb.ToString());
-            // TO-DO: Sitemap!
+
+            // Categories
+            sb.Clear();
+            List<string> catList = new List<string>();
+            foreach (var cat in cats) catList.Add(cat);
+            catList.Sort((x, y) => x.ToLowerInvariant().CompareTo(y.ToLowerInvariant()));
+            foreach (var cat in catList) sb.AppendLine("<span>" + cat + "</span>");
+            sbContent.Replace("{{CATS}}", sb.ToString());
+        }
+
+        private void buildSitemap()
+        {
+            using (FileStream fs = new FileStream("./wwwroot/sitemap.txt", FileMode.Create, FileAccess.ReadWrite))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                foreach (var ti in texts)
+                {
+                    if (ti.NoIndex) continue;
+                    string rel = ti.Rel;
+                    if (rel.StartsWith("!")) rel = "/" + rel.Substring(1);
+                    else rel = "/texts" + rel;
+                    string line = baseUrl + rel;
+                    sw.WriteLine(line);
+                }
+            }
         }
     }
 }

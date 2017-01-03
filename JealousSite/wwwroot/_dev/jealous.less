@@ -3,6 +3,7 @@
 @fntBaseSizeSmall: 12pt;
 @fntTaglineFamily: "Open Sans", sans-serif;
 @fntTaglineSize: 0.9rem;
+@fntTitleFamily: "Bree Serif", serif;
 @headerHeight: 8rem;
 @logoWidth: 32rem;
 @contentWidth: 38rem;
@@ -83,14 +84,18 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
 
 .content {
   color: @textColor; font-size: 1rem;
-  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  h1 { font-family: @fntTitleFamily; font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; }
+  h1.toc { margin-bottom: 0.8rem; }
+  h2 { font-family: @fntTitleFamily; font-size: 1.3rem; font-weight: 400; margin: 1rem 0 0.8rem 0; }
   p { margin-bottom: 0.8rem; }
   p.lede { font-style: italic; margin-bottom: 2rem; }
   a { color: @accentColor; text-decoration: none; &:hover { text-decoration: underline; } }
 
   .toc-item {
-    margin-bottom: 1.5rem;
-    h2 { font-size: 1rem; margin:0; font-weight: 600; }
+    margin-bottom: 1.5rem; height: auto; opacity: 1;
+    &.hidden { height: 0; margin-bottom: 0; opacity: 0; }
+    transition: all 0.5s ease;
+    h2 { font-family: @fntBaseFamily; font-size: 1rem; margin: 0; font-weight: 600; }
     .toc-meta, p { font-size: @tocLedeFontSize; color: @tocMetaColor; margin: 0; }
     p { font-style: italic; a { color: @tocMetaColor; } display: none; }
     i { display: none; }
@@ -100,6 +105,20 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
       display: inline-block; margin-left: 0.5rem; font-size: @tocMetaFontSize; color: @textColor;
       span { background-color: #f0f0f0; border-radius: 0.2rem; padding: 0 0.3rem; margin-right: 0.1rem }
     }
+  }
+
+  .catSelector { margin-bottom: 1.5rem; }
+  .catSelector span {
+    display: inline-block; float: left; padding: 0.3rem 0.8rem;
+    background-color: #f0f0f0; margin: 0 0.3rem 0.3rem 0;
+    transition: background-color 0.5s ease;
+    font-size: 0.8rem; cursor: default;
+    &.primary { 
+      font-weight: 700; 
+      &.selected { background-color: lighten(@accentColor, 30%); }
+    }
+    &.selected, &.selected:hover { background-color: lighten(@accentColor, 35%); color: white; }
+    &:hover { background-color: lighten(@accentColor, 55%); }
   }
 }
 

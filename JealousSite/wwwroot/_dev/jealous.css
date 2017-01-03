@@ -149,9 +149,19 @@ body {
   font-size: 1rem;
 }
 .content h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-family: "Bree Serif", serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+.content h1.toc {
+  margin-bottom: 0.8rem;
+}
+.content h2 {
+  font-family: "Bree Serif", serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 1rem 0 0.8rem 0;
 }
 .content p {
   margin-bottom: 0.8rem;
@@ -169,8 +179,17 @@ body {
 }
 .content .toc-item {
   margin-bottom: 1.5rem;
+  height: auto;
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+.content .toc-item.hidden {
+  height: 0;
+  margin-bottom: 0;
+  opacity: 0;
 }
 .content .toc-item h2 {
+  font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   margin: 0;
   font-weight: 600;
@@ -208,4 +227,31 @@ body {
   border-radius: 0.2rem;
   padding: 0 0.3rem;
   margin-right: 0.1rem;
+}
+.content .catSelector {
+  margin-bottom: 1.5rem;
+}
+.content .catSelector span {
+  display: inline-block;
+  float: left;
+  padding: 0.3rem 0.8rem;
+  background-color: #f0f0f0;
+  margin: 0 0.3rem 0.3rem 0;
+  transition: background-color 0.5s ease;
+  font-size: 0.8rem;
+  cursor: default;
+}
+.content .catSelector span.primary {
+  font-weight: 700;
+}
+.content .catSelector span.primary.selected {
+  background-color: #f57d62;
+}
+.content .catSelector span.selected,
+.content .catSelector span.selected:hover {
+  background-color: #f7917a;
+  color: white;
+}
+.content .catSelector span:hover {
+  background-color: #fde0da;
 }
