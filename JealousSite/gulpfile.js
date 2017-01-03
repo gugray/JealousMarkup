@@ -20,7 +20,7 @@ gulp.task('less', function () {
 
 // Delete all compiled and bundled files
 gulp.task('clean', function () {
-  return del(['./wwwroot/_dev/*.css', './wwwroot/static/*']);
+  return del(['./wwwroot/_dev/*.css', './wwwroot/static/*.js', './wwwroot/static/*.css']);
 });
 
 // Minify and bundle JS files

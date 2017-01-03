@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>How Zydeo came to be - Jealous Markup</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='/static/jealous.min.css'>
+</head>
+<body>
+  <div class="content-wrap">
+    <div class="header-wrap">
+      <div class="header">
+        <a href="/"><img src="/static/jealous-markup-white.svg" alt="jealous markup" /></a>
+        <div class="subhead">
+          <div class="tagline">Software and language, mostly</div>
+          <a href="/about">About</a>
+          <span> &bull; </span>
+          <a href="https://twitter.com/twilliability" target="_blank" rel="nofollow noreferrer">Twitter</a>
+          <span> &bull; </span>
+          <a href="https://github.com/gugray" target="_blank" rel="nofollow noreferrer">Github</a>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      
+
+<h1>How Zydeo came to be</h1>
+<p class="lede">Who needs another Chinese dictionary, and a desktop tool at that? Or: Zydeo 1.0’s release notes.</p>
+
+<p>
+  Zydeo started as a hobby project in the summer of 2014. For several
+  months I didn’t truly believe it would grow beyond a harmless outlet for
+  my urge to fiddle with things, experiment with user interfaces, and
+  code just for the fun of it. But soon enough this creature took on a
+  life of its own, and I realized it was becoming precisely the dictionary
+  I wanted to use in my own (often abortive) effort to learn Mandarin.
+</p>
+<p>
+  A big part of the inspiration came from Bret Victor’s 2006 article,
+  <a href="http://worrydream.com/MagicInk/" target="_blank">Magic Ink</a>,
+  which resonated with my own thinking about user interfaces. A
+  dictionary is pure information software, where the best kind of
+  interaction is no interaction at all. I suddenly understood why I found
+  many of the existing online and desktop dictionaries so cumbersome. When
+  I’m deciphering a Chinese text, I’m in a flow where I don’t want the
+  dictionary to be the center of my attention; I want it to get out of the
+  way. I don’t want to put in asterisks to fine-tune my search, and I
+  don’t want to go through a monotonous, cluttered list to find what I’m
+  looking for. I hope to give as little input as possible, and have the
+  computer figure out the right answer for me.
+</p>
+<p>
+  Gradually, a coherent picture of the dream tool emerged. Because
+  we’re dealing with an ideographic script, character recognition is a
+  must. Until I know what a character <em>is</em>, I cannot type it on a
+  computer, and looking up unknown characters is exactly what I’m doing
+  when I’m trying to understand an unfamiliar text.
+</p>
+<p>
+  Once I draw or type my query, I want the software to figure out my
+  question. If it’s Hanzi, it should recognize that and search for Hanzi.
+  If it’s Pinyin, it should search in the Pinyin headwords. In all other
+  cases, it must be English, so it should search in English equivalents or
+  glosses.
+</p>
+<p>
+  It should not need asterisks or the like to know if I’m looking for a
+  full word or a part of something. It should simply rank the most likely
+  entries higher in the output. And it should lay out the results in a
+  format where I can easily find the bits of information I’m looking for –
+  in other words, it should rely on typography so I can skim the results
+  quickly, and use highlights to show which part of each entry answers my
+  question.
+</p>
+<p>
+  The moment of thrill came when I found that every single building
+  block I needed was already out there, open-source, free to use. Jordan
+  Kiang created a character recognition tool,
+  <a href="http://www.kiang.org/jordan/software/hanzilookup/" target="_blank">HanziLookup</a>,
+  in 2006. It is in Java, and my platform on Windows is different, but I
+  could port it with reasonable effort. And there is of course
+  <a href="http://cc-cedict.org/wiki/" target="_blank">CC-CEDICT</a>,
+  an open-source, community-edited dictionary with over 110 thousand entries.
+</p>
+<p>
+  All I had to do was to bring these building blocks together and
+  combine them in a sleek user interface. Getting there involved a lot of
+  plain old schlep, but more importantly, it was a process of sawing off
+  unnecessary details and reducing the tool to the essentials: eliminating
+  any clutter and interaction that was not absolutely necessary. You can
+  find the details of this journey documented in the blog, written up in
+  posts that range from abstract design ideas to very specific tricks of
+  the Windows developer’s trade.
+</p>
+<p>
+  I put about three person-months’ work into the first version of Zydeo
+  (over a much longer period, of course), but because my job would have
+  been completely and utterly impossible without all the open-source
+  resources out there, I chose to open-source my own work too. In this way
+  I hope Zydeo will be a useful tool for those who are interested in
+  Chinese, while the source code, the data I produced as a side effect,
+  and the blog posts may be a useful resource for developers.
+</p>
+<p><em>Enjoy.</em></p>
+
+    </div>
+    <div class="push">&nbsp;</div>
+  </div>
+  <div class="footer-wrap">
+    <div class="footer">&copy;2017 Gábor L Ugray &bull; <a href="/imprint">Imprint</a></div>
+  </div>
+  <script src='/static/jealous.min.js'></script>
+</body>
+</html>

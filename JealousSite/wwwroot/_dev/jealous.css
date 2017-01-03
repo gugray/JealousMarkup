@@ -22,20 +22,24 @@ html {
   font-size: 14pt;
   font-family: "Open Sans", sans-serif;
 }
+html.smaller {
+  font-size: 12pt;
+}
 body {
   position: relative;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  background-color: #fbfbfb;
+  background-color: #e0e0e0;
 }
-.header-wrap {
+.debug {
+  display: none;
   position: fixed;
-  width: 100%;
-  height: 9rem;
+  color: white;
+  font-size: 9pt;
   z-index: 1;
-  background-color: #fbfbfb;
-  color: black;
+  background-color: #606060;
+  width: auto;
 }
 .content-wrap {
   min-height: 100%;
@@ -43,12 +47,18 @@ body {
   height: 100%;
   margin-bottom: -3rem;
 }
+.content-wrap .header-wrap {
+  background-color: #b32a0b;
+  height: 8rem;
+}
 .content-wrap .header {
   float: none;
-  width: 36rem;
-  margin: 0 auto;
   padding-top: 0.8em;
-  height: 9rem;
+  width: 38rem;
+  margin: 0 auto;
+  color: white;
+  background-color: #b32a0b;
+  height: 100%;
 }
 .content-wrap .header img {
   display: block;
@@ -61,7 +71,7 @@ body {
 .content-wrap .header .subhead .tagline {
   width: auto;
   padding-bottom: 0.2rem;
-  border-bottom: 0.2rem solid #303030;
+  border-bottom: 0.2rem solid white;
   font-size: 0.9rem;
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
@@ -75,24 +85,20 @@ body {
   font-size: 0.9rem;
   font-family: "Open Sans", sans-serif;
   text-transform: lowercase;
-  color: black;
+  color: white;
   text-decoration: none;
 }
-.content-wrap .header .subhead span {
-  color: #303030;
-}
-.content-wrap .header .subhead a {
-  color: #b32a0b;
-}
 .content-wrap .content {
-  width: 36rem;
+  width: 38rem;
   float: none;
   margin: 0 auto;
   height: auto;
   overflow-y: auto;
+  background-color: #fbfbfb;
+  padding: 1rem 1rem 2rem 1rem;
 }
 .content-wrap .push {
-  height: 6rem;
+  height: 3rem;
 }
 .footer-wrap {
   box-sizing: border-box;
@@ -152,9 +158,13 @@ body {
 }
 .content .toc-item p {
   font-style: italic;
+  display: none;
 }
 .content .toc-item p a {
   color: #707070;
+}
+.content .toc-item i {
+  display: none;
 }
 .content .toc-item .toc-meta {
   margin-bottom: 0.2rem;

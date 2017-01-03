@@ -1,21 +1,21 @@
 <svg width="187" height="23" viewBox="0 0 187 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
 <title>jealous markup</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(318 514)" figma:type="canvas">
+<g id="Canvas" transform="translate(318 470)" figma:type="canvas">
 <g id="jealous markup" style="mix-blend-mode:normal;" figma:type="vector">
-<use xlink:href="#path0_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path1_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path2_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path3_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path4_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path5_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path6_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path7_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path8_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path9_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path10_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path11_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path12_fill" transform="translate(-317.27 -513.508)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path0_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path1_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path2_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path3_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path4_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path5_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path6_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path7_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path8_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path9_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path10_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path11_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path12_fill" transform="translate(-317.27 -469.043)" fill="#FFFFFF" style="mix-blend-mode:normal;"/>
 </g>
 </g>
 <defs>

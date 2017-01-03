@@ -1,14 +1,17 @@
 ﻿@fntBaseFamily: "Open Sans", sans-serif;
-@fntBaseSize: 14pt;
+@fntBaseSizeFull: 14pt;
+@fntBaseSizeSmall: 12pt;
 @fntTaglineFamily: "Open Sans", sans-serif;
 @fntTaglineSize: 0.9rem;
-@headerHeight: 9rem;
+@headerHeight: 8rem;
 @logoWidth: 32rem;
-@contentWidth: 36rem;
+@contentWidth: 38rem;
+@contentPadding: 1rem;
 @footerHeight: 3rem;
 @bgColor: #fbfbfb;
+@shoulderColor: #e0e0e0;
 @textColor: #404040;
-@linkColor: #b32a0b;
+@accentColor: #b32a0b;
 @tocMetaColor: #707070;
 @tocLedeFontSize: 0.85rem;
 @tocMetaFontSize: 0.7rem;
@@ -18,42 +21,41 @@ div, p, h1, h2, h3, ul, ol {
   position: relative; float: left; box-sizing: border-box; width: 100%;
   height: auto; overflow-y: auto;
 }
-html { height: 100%; font-size: @fntBaseSize; font-family: @fntBaseFamily; }
+html { height: 100%; font-size: @fntBaseSizeFull; font-family: @fntBaseFamily; }
+html.smaller { font-size: @fntBaseSizeSmall; }
+body { position: relative; width: 100%; height: 100%; overflow-y: scroll; background-color: @shoulderColor; }
 
-body {
-  position: relative; width: 100%; height: 100%; overflow-y: scroll; background-color: @bgColor;
-}
-
-.header-wrap {
-  position: fixed; width: 100%; height: @headerHeight;
-  z-index: 1; background-color: @bgColor; color: black;
+.debug {
+  display: none;
+  position: fixed; color: white; font-size: 9pt; z-index: 1; background-color: #606060; width: auto;
 }
 
 .content-wrap {
   min-height: 100%; height: auto !important; height: 100%; margin-bottom: -@footerHeight;
+  .header-wrap { background-color: @accentColor; height: @headerHeight; }
   .header {
-    float: none; width: @contentWidth; margin: 0 auto; padding-top: 0.8em; height: @headerHeight;
+    float: none; padding-top: 0.8em; width: @contentWidth; margin: 0 auto; color: white;
+    background-color: @accentColor; height: 100%;
     img { display: block; width: @logoWidth; }
     .subhead { 
       margin: 0.5rem 0 0 0; cursor: default;
       .tagline {
-        width: auto; padding-bottom: 0.2rem; border-bottom: 0.2rem solid #303030;
+        width: auto; padding-bottom: 0.2rem; border-bottom: 0.2rem solid white;
         font-size: @fntTaglineSize; font-family: @fntTaglineFamily; text-transform: uppercase;
       }
       a, span {
         display: block; position: relative; float: right;
         white-space: pre-wrap;
         font-size: @fntTaglineSize; font-family: @fntTaglineFamily; text-transform: lowercase;
-        color: black; text-decoration: none;
+        color: white; text-decoration: none;
       }
-      span { color: #303030; }
-      a { color: @linkColor; }
     }
   }
   .content {
     width: @contentWidth; float: none; margin: 0 auto; height: auto; overflow-y: auto;
+    background-color: @bgColor; padding: 1rem @contentPadding 2rem @contentPadding;
   }
-  .push { height: @footerHeight + 3rem; }
+  .push { height: @footerHeight; }
 }
 
 .footer-wrap {
@@ -62,7 +64,7 @@ body {
   .footer {
     display: inline-block; float: none; width: auto;
     font-size: 9pt; color: #707070;
-    a { color: desaturate(@linkColor, 50%); text-decoration: none; }
+    a { color: desaturate(@accentColor, 50%); text-decoration: none; }
   }
 }
 
@@ -71,13 +73,14 @@ body {
   h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
   p { margin-bottom: 0.8rem; }
   p.lede { font-style: italic; margin-bottom: 2rem; }
-  a { color: @linkColor; text-decoration: none; &:hover { text-decoration: underline; } }
+  a { color: @accentColor; text-decoration: none; &:hover { text-decoration: underline; } }
 
   .toc-item {
     margin-bottom: 1.5rem;
     h2 { font-size: 1rem; margin:0; font-weight: 600; }
     .toc-meta, p { font-size: @tocLedeFontSize; color: @tocMetaColor; margin: 0; }
-    p { font-style: italic; a { color: @tocMetaColor; } }
+    p { font-style: italic; a { color: @tocMetaColor; } display: none; }
+    i { display: none; }
     .toc-meta { margin-bottom: 0.2rem; }
     .date { color: @textColor; }
     .filedunder { 
