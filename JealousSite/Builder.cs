@@ -4,6 +4,7 @@ using System.Net;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace JealousSite
 {
@@ -31,7 +32,7 @@ namespace JealousSite
             "<link rel='stylesheet' href='/_dev/jealous.css'>";
 
         private static readonly string prodIncludeHead =
-            "<link rel='stylesheet' href='/static/jealous.min.css'>";
+            "<link rel='stylesheet' href='/static/jealous.min.css?v={{css-hash}}'>";
 
         private static readonly string devIncludeBody =
             "<script src='/_lib/jquery-3.1.1.min.js'></script>\n" +
@@ -39,8 +40,10 @@ namespace JealousSite
             "<script src='/_dev/jealous.js'></script>";
 
         private static readonly string prodIncludeBody =
-            "<script src='/static/jealous.min.js'></script>";
+            "<script src='/static/jealous.min.js?v={{js-hash}}'></script>";
 
+        private string prodIncludeHeadBusted;
+        private string prodIncludeBodyBusted;
         private readonly List<TextInfo> texts = new List<TextInfo>();
         private readonly HashSet<string> cats = new HashSet<string>();
 
@@ -65,6 +68,22 @@ namespace JealousSite
 
         public void RebuildAll()
         {
+            using (var md5 = MD5.Create())
+            {
+                string verHash;
+                using (var s = File.OpenRead("./wwwroot/static/jealous.min.css"))
+                {
+                    verHash = toBase32(md5.ComputeHash(s));
+                    prodIncludeHeadBusted = prodIncludeHead.Replace("{{css-hash}}", verHash);
+                }
+                using (var s = File.OpenRead("./wwwroot/static/jealous.min.js"))
+                {
+                    verHash = toBase32(md5.ComputeHash(s));
+                    prodIncludeBodyBusted = prodIncludeBody.Replace("{{js-hash}}", verHash);
+                }
+            }
+
+
             texts.Clear();
             cats.Clear();
             readIndex();
@@ -99,8 +118,8 @@ namespace JealousSite
             sbDev.Replace("{{body-include}}", devIncludeBody);
 
             StringBuilder sbProd = new StringBuilder(strIndex);
-            sbProd.Replace("{{head-include}}", prodIncludeHead);
-            sbProd.Replace("{{body-include}}", prodIncludeBody);
+            sbProd.Replace("{{head-include}}", prodIncludeHeadBusted);
+            sbProd.Replace("{{body-include}}", prodIncludeBodyBusted);
 
             StringBuilder sbContent = new StringBuilder();
             using (FileStream fs = new FileStream(srcPath, FileMode.Open, FileAccess.Read))
@@ -262,5 +281,82 @@ namespace JealousSite
                 }
             }
         }
+
+        private const string base32Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+
+        private static string toBase32(byte[] bytes)
+        {
+            // Prepare container for the final value
+            StringBuilder builder = new StringBuilder(bytes.Length * 8 / 5);
+
+            // Position in the input buffer
+            int bytesPosition = 0;
+
+            // Offset inside a single byte that <bytesPosition> points to (from left to right)
+            // 0 - highest bit, 7 - lowest bit
+            int bytesSubPosition = 0;
+
+            // Byte to look up in the dictionary
+            byte outputBase32Byte = 0;
+
+            // The number of bits filled in the current output byte
+            int outputBase32BytePosition = 0;
+
+            // Iterate through input buffer until we reach past the end of it
+            while (bytesPosition < bytes.Length)
+            {
+                // Calculate the number of bits we can extract out of current input byte to fill missing bits in the output byte
+                int bitsAvailableInByte = Math.Min(8 - bytesSubPosition, 5 - outputBase32BytePosition);
+
+                // Make space in the output byte
+                outputBase32Byte <<= bitsAvailableInByte;
+
+                // Extract the part of the input byte and move it to the output byte
+                outputBase32Byte |= (byte)(bytes[bytesPosition] >> (8 - (bytesSubPosition + bitsAvailableInByte)));
+
+                // Update current sub-byte position
+                bytesSubPosition += bitsAvailableInByte;
+
+                // Check overflow
+                if (bytesSubPosition >= 8)
+                {
+                    // Move to the next byte
+                    bytesPosition++;
+                    bytesSubPosition = 0;
+                }
+
+                // Update current base32 byte completion
+                outputBase32BytePosition += bitsAvailableInByte;
+
+                // Check overflow or end of input array
+                if (outputBase32BytePosition >= 5)
+                {
+                    // Drop the overflow bits
+                    outputBase32Byte &= 0x1F;  // 0x1F = 00011111 in binary
+
+                    // Add current Base32 byte and convert it to character
+                    builder.Append(base32Alphabet[outputBase32Byte]);
+
+                    // Move to the next byte
+                    outputBase32BytePosition = 0;
+                }
+            }
+
+            // Check if we have a remainder
+            if (outputBase32BytePosition > 0)
+            {
+                // Move to the right bits
+                outputBase32Byte <<= (5 - outputBase32BytePosition);
+
+                // Drop the overflow bits
+                outputBase32Byte &= 0x1F;  // 0x1F = 00011111 in binary
+
+                // Add current Base32 byte and convert it to character
+                builder.Append(base32Alphabet[outputBase32Byte]);
+            }
+
+            return builder.ToString();
+        }
+
     }
 }
