@@ -60,9 +60,17 @@ body {
   background-color: #b32a0b;
   height: 100%;
 }
+html.mobile .content-wrap .header {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .content-wrap .header img {
   display: block;
   width: 32rem;
+}
+html.mobile .content-wrap .header img {
+  width: 100%;
 }
 .content-wrap .header .subhead {
   margin: 0.5rem 0 0 0;
@@ -76,8 +84,16 @@ body {
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
 }
-.content-wrap .header .subhead a,
-.content-wrap .header .subhead span {
+.content-wrap .header .subhead .links {
+  width: auto;
+  float: right;
+}
+html.mobile .content-wrap .header .subhead .links {
+  float: left;
+  margin-top: 0.5rem;
+}
+.content-wrap .header .subhead .links a,
+.content-wrap .header .subhead .links span {
   display: block;
   position: relative;
   float: right;
@@ -96,6 +112,9 @@ body {
   overflow-y: auto;
   background-color: #fbfbfb;
   padding: 1rem 1rem 2rem 1rem;
+}
+html.mobile .content-wrap .content {
+  width: 100%;
 }
 .content-wrap .push {
   height: 3rem;

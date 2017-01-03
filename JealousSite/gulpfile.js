@@ -47,6 +47,6 @@ gulp.task('default', ['clean', 'scripts', 'styles'], function () { });
 
 // Watch: recompile less on changes
 gulp.task('watch', function () {
-  gulp.watch(['./wwwroot/_dev/*.less'], ['less']);
+  gulp.watch(['./wwwroot/_dev/*.less'], ['styles']);
   gulp.watch(['./wwwroot/_dev/*.js'], ['scripts']);
 });
