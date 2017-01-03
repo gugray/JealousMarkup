@@ -22,7 +22,6 @@ div, p, h1, h2, h3, ul, ol {
   height: auto; overflow-y: auto;
 }
 html { height: 100%; font-size: @fntBaseSizeFull; font-family: @fntBaseFamily; }
-html.smaller { font-size: @fntBaseSizeSmall; }
 body { position: relative; width: 100%; height: 100%; overflow-y: scroll; background-color: @shoulderColor; }
 
 .debug {
@@ -36,9 +35,7 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
   .header {
     float: none; padding-top: 0.8em; width: @contentWidth; margin: 0 auto; color: white;
     background-color: @accentColor; height: 100%;
-    html.mobile & { width: 100%; padding-left: @contentPadding; padding-right: @contentPadding; }
     img { display: block; width: @logoWidth; }
-    html.mobile & img { width: 100%; }
     .subhead { 
       margin: 0.5rem 0 0 0; cursor: default;
       .tagline {
@@ -47,7 +44,6 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
       }
       .links {
         width: auto; float: right;
-        html.mobile & { float: left; margin-top: 0.5rem; }
         a, span {
           display: block; position: relative; float: right;
           white-space: pre-wrap;
@@ -60,7 +56,6 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
   .content {
     width: @contentWidth; float: none; margin: 0 auto; height: auto; overflow-y: auto;
     background-color: @bgColor; padding: 1rem @contentPadding 2rem @contentPadding;
-    html.mobile & { width: 100%; }
   }
   .push { height: @footerHeight; }
 }
@@ -73,6 +68,17 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
     font-size: 9pt; color: #707070;
     a { color: desaturate(@accentColor, 50%); text-decoration: none; }
   }
+}
+
+@media screen and (max-width: 800px) {
+  html { font-size: @fntBaseSizeSmall; }
+}
+
+@media screen and (max-width: 620px) {
+  .content-wrap .header { width: 100%; padding-left: @contentPadding; padding-right: @contentPadding; }
+  .content-wrap .header img { width: 100%; max-width: 400px; }
+  .content-wrap .header .subhead .links { float: left; margin-top: 0.5rem; clear: both; }
+  .content-wrap .content { width: 100%; }
 }
 
 .content {
@@ -96,3 +102,5 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
     }
   }
 }
+
+

@@ -22,9 +22,6 @@ html {
   font-size: 14pt;
   font-family: "Open Sans", sans-serif;
 }
-html.smaller {
-  font-size: 12pt;
-}
 body {
   position: relative;
   width: 100%;
@@ -60,17 +57,9 @@ body {
   background-color: #b32a0b;
   height: 100%;
 }
-html.mobile .content-wrap .header {
-  width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
 .content-wrap .header img {
   display: block;
   width: 32rem;
-}
-html.mobile .content-wrap .header img {
-  width: 100%;
 }
 .content-wrap .header .subhead {
   margin: 0.5rem 0 0 0;
@@ -87,10 +76,6 @@ html.mobile .content-wrap .header img {
 .content-wrap .header .subhead .links {
   width: auto;
   float: right;
-}
-html.mobile .content-wrap .header .subhead .links {
-  float: left;
-  margin-top: 0.5rem;
 }
 .content-wrap .header .subhead .links a,
 .content-wrap .header .subhead .links span {
@@ -113,9 +98,6 @@ html.mobile .content-wrap .header .subhead .links {
   background-color: #fbfbfb;
   padding: 1rem 1rem 2rem 1rem;
 }
-html.mobile .content-wrap .content {
-  width: 100%;
-}
 .content-wrap .push {
   height: 3rem;
 }
@@ -137,6 +119,30 @@ html.mobile .content-wrap .content {
 .footer-wrap .footer a {
   color: #84483a;
   text-decoration: none;
+}
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 12pt;
+  }
+}
+@media screen and (max-width: 620px) {
+  .content-wrap .header {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .content-wrap .header img {
+    width: 100%;
+    max-width: 400px;
+  }
+  .content-wrap .header .subhead .links {
+    float: left;
+    margin-top: 0.5rem;
+    clear: both;
+  }
+  .content-wrap .content {
+    width: 100%;
+  }
 }
 .content {
   color: #404040;
