@@ -9,7 +9,8 @@ h1,
 h2,
 h3,
 ul,
-ol {
+ol,
+blockquote {
   position: relative;
   float: left;
   box-sizing: border-box;
@@ -221,12 +222,27 @@ body {
   font-weight: 400;
   margin: 1rem 0 0.8rem 0;
 }
-.content p {
+.content p,
+.content ul,
+.content ol,
+.content figure {
   margin-bottom: 0.8rem;
 }
 .content p.lede {
   font-style: italic;
   margin-bottom: 2rem;
+}
+.content ul {
+  list-style: disc outside none;
+  padding: 0 0 0 1.5rem;
+}
+.content ol {
+  list-style: decimal outside none;
+  padding: 0 0 0 1.5rem;
+}
+.content li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.5rem;
 }
 .content a {
   color: #b32a0b;
@@ -234,6 +250,34 @@ body {
 }
 .content a:hover {
   text-decoration: underline;
+}
+.content img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+.content blockquote {
+  padding: 0.5rem 0 0.5rem 3rem;
+  font-size: 95%;
+  font-style: italic;
+  background-color: #f3f3f3;
+  margin-bottom: 1rem;
+  border-left: 2px solid #b32a0b;
+  overflow-y: hidden;
+}
+.content blockquote:before {
+  position: absolute;
+  top: 0;
+  left: 0.1rem;
+  content: '\201C';
+  color: #b32a0b;
+  font-size: 4rem;
+  font-family: serif;
+  font-weight: bold;
+}
+.content blockquote p:last-child {
+  margin-bottom: 0;
 }
 .content .toc-item {
   margin-bottom: 1.5rem;

@@ -83,7 +83,9 @@
   missing in the system, as they inevitably are in XP.
 </p>
 <p>So after all this groundwork, I expected Zydeo to just work on XP after a seamless installation. Here’s what I got instead.</p>
-<p><a class="more-link" href="http://blog.zydeo.net/wp-content/uploads/2015/04/wxpxm-01-error.png"><img src="09-going-the-extra-mile-for-windows-xp_files/wxpxm-01-error.png" alt="." class="alignnone size-full wp-image-152" width="770" height="260"></a></p>
+<p>
+  <img src="/files/zydeo-blog/wxpxm-01-error.png" alt="." width="770" height="260" />
+</p>
 <h2>Facepalm 1: Segoe UI</h2>
 <p>
   It took me less than a minute to find the reason: in Zydeo I rely on
@@ -101,7 +103,9 @@
   it’s not. Then, voilà…
 </p>
 <h2>Facepalm 2: font linking</h2>
-<p><a class="more-link" href="http://blog.zydeo.net/wp-content/uploads/2015/04/wxpxm-02-fontlinking.png"><img src="09-going-the-extra-mile-for-windows-xp_files/wxpxm-02-fontlinking.png" alt="." class="alignnone size-full wp-image-154" width="709" height="70"></a></p>
+<p>
+  <img src="/files/zydeo-blog/wxpxm-02-fontlinking.png" alt="." width="709" height="70" />
+</p>
 <p>
   You see I rely on an under-the-hood behavior of Windows in the search
   area. For the input field as well as the two buttons Zydeo specifies a
@@ -134,7 +138,9 @@
   built-in font linking and force the single Hei font that’s available in
   XP, SimHei, onto those buttons and the search input field.
 </p>
-<p><a class="more-link" href="http://blog.zydeo.net/wp-content/uploads/2015/04/wxpxm-03-simheifixed.png"><img src="09-going-the-extra-mile-for-windows-xp_files/wxpxm-03-simheifixed.png" alt="." class="alignnone size-full wp-image-155" width="709" height="61"></a></p>
+<p>
+  <img src="/files/zydeo-blog/wxpxm-03-simheifixed.png" alt="." width="709" height="61" />
+</p>
 <p>
   Yup. The <a href="http://www.pinyinjoe.com/pinyin/pinyin_xpfonts.htm" target="_blank">page on Pinyin Joe</a>
   that’s a such a wonderful source of information about Chinese fonts in
@@ -143,7 +149,9 @@
   improvised test from MS Word, with the same text in 11pt Calibri, 11pt
   SimHei and 10pt Consolas – that’s as mono as “spaced” ever gets:
 </p>
-<p><a class="more-link" href="http://blog.zydeo.net/wp-content/uploads/2015/04/wxpxm-04-simheifixed.png"><img src="09-going-the-extra-mile-for-windows-xp_files/wxpxm-04-simheifixed.png" alt="." class="alignnone size-full wp-image-156" width="326" height="166"></a></p>
+<p>
+  <img src="/files/zydeo-blog/wxpxm-04-simheifixed.png" alt="." width="326" height="166" />
+</p>
 <p style="color: #743500; font-style: italic;">Update: On a whim I mailed Joe about the error. Within a matter of hours he updated the page, which now says monospaced.</p>
 <p>On to…</p>
 <h2>Attempt 2: ship Noto Sans CJK</h2>
@@ -167,59 +175,80 @@
   against wall when I double-checked the result on XP an hour later.
 </p>
 <h2>Facepalm 3: GDI+ and OpenType</h2>
-<pthe reward="" of="" all="" this="" sweating="" was="" yet="" another="" one="" these="" messages="" as="" soon="" i="" started="" zydeo:<p="">
-<a class="more-link" href="http://blog.zydeo.net/wp-content/uploads/2015/04/wxpxm-01-error.png"><img src="09-going-the-extra-mile-for-windows-xp_files/wxpxm-01-error.png" alt="." class="alignnone size-full wp-image-152" width="770" height="260"></a><p></p>
+<p>The reward of all this sweating was yet another one of these messages as soon as I started Zydeo:</p>
+<p>
+  <img src="/files/zydeo-blog/wxpxm-01-error.png" alt="." width="770" height="260" />
+</p>
 <p>You see there are two ways to create a <em>System.Drawing.Font</em> object: the first works with installed fonts, the second uses a private font collection.</p>
 <div style="font-size: 70%;">
-<div><div id="highlighter_609682" class="syntaxhighlighter  csharp"><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp comments">// Instantiate font installed in system</code></div><div class="line number2 index1 alt1"><code class="csharp plain">Font f1 = </code><code class="csharp keyword">new</code> <code class="csharp plain">Font(</code><code class="csharp string">"Noto Sans S Chinese Regular"</code><code class="csharp plain">, 12F, FontStyle.Regular);</code></div><div class="line number3 index2 alt2"><code class="csharp comments">// Load font from a private font collection, without installing font in system</code></div><div class="line number4 index3 alt1"><code class="csharp plain">PrivateFontCollection pfc = </code><code class="csharp keyword">new</code> <code class="csharp plain">PrivateFontCollection();</code></div><div class="line number5 index4 alt2"><code class="csharp plain">pfc.AddFontFile(</code><code class="csharp string">"NotoSansHans-Regular.otf"</code><code class="csharp plain">);</code></div><div class="line number6 index5 alt1"><code class="csharp plain">Font f2 = </code><code class="csharp keyword">new</code> <code class="csharp plain">Font(pfc.Families[0], 12F, FontStyle.Regular);</code></div></div></td></tr></tbody></table></div></div>
+  <div><div id="highlighter_609682" class="syntaxhighlighter  csharp"><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp comments">// Instantiate font installed in system</code></div><div class="line number2 index1 alt1"><code class="csharp plain">Font f1 = </code><code class="csharp keyword">new</code> <code class="csharp plain">Font(</code><code class="csharp string">"Noto Sans S Chinese Regular"</code><code class="csharp plain">, 12F, FontStyle.Regular);</code></div><div class="line number3 index2 alt2"><code class="csharp comments">// Load font from a private font collection, without installing font in system</code></div><div class="line number4 index3 alt1"><code class="csharp plain">PrivateFontCollection pfc = </code><code class="csharp keyword">new</code> <code class="csharp plain">PrivateFontCollection();</code></div><div class="line number5 index4 alt2"><code class="csharp plain">pfc.AddFontFile(</code><code class="csharp string">"NotoSansHans-Regular.otf"</code><code class="csharp plain">);</code></div><div class="line number6 index5 alt1"><code class="csharp plain">Font f2 = </code><code class="csharp keyword">new</code> <code class="csharp plain">Font(pfc.Families[0], 12F, FontStyle.Regular);</code></div></div></td></tr></tbody></table></div></div>
 </div>
-<p>Now, there is a subtle difference between the two methods if GDI+
-cannot deal with the specific font you are using. If you install the
-Noto Sans CJK font, it will show up in some programs (like Word or
-Notepad), but in pre-Win8 systems, you will not be able to use it to
-create a <em>System.Drawing.Font</em> object. The first method will
-return a Font object, but it will not be what you requested; instead,
-you’ll be getting Microsoft Sans Serif.</p>
+<p>
+  Now, there is a subtle difference between the two methods if GDI+
+  cannot deal with the specific font you are using. If you install the
+  Noto Sans CJK font, it will show up in some programs (like Word or
+  Notepad), but in pre-Win8 systems, you will not be able to use it to
+  create a <em>System.Drawing.Font</em> object. The first method will
+  return a Font object, but it will not be what you requested; instead,
+  you’ll be getting Microsoft Sans Serif.
+</p>
 <p>The second method will barf at <em>AddFontFile</em>. How exactly? With a <em>FileNotFoundException</em>. Yup, you’re reading that right. Face. Palm.</p>
 <h2>Detour: GDI+ and OpenType</h2>
 <p>Now this section is not strictly relevant for how I went on with Zydeo, but I need the space for some ranting.</p>
 <p>There are two standard ways to draw text using Windows functions. One is GDI, which is what happens if you use <em>Windows.Forms.TextRenderer.DrawText</em> in C#. The other is GDI+, which is what happens if you use <em>System.Drawing.Graphics.DrawString</em>. In effect, everything in <em>System.Drawing</em> is a wrapper around GDI+.</p>
-<p>While the plus in the name suggests that GDI+ is the more advanced of
- the two, that’s not so obvious. As far as text rendering goes, GDI+
-seems to be a building abandoned when it was just about halfway built.
-If you have nothing better to do, read up on the differences on <em>The Art of Dev</em>, <a href="http://theartofdev.com/2013/08/12/the-wonders-of-text-rendering-and-gdi/" target="_blank">here</a> and <a href="http://theartofdev.com/2014/04/21/text-rendering-methods-comparison-or-gdi-vs-gdi-revised/" target="_blank">here</a>.
- In nearly all respects GDI+ appears to be inferior, but it can do one
-thing that GDI cannot that’s crucial in Zydeo: write text on top of an
-image or other non-uniform background.</p>
-<p>Another thing GDI+ cannot cope with on pre-Win8 systems is OpenType
-fonts. Not like Microsoft tells you up front. This little detail is
-hidden in the <a href="https://msdn.microsoft.com/en-us/library/system.drawing.text.privatefontcollection.addfontfile%28v=vs.110%29.aspx" target="_blank">same MSDN page</a> that explains about the <em>FileNotFound</em> exception:</p>
-<blockquote><p>
-Windows Forms applications support TrueType fonts and have limited
-support for OpenType fonts. If you try to use a font that is not
-supported, such as an unsupported OpenType font or a Bitmap font, an
-exception will occur.</p></blockquote>
-<p>As it happens, Noto Sans CJK is an OpenType font. As it also happens,
- it is an OpenType font that no online font converter will be able to
-transform into a TrueType font for you. Even FontForge will either
-report errors or save a corrupt TTF file.</p>
-<p>The truly frustrating part is that if you install Noto Sans CJK on
-Windows XP, the font shows up in Word and even Notepad. You just cannot
-use it in your own code, unless you are ready to switch from <em>System.Drawing</em> (GDI+) to <em>TextRenderer</em> (GDI). But that’s not an option for a different reason: it won’t paint over a gradient background, such as these buttons have:</p>
-<p><a class="more-link" href="http://blog.zydeo.net/wp-content/uploads/2015/04/wxpxm-05-gradient.png"><img src="09-going-the-extra-mile-for-windows-xp_files/wxpxm-05-gradient.png" alt="." class="alignnone size-full wp-image-157" width="225" height="66"></a></p>
+<p>
+  While the plus in the name suggests that GDI+ is the more advanced of
+  the two, that’s not so obvious. As far as text rendering goes, GDI+
+  seems to be a building abandoned when it was just about halfway built.
+  If you have nothing better to do, read up on the differences on <em>The Art of Dev</em>, <a href="http://theartofdev.com/2013/08/12/the-wonders-of-text-rendering-and-gdi/" target="_blank">here</a> and <a href="http://theartofdev.com/2014/04/21/text-rendering-methods-comparison-or-gdi-vs-gdi-revised/" target="_blank">here</a>.
+  In nearly all respects GDI+ appears to be inferior, but it can do one
+  thing that GDI cannot that’s crucial in Zydeo: write text on top of an
+  image or other non-uniform background.
+</p>
+<p>
+  Another thing GDI+ cannot cope with on pre-Win8 systems is OpenType
+  fonts. Not like Microsoft tells you up front. This little detail is
+  hidden in the <a href="https://msdn.microsoft.com/en-us/library/system.drawing.text.privatefontcollection.addfontfile%28v=vs.110%29.aspx" target="_blank">same MSDN page</a> that explains about the <em>FileNotFound</em> exception:
+</p>
+<blockquote>
+  <p>
+    Windows Forms applications support TrueType fonts and have limited
+    support for OpenType fonts. If you try to use a font that is not
+    supported, such as an unsupported OpenType font or a Bitmap font, an
+    exception will occur.
+  </p>
+</blockquote>
+<p>
+  As it happens, Noto Sans CJK is an OpenType font. As it also happens,
+  it is an OpenType font that no online font converter will be able to
+  transform into a TrueType font for you. Even FontForge will either
+  report errors or save a corrupt TTF file.
+</p>
+<p>
+  The truly frustrating part is that if you install Noto Sans CJK on
+  Windows XP, the font shows up in Word and even Notepad. You just cannot
+  use it in your own code, unless you are ready to switch from <em>System.Drawing</em> (GDI+) to <em>TextRenderer</em> (GDI). But that’s not an option for a different reason: it won’t paint over a gradient background, such as these buttons have:
+</p>
+<p>
+  <img src="/files/zydeo-blog/wxpxm-05-gradient.png" alt="." width="225" height="66" />
+</p>
 <p>Additionally, it’s only <em>System.Drawing</em> that gives you GDI+; the rest of <em>Windows.Forms</em> wraps up native Windows controls, which are all GDI and happy with OTF fonts for their part. But if you have a <em>TextBox</em>, which wraps a native edit control that can deal with OTF, using the <em>TextBox</em> class there’s no way to do that because the exposed property is a <em>System.Drawing.Font</em>, which will never, ever represent an OTF font… Face. Palm.</p>
 <h2>Bottom line</h2>
 <p>This post is already waaaay too long. What’s the deal in the end with Windows XP?</p>
 <ul>
-<li>When you run the installer on XP, it will download the Noto Sans fonts (only the Latin TTFs, not the large CJK OTF).</li>
-<li>Whatever is Segoe UI in later Windows versions shows up with Noto
-Sans on XP. That’s all the labels, and also the English in dictionary
-entries.</li>
-<li>Zydeo specifies “Microsoft Sans Serif” for the input field and the
-two buttons with the Chinese labels. Your mileage may vary, but this
-looks kinda OK for me on XP; better than it would on later Windows
-versions.</li>
-<li>At least with the on-demand font download I reduced the installer to 8MB from 18MB; that’s a benefit for everyone.</li>
+  <li>When you run the installer on XP, it will download the Noto Sans fonts (only the Latin TTFs, not the large CJK OTF).</li>
+  <li>
+    Whatever is Segoe UI in later Windows versions shows up with Noto
+    Sans on XP. That’s all the labels, and also the English in dictionary
+    entries.
+  </li>
+  <li>
+    Zydeo specifies “Microsoft Sans Serif” for the input field and the
+    two buttons with the Chinese labels. Your mileage may vary, but this
+    looks kinda OK for me on XP; better than it would on later Windows
+    versions.
+  </li>
+  <li>At least with the on-demand font download I reduced the installer to 8MB from 18MB; that’s a benefit for everyone.</li>
 </ul>
 <p>Is there anyone (I mean, <em>anyone</em>) out there that will use Zydeo on XP? I can’t wait to see.</p>
 
