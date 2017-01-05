@@ -45,11 +45,11 @@ body {
   height: 100%;
   margin-bottom: -3rem;
 }
-.content-wrap .header-wrap {
+.content-wrap div.header-wrap {
   background-color: #b32a0b;
   height: 8rem;
 }
-.content-wrap .header {
+.content-wrap div.header {
   float: none;
   padding-top: 0.8em;
   width: 38rem;
@@ -58,15 +58,15 @@ body {
   background-color: #b32a0b;
   height: 100%;
 }
-.content-wrap .header img {
+.content-wrap div.header img {
   display: block;
   width: 32rem;
 }
-.content-wrap .header .subhead {
+.content-wrap div.header .subhead {
   margin: 0.5rem 0 0 0;
   cursor: default;
 }
-.content-wrap .header .subhead .tagline {
+.content-wrap div.header .subhead .tagline {
   width: auto;
   padding-bottom: 0.2rem;
   border-bottom: 0.2rem solid white;
@@ -74,12 +74,12 @@ body {
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
 }
-.content-wrap .header .subhead .links {
+.content-wrap div.header .subhead .links {
   width: auto;
   float: right;
 }
-.content-wrap .header .subhead .links a,
-.content-wrap .header .subhead .links span {
+.content-wrap div.header .subhead .links a,
+.content-wrap div.header .subhead .links span {
   display: block;
   position: relative;
   float: right;
@@ -172,16 +172,16 @@ body {
   }
 }
 @media screen and (max-width: 620px) {
-  .content-wrap .header {
+  .content-wrap div.header {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  .content-wrap .header img {
+  .content-wrap div.header img {
     width: 100%;
     max-width: 400px;
   }
-  .content-wrap .header .subhead .links {
+  .content-wrap div.header .subhead .links {
     float: left;
     margin-top: 0.5rem;
     clear: both;
@@ -211,7 +211,25 @@ body {
   font-family: "Bree Serif", serif;
   font-size: 1.8rem;
   font-weight: 400;
+}
+.content p.meta {
   margin-bottom: 2rem;
+  font-size: 90%;
+}
+.content p.meta .date {
+  font-style: italic;
+}
+.content p.meta .filedunder {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 90%;
+  color: #404040;
+}
+.content p.meta .filedunder span {
+  background-color: #f0f0f0;
+  border-radius: 0.2rem;
+  padding: 0 0.3rem;
+  margin-right: 0.1rem;
 }
 .content h1.toc {
   margin-bottom: 0.8rem;
@@ -225,7 +243,8 @@ body {
 .content p,
 .content ul,
 .content ol,
-.content figure {
+.content figure,
+.content table {
   margin-bottom: 0.8rem;
 }
 .content p.lede {
@@ -251,11 +270,23 @@ body {
 .content a:hover {
   text-decoration: underline;
 }
+.content b {
+  font-weight: 600;
+}
 .content img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
   height: auto;
+  padding: 5px;
+  border: 2px solid #e6e6e6;
+  box-sizing: border-box;
+}
+.content p.formula {
+  text-align: center;
+}
+.content div.centeredContent {
+  text-align: center;
 }
 .content blockquote {
   padding: 0.5rem 0 0.5rem 3rem;
@@ -356,4 +387,31 @@ body {
 }
 .content .catSelector span:hover {
   background-color: #fde0da;
+}
+table.styleA {
+  display: inline-block;
+  font-size: 85%;
+  border-collapse: collapse;
+}
+table.styleA td {
+  text-align: center;
+  margin: 0;
+  padding: 0 1rem;
+}
+table.styleA tr.header td {
+  font-weight: 600;
+  border-bottom: 1pt solid #404040;
+}
+table.styleA td.rowHeader {
+  text-align: right;
+  padding-right: 0;
+}
+table.styleA.reducedPad td {
+  padding: 0 0.4rem;
+}
+table.styleA tr.dottedBottom td {
+  border-bottom: 1pt dotted #404040;
+}
+table.styleA tr.solidBottom td {
+  border-bottom: 1pt solid #404040;
 }

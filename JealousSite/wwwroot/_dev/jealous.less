@@ -32,8 +32,8 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
 
 .content-wrap {
   min-height: 100%; height: auto !important; height: 100%; margin-bottom: -@footerHeight;
-  .header-wrap { background-color: @accentColor; height: @headerHeight; }
-  .header {
+  div.header-wrap { background-color: @accentColor; height: @headerHeight; }
+  div.header {
     float: none; padding-top: 0.8em; width: @contentWidth; margin: 0 auto; color: white;
     background-color: @accentColor; height: 100%;
     img { display: block; width: @logoWidth; }
@@ -95,9 +95,9 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
 
 // Mobile device: real narrow
 @media screen and (max-width: 620px) {
-  .content-wrap .header { width: 100%; padding-left: @contentPadding; padding-right: @contentPadding; }
-  .content-wrap .header img { width: 100%; max-width: 400px; }
-  .content-wrap .header .subhead .links { float: left; margin-top: 0.5rem; clear: both; }
+  .content-wrap div.header { width: 100%; padding-left: @contentPadding; padding-right: @contentPadding; }
+  .content-wrap div.header img { width: 100%; max-width: 400px; }
+  .content-wrap div.header .subhead .links { float: left; margin-top: 0.5rem; clear: both; }
   .content-wrap .content { width: 100%; }
   .cookies-wrap { bottom: 0; .cookies { width: 100%; border-radius: 0; } }
   .cookies-wrap .cookies { img { width: 45%; } div { width: 55%; } }
@@ -105,16 +105,30 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
 
 .content {
   color: @textColor; font-size: 1rem;
-  h1 { font-family: @fntTitleFamily; font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; }
+  h1 { font-family: @fntTitleFamily; font-size: 1.8rem; font-weight: 400; }
+  p.meta { 
+    margin-bottom: 2rem; font-size: 90%;
+    .date { font-style: italic; }
+    .filedunder { 
+      display: inline-block; margin-left: 0.5rem; font-size: 90%; color: @textColor;
+      span { background-color: #f0f0f0; border-radius: 0.2rem; padding: 0 0.3rem; margin-right: 0.1rem }
+    }
+  }
   h1.toc { margin-bottom: 0.8rem; }
   h2 { font-family: @fntTitleFamily; font-size: 1.3rem; font-weight: 400; margin: 1rem 0 0.8rem 0; }
-  p, ul, ol, figure { margin-bottom: 0.8rem; }
+  p, ul, ol, figure, table { margin-bottom: 0.8rem; }
   p.lede { font-style: italic; margin-bottom: 2rem; }
   ul { list-style: disc outside none; padding: 0 0 0 1.5rem; }
   ol { list-style: decimal outside none; padding: 0 0 0 1.5rem; }
   li { margin-bottom: 0.4rem; padding-left: 0.5rem; }
   a { color: @accentColor; text-decoration: none; &:hover { text-decoration: underline; } }
-  img { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  b { font-weight: 600; }
+  img { 
+    display: block; margin: 0 auto; max-width: 100%; height: auto; padding: 5px; border: 2px solid lighten(@textColor, 65%); 
+    box-sizing: border-box;
+  }
+  p.formula { text-align: center; }
+  div.centeredContent { text-align: center; }
   blockquote {
     padding: 0.5rem 0 0.5rem 3rem; font-size: 95%; font-style: italic; background-color: darken(@bgColor, 3%);
     margin-bottom: 1rem; border-left: 2px solid @accentColor; overflow-y: hidden;
@@ -156,4 +170,12 @@ body { position: relative; width: 100%; height: 100%; overflow-y: scroll; backgr
   }
 }
 
-
+table.styleA {
+  display: inline-block; font-size: 85%; border-collapse: collapse;
+  td { text-align: center; margin: 0; padding: 0 1rem; }
+  tr.header td { font-weight: 600; border-bottom: 1pt solid @textColor; }
+  td.rowHeader { text-align: right; padding-right: 0; }
+  &.reducedPad td { padding: 0 0.4rem; }
+  tr.dottedBottom td { border-bottom: 1pt dotted @textColor; }
+  tr.solidBottom td { border-bottom: 1pt solid @textColor; }
+}

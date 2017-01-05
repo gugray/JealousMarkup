@@ -147,6 +147,19 @@ namespace JealousSite
                     // Noindex!!!
                 }
             }
+            StringBuilder sbMeta = new StringBuilder();
+            sbMeta.AppendLine("<span class='date'>" + months[ti.Date.Month - 1] + " " + ti.Date.Day + ", " + ti.Date.Year + "</span>");
+            if (ti.Cats.Count != 0)
+            {
+                sbMeta.AppendLine("<span class='filedunder'>");
+                foreach (var cat in ti.Cats)
+                    sbMeta.AppendLine("<span>" + WebUtility.HtmlEncode(cat) + "</span>");
+                sbMeta.AppendLine("</span>"); // <span class='filedunder'>
+            }
+            string strMeta = sbMeta.ToString();
+            sbContent.Replace("{{meta}}", strMeta);
+
+
             if (ti.Title.Trim() != "")
             {
                 sbDev.Replace("{{title}}", WebUtility.HtmlEncode(ti.Title + " - " + siteTitle));

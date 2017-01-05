@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Authorial analysis #2: Cross-interrogation methods - Jealous Markup</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700|Bree+Serif&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='/static/jealous.min.css?v=KY2BJD6HCXN4OH37VFYLAXJZYU'>
+</head>
+<body>
+  <div class="content-wrap">
+    <div class="header-wrap">
+      <div class="header">
+        <a href="/"><img src="/static/jealous-markup-white.svg" alt="jealous markup" /></a>
+        <div class="subhead">
+          <div class="tagline">Software and language, mostly</div>
+          <div class="links">
+            <a href="/about">About</a>
+            <span> &bull; </span>
+            <a href="https://twitter.com/twilliability" target="_blank" rel="nofollow noreferrer">Twitter</a>
+            <span> &bull; </span>
+            <a href="https://github.com/gugray" target="_blank" rel="nofollow noreferrer">Github</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+
+      
+
+<h1>Authorial analysis #2: Cross-interrogation methods</h1>
+<p class="meta"><span class='date'>August 20, 2013</span>
+<span class='filedunder'>
+<span>NLP</span>
+<span>Language</span>
+<span>Software</span>
+</span>
+</p>
+
+<p>
+  In the first post of the series I looked at the goals of authorial analysis, the linguistic variables it works with, and the way it measures the similarity of texts. It’s now time to test those methods for real – and my aim is to see how the same techniques work for a different language, Hungarian. First I must explain what I mean by different, and then come up with a way to decide what works and what doesn’t.
+</p>
+
+<h2>Define “different”</h2>
+<p>
+  Just how do I mean Hungarian is different from English? Why would that have any kind of bearing on authorial analysis?
+</p>
+<p>
+  Here are a few properties of Hungarian, contrasted with English, that justify the question of whether the same linguistic variables would work:
+</p>
+<ul>
+  <li>
+    Hungarian is a morphologically rich, agglutinative language. It keeps tacking suffixes to the end of words:
+    for nouns, these suffixes can indicate possession, number and case. With three persons, singular and plural,
+    and at least 17 cases (depending on who you’re asking), the suffixes can combine to produce several hundred
+    word forms for a single dictionary noun. Compare that with two or four possibilities (singular and plural,
+    with and without possessive <i>‘s</i>) for English.<br />
+    Remember how we defined “words” in the last post: lower-case sequences of letters, separated by spaces, with
+    punctuation trimmed. That means we’re really looking at word forms, not dictionary words. The same amount of
+    text will contain a much larger number of word forms in Hungarian, and each word form will occur a lot less frequently.
+    Is the list of the most frequent 100 words still useful? Will we find a whole lot of word bigrams occurring often
+    enough to be useful?
+  </li>
+  <li>
+    Add to this that Hungarian uses a larger alphabet relying on 35 characters:<br />
+    <i>aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyz</i><br />
+    Combined with the rich morphology, and contrasted with the 26 characters in the English alphabet, this will produce a greater number of different character 4-grams, all of which will occur less frequently. Will the character 4-gram variable still work as expected?
+  </li>
+  <li>
+    Finally, let’s consider one more linguistic feature: vowel harmony. Each vowel can be categorized as back,
+    front unrounded or front rounded. Many suffixes have two or three variants, and when a suffix is needed,
+    the corresponding form is tacked onto the word at hand to preserve vowel harmony. Some words have
+    alternatives (e.g., fel and föl) that are fully equivalent except for the choice of vowel, and they
+    attract a different set of suffix forms.<br />
+    Could a person’s preference of vowels be characteristic of their writing style? With a bit of insight into
+    the language we may be able to come up with a useful linguistic variable – but it may equally well turn out
+    to be a lemon.
+  </li>
+</ul>
+
+<h2>Measuring success</h2>
+<p>
+  Here’s the experiment I set up to learn what works and what does not.
+</p>
+<p>
+  First, I needed data to feed into the authorial analyzer. I gathered texts from 6 different columnists, writing for three online portals or magazines. From each author the corpus contains 8 to 14 articles, with a total of 9 to 13 thousand words. For statistical methods, this counts as a very small amount of data. The table below gives you a precise breakdown; authors are identified by two letters.
+</p>
+<div class="centeredContent">
+  <table class="styleA">
+    <tr class="header">
+      <td>Author</td>
+      <td># of articles</td>
+      <td>Total words</td>
+      <td>Total characters w/o spaces</td>
+    </tr>
+    <tr>
+      <td>fa</td>
+      <td>17</td>
+      <td>10,747</td>
+      <td>66,152</td>
+    </tr>
+    <tr>
+      <td>me</td>
+      <td>14</td>
+      <td>12,196</td>
+      <td>71,672</td>
+    </tr>
+    <tr>
+      <td>se</td>
+      <td>12</td>
+      <td>11,312</td>
+      <td>72,338</td>
+    </tr>
+    <tr>
+      <td>tg</td>
+      <td>8</td>
+      <td>9,172</td>
+      <td>60,742</td>
+    </tr>
+    <tr>
+      <td>to</td>
+      <td>20</td>
+      <td>12,939</td>
+      <td>77,398</td>
+    </tr>
+    <tr>
+      <td>va</td>
+      <td>14</td>
+      <td>12,792</td>
+      <td>82,547</td>
+    </tr>
+  </table>
+</div>
+
+<p>
+  My program processed the texts from each author and counted the raw and relative frequencies of:
+</p>
+<ul>
+  <li>Character 4-grams</li>
+  <li>Words</li>
+  <li>Words of different lengths (from 1 to 32 letters)</li>
+  <li>Vowels (14 of them)</li>
+  <li>Character trigrams from the end of each word</li>
+  <li>Character trigrams</li>
+  <li>Character bigrams</li>
+</ul>
+<p>
+  I’ll come back to the last four measures later. The key challenge at this point is to find out how good these metrics are at identifying authorship. For that the program reads texts paragraph by paragraph, and creates two samples for every author, so that approximately 20% of the text ends up in a “test” corpus, and the remaining 80% ends up in a “training” corpus. There are two sets of counts per author, one from the test corpus and one from the training corpus. Then, the program takes one author’s test corpus vectors at a time, and calculates their similarity with the corresponding vectors from every author’s training corpus.
+</p>
+<p>
+  A variable is good at predicting authorship if an author’s vector from the test corpus is consistently closest to the same author’s vector from the training corpus.
+</p>
+<p>
+  A typical method in corpus linguistics is to divide the content into 10 equal parts, use 9 parts for training and 1 part
+  for verification, and do this ten times around, using a different 1/10<sup>th</sup> for verification each time.
+  I used 1/5<sup>th</sup> because the corpus is already very small to begin with, and I didn’t do the full cycle, only selected
+  a single random set of paragraphs for verification. After all, this is just a playful exercise, not a publication-grade study.
+</p>
+<p>
+  The outcome is a set of tables like the one below, one for every linguistic variable. These figures are for word length.
+</p>
+<div class="centeredContent">
+  <table class="styleA reducedPad">
+    <tr class="header">
+      <td>Test author</td>
+      <td valign="bottom">Rank</td>
+      <td valign="bottom">Winner</td>
+      <td valign="bottom">fa</td>
+      <td valign="bottom">me</td>
+      <td valign="bottom">se</td>
+      <td valign="bottom">tg</td>
+      <td valign="bottom">to</td>
+    </tr>
+    <tr>
+      <td>fa</td>
+      <td>1</td>
+      <td>fa</td>
+      <td>0.9988419</td>
+      <td>0.9883497</td>
+      <td>0.9922947</td>
+      <td>0.9897225</td>
+      <td>0.9922224</td>
+    </tr>
+    <tr>
+      <td>me</td>
+      <td>1</td>
+      <td>me</td>
+      <td>0.9873105</td>
+      <td>0.9990566</td>
+      <td>0.9929206</td>
+      <td>0.9742669</td>
+      <td>0.9962779</td>
+    </tr>
+    <tr>
+      <td>se</td>
+      <td>1</td>
+      <td>se</td>
+      <td>0.9953771</td>
+      <td>0.9924851</td>
+      <td>0.9975414</td>
+      <td>0.9891039</td>
+      <td>0.9940981</td>
+    </tr>
+    <tr>
+      <td>tg</td>
+      <td>2</td>
+      <td>va</td>
+      <td>0.9838168</td>
+      <td>0.9763228</td>
+      <td>0.9861519</td>
+      <td>0.9935337</td>
+      <td>0.9774470</td>
+    </tr>
+    <tr>
+      <td>to</td>
+      <td>1</td>
+      <td>to</td>
+      <td>0.9837986</td>
+      <td>0.9953516</td>
+      <td>0.9905211</td>
+      <td>0.9750831</td>
+      <td>0.9973213</td>
+    </tr>
+    <tr>
+      <td>va</td>
+      <td>2</td>
+      <td>tg</td>
+      <td>0.9898528</td>
+      <td>0.9722818</td>
+      <td>0.9865904</td>
+      <td>0.9981027</td>
+      <td>0.9753838</td>
+    </tr>
+  </table>
+</div>
+
+<ul>
+  <li>
+    Each row represents an author’s vector from the test corpus; the last six columns represent authors’ vectors
+    from the training corpora. The number in <i>fa</i>’s row and <i>me</i>’s column is 0.9883497, meaning that the word length
+    vector from <i>fa</i>’s test corpus was 0.9883497 “similar” to the vector from <i>me</i>’s training corpus, in
+    terms of cosine similarity.
+  </li>
+  <li>
+    Rank is 1 if X is the most similar to X in this way; it is 2 if X is the <i>second</i>
+    most similar to X, following a different author Y; etc.
+  </li>
+  <li>
+    Clearly, word length gets it right, or almost right, for every author in this evaluation.
+  </li>
+</ul>
+
+<h2>Expert committee</h2>
+<p>
+  Now let’s stop filling up hundreds of cells with long numbers and try to answer the simple question:
+  <i>I have a new article here, who is the author?</i>
+  For each variable, the program computes the vectors of frequencies, and compares them to every author’s
+  vectors from our full training corpus. And we end up with something like this:
+</p>
+<div class="centeredContent">
+  <table class="styleA">
+    <tr class="header">
+      <td class="rowHeader">Metric</td>
+      <td>Authors ordered by similarity</td>
+    </tr>
+    <tr>
+      <td class="rowHeader">Word length</td>
+      <td>fa, to, me, se, va, tg</td>
+    </tr>
+    <tr>
+      <td class="rowHeader">Most frequent words</td>
+      <td>se, va, fa, tg, to, me</td>
+    </tr>
+    <tr>
+      <td class="rowHeader">4-grams	</td>
+      <td>va, se, tg, to, me, fa</td>
+    </tr>
+    <tr>
+      <td class="rowHeader">Word-final trigrams</td>
+      <td>fa, me, se, va, to, tg</td>
+    </tr>
+  </table>
+</div>
+<p>
+  We asked four experts, and they came up with different answers. The final touch to the authorship analyzer is to synthesize these diverging opinions into a single answer. Depending on the text we’re looking at, some variables may predict authorship perfectly; others may get it almost right; and others still may be thrown off the mark by the current text’s idiosyncrasies. Which ones get it right and which ones fail will vary from text to text. Remember, our training corpus is already quite small, and a single newspaper article may only contain a few hundred words. This leaves significant room for error with statistical methods.
+</p>
+<p>
+  So I decided to score every author based on their position in each variable’s ordered list of similarity.
+  Whenever <i>fa</i> occurs first, the program increments <i>fa</i>’s score by 1. For every second place, it adds 0.5.
+  For every third place, 0.25; and so on. The authors’ combined scores from the table above, then:
+</p>
+<div class="centeredContent">
+  <table class="styleA">
+    <tr class="header">
+      <td>fa</td>
+      <td>me</td>
+      <td>se</td>
+      <td>tg</td>
+      <td>to</td>
+      <td>va</td>
+    </tr>
+    <tr>
+      <td>2.28125</td>
+      <td>0.84375</td>
+      <td>1.875</td>
+      <td>0.4375</td>
+      <td>0.75</td>
+      <td>1.6875</td>
+    </tr>
+  </table>
+</div>
+<p>
+  The winner is <i>fa</i> with 2.28125. Incidentally, for the recent article that I analyzed here, that was exactly the right answer.
+</p>
+
+<h2>So what’s the deal with Hungarian?</h2>
+<p>
+  If you paid very close attention, you’ll have noticed that I skipped one metric from Juola’s list altogether: word pairs (bigrams). I had the intuition that with my small corpus size and Hungarian’s large morphological variability, that variable would yield data that is too sparse to be useful.
+</p>
+<p>
+  However, I added a couple of my own; some just for fun, but some out of genuine curiosity.
+</p>
+<p>
+  <b>Character bigrams and trigrams.</b> These are not referenced anywhere in the literature about authorial analysis, and there’s no obvious reason why they should be particularly useful for Hungarian. And indeed, the program’s hit rate dropped sharply whenever these two guys without a pedigree sat on the expert committee. The world is not a richer place with this knowledge, but it was reassuring to contrast the really useful stuff with bad ideas.
+</p>
+<p>
+  <b>Vowels.</b> I was genuinely curious about this metric, but it turned out to be a lemon. The frequency of different vowels had about the same predictive power for authorship as character bigrams or trigrams – none. I’d still like to go back and see how useful more specific features (long vs. short vowels, or front/back vowels) would be, but that’s for next time.
+</p>
+<p>
+  <b>Word-final trigrams.</b> This variable turned out to be a hit, in line with my hopes. Hungarian relies much less on short function words like prepositions in English; instead, it has a rich case system. The last three letters of nouns encode most of that information, and writers have a similar degree of freedom in their choice of case as they have in their choice of preposition in English. This explanation is definitely not the full story as it relies on a very narrow view of language, but my experiments have shown that expert committees had a higher success rate when this metric was sitting on them.
+</p>
+<p>
+  Do my earlier assertions about the number and frequency of words and character 4-grams hold true? The table below compares
+  one of the Hungarian authors (<i>to</i>) in my experiment to an English-language academic blogger (<i>lf</i>).
+</p>
+<div class="centeredContent">
+  <table class="styleA reducedPad">
+    <tr class="header">
+      <td>Author</td>
+      <td>Total chars</td>
+      <td>Different words</td>
+      <td>Avg wd freq</td>
+      <td>Different 4-grams</td>
+      <td>Avg 4-gram freq</td>
+    </tr>
+    <tr>
+      <td>to</td>
+      <td>77,398</td>
+      <td>2,034</td>
+      <td>4.71</td>
+      <td>21,847</td>
+      <td>4.04</td>
+    </tr>
+    <tr>
+      <td>lf</td>
+      <td>68,203</td>
+      <td>1,998</td>
+      <td>6.03</td>
+      <td>16,260</td>
+      <td>5.04</td>
+    </tr>
+  </table>
+</div>
+<p>
+  I would have expected the difference to be a lot more drastic, but the tendency is still clear: the Hungarian corpus contains a greater number of different word forms that each occur less frequently, and you find a larger number of different character 4-grams, which all occur fewer times.
+</p>
+
+<h2>From insight to black box and back</h2>
+<p>
+  The way I came up with ideas for new metrics, tested them, and then interpreted the results, is a typical full circle in statistics-based computer linguistics. You start out with some formal or intuitive insight into language:
+</p>
+<ul>
+  <li>
+    In Hungarian, the last few characters of words encode grammatical information that may be characteristic of an author’s style.
+  </li>
+  <li>
+    Authors may prefer different function words (e.g., definite vs. indefinite articles), and you can capture this by looking at the distribution of the 100 most frequent words.
+  </li>
+</ul>
+<p>
+  You then construct metrics that have nothing to do with grammatical categories like case or function words, and start counting big time. In effect, you drop your magnifying glass and create a statistical black box. The trick is to choose metrics that are really dumb (do not require automated linguistic analysis or other language-specific knowledge in your code) but still capture the information you are looking for.
+</p>
+<p>
+  In the end, there are exciting possibilities to curve back and learn very language-y things from the experiment. Consider this. Instead of attributing texts to specific authors, you could instead try to train a program to determine if a text was written by a male or female author. This is not new, there are people out there getting paid to do this kind of thing. You may start out from one of the metrics I used in my experiment: the distribution of the 100 most frequent words. But then you can start narrowing down the vector from 100 dimensions to only a few – in practical terms, looking at a much shorter list of specific words in a specific language. It may turn out some words have strong gender predicting capacity, while others may be more gender neutral. Do male writers prefer definite articles? Do female writes prefer personal pronouns? The answer is yours to find out.
+</p>
+<p>
+  I am also quite intrigued to see what metrics could be used to identify authors in languages that use an ideographic writing system, like Chinese. Because there is no short alphabet and words are not delimited by spaces, many of the metrics I’ve used successfully for Hungarian are simply not applicable.
+</p>
+<p>
+  But that’s not what I’ll do next. Instead, in the next post I’ll show you how I used my shiny new authorial analyzer to solve a decades-old mystery of Hungarian literature, and to see who really influences the style of a transated novel: the original author or the translator.
+</p>
+
+    </div>
+    <div class="push">&nbsp;</div>
+  </div>
+  <div class="footer-wrap">
+    <div class="footer">&copy;2017 Gábor L Ugray &bull; <a href="/imprint">Imprint</a></div>
+  </div>
+  <script src='/static/jealous.min.js?v=X2TWUUIMLBCBAIUIFA2QXR4JZI'></script>
+</body>
+</html>
