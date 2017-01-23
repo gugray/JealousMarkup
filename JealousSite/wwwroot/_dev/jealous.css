@@ -461,4 +461,7 @@ table.styleA tr.solidBottom td {
     width: 100%;
     margin-right: 0;
   }
+  .catzine img {
+    width: 100%;
+  }
 }
