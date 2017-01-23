@@ -314,6 +314,12 @@ body {
 .content blockquote p:last-child {
   margin-bottom: 0;
 }
+.content .imprint {
+  font-size: 0.8rem;
+}
+.content .imprint h1 {
+  font-size: 1.3rem;
+}
 .content .toc-item {
   margin-bottom: 1.5rem;
   height: auto;
@@ -417,4 +423,42 @@ table.styleA tr.dottedBottom td {
 }
 table.styleA tr.solidBottom td {
   border-bottom: 1pt solid #404040;
+}
+.catzine {
+  text-align: center;
+}
+.catzine img {
+  background-color: white;
+  max-width: 28rem;
+}
+.catzine-thumb {
+  background-color: white;
+  text-align: center;
+  width: 48%;
+  margin: 0 2% 0.7rem 0;
+}
+.catzine-thumb a {
+  display: block;
+  padding: 0.2rem;
+  border: 2px solid #e6e6e6;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  overflow-y: auto;
+}
+.catzine-thumb a:hover {
+  text-decoration: none;
+}
+.catzine-thumb img {
+  border: none;
+  background-color: white;
+  width: 50%;
+  display: block;
+  float: left;
+}
+@media screen and (max-width: 620px) {
+  .catzine-thumb {
+    width: 100%;
+    margin-right: 0;
+  }
 }
