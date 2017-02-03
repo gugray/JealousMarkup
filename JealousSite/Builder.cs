@@ -52,6 +52,8 @@ namespace JealousSite
         /// </summary>
         private readonly Regex reMetaDiv = new Regex("^<div +id=\"x\\-([^\"]+)\">(.*)<\\/div>[ \t]*$");
 
+        private readonly Regex reMetaMeta = new Regex("^<meta (.+)\\/>[ \t]*$");
+
         public Builder()
         {
             readIndex();
@@ -122,6 +124,7 @@ namespace JealousSite
             sbProd.Replace("{{body-include}}", prodIncludeBodyBusted);
 
             StringBuilder sbContent = new StringBuilder();
+            StringBuilder sbMetaTags = new StringBuilder();
             using (FileStream fs = new FileStream(srcPath, FileMode.Open, FileAccess.Read))
             using (StreamReader sr = new StreamReader(fs))
             {
@@ -131,7 +134,9 @@ namespace JealousSite
                     Match m = reMetaDiv.Match(line);
                     if (!m.Success)
                     {
-                        sbContent.AppendLine(line);
+                        m = reMetaMeta.Match(line);
+                        if (m.Success) sbMetaTags.AppendLine(line);
+                        else sbContent.AppendLine(line);
                         continue;
                     }
                     string key = m.Groups[1].Value;
@@ -147,6 +152,12 @@ namespace JealousSite
                     // Noindex!!!
                 }
             }
+            // Meta tags
+            string strMetaTags = sbMetaTags.ToString();
+            sbDev.Replace("{{meta-tags}}", strMetaTags);
+            sbProd.Replace("{{meta-tags}}", strMetaTags);
+
+            // Our (in-site) "metas", aka tags/cats/watchamacallit
             StringBuilder sbMeta = new StringBuilder();
             sbMeta.AppendLine("<span class='date'>" + months[ti.Date.Month - 1] + " " + ti.Date.Day + ", " + ti.Date.Year + "</span>");
             if (ti.Cats.Count != 0)
@@ -189,12 +200,20 @@ namespace JealousSite
             sbDev.Replace("{{content}}", strContent);
             sbProd.Replace("{{content}}", strContent);
 
-            string trgFolder = "./wwwroot";
+            string resolvedRel = "";
             if (!isHomePage)
             {
-                if (!ti.Rel.StartsWith("!")) trgFolder += "/texts" + ti.Rel;
-                else trgFolder += "/" + ti.Rel.Substring(1);
+                if (!ti.Rel.StartsWith("!")) resolvedRel = "/texts" + ti.Rel;
+                else resolvedRel = "/" + ti.Rel.Substring(1);
             }
+
+            // URL in page
+            string pageUrl = baseUrl + resolvedRel;
+            sbDev.Replace("{{url}}", pageUrl);
+            sbProd.Replace("{{url}}", pageUrl);
+
+            // Where the page goes
+            string trgFolder = "./wwwroot" + resolvedRel;
             if (!Directory.Exists(trgFolder)) Directory.CreateDirectory(trgFolder);
             string devFileName = Path.Combine(trgFolder, "dev-index.html");
             string prodFileName = Path.Combine(trgFolder, "index.html");
