@@ -52,7 +52,7 @@ namespace JealousSite
         /// </summary>
         private readonly Regex reMetaDiv = new Regex("^<div +id=\"x\\-([^\"]+)\">(.*)<\\/div>[ \t]*$");
 
-        private readonly Regex reMetaMeta = new Regex("^<meta (.+)\\/>[ \t]*$");
+        private readonly Regex reMetaMeta = new Regex("^<meta +(name|property)=\"([^\"]+)\" +content=\"([^\"]+)\".*\\/>[ \t]*$");
 
         public Builder()
         {
@@ -113,6 +113,12 @@ namespace JealousSite
 
         private TextInfo rebuildFile(string srcPath, bool isHomePage)
         {
+            // DBG
+            if (srcPath.Contains("catzine-03"))
+            {
+                int fdks = 0;
+            }
+
             TextInfo ti = new TextInfo();
 
             StringBuilder sbDev = new StringBuilder(strIndex);
@@ -125,6 +131,8 @@ namespace JealousSite
 
             StringBuilder sbContent = new StringBuilder();
             StringBuilder sbMetaTags = new StringBuilder();
+            string metaDescription = "";
+            string shortTitle = "";
             using (FileStream fs = new FileStream(srcPath, FileMode.Open, FileAccess.Read))
             using (StreamReader sr = new StreamReader(fs))
             {
@@ -135,13 +143,22 @@ namespace JealousSite
                     if (!m.Success)
                     {
                         m = reMetaMeta.Match(line);
-                        if (m.Success) sbMetaTags.AppendLine(line);
+                        if (m.Success)
+                        {
+                            sbMetaTags.AppendLine(line);
+                            if (m.Groups[2].Value == "description")
+                                metaDescription = WebUtility.HtmlDecode(m.Groups[3].Value);
+                        }
                         else sbContent.AppendLine(line);
                         continue;
                     }
                     string key = m.Groups[1].Value;
                     string value = m.Groups[2].Value;
-                    if (key == "title") ti.Title = WebUtility.HtmlDecode(value);
+                    if (key == "title")
+                    {
+                        ti.Title = WebUtility.HtmlDecode(value);
+                        shortTitle = ti.Title;
+                    }
                     else if (key == "noindex") ti.NoIndex = true;
                     else if (key == "rel") ti.Rel = value;
                     else if (key == "lede") ti.Lede = value;
@@ -207,10 +224,16 @@ namespace JealousSite
                 else resolvedRel = "/" + ti.Rel.Substring(1);
             }
 
-            // URL in page
+            // URL in page, and other quirky placeholders
             string pageUrl = baseUrl + resolvedRel;
             sbDev.Replace("{{url}}", pageUrl);
             sbProd.Replace("{{url}}", pageUrl);
+            sbDev.Replace("{{description}}", WebUtility.HtmlEncode(metaDescription));
+            sbProd.Replace("{{description}}", WebUtility.HtmlEncode(metaDescription));
+            sbDev.Replace("{{short-title}}", WebUtility.HtmlEncode(shortTitle));
+            sbProd.Replace("{{short-title}}", WebUtility.HtmlEncode(shortTitle));
+            sbDev.Replace("{{share-text}}", WebUtility.UrlEncode(metaDescription));
+            sbProd.Replace("{{share-text}}", WebUtility.UrlEncode(metaDescription));
 
             // Where the page goes
             string trgFolder = "./wwwroot" + resolvedRel;

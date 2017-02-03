@@ -431,6 +431,25 @@ table.styleA tr.solidBottom td {
   background-color: white;
   max-width: 28rem;
 }
+.catzine .socialshares {
+  text-transform: uppercase;
+  margin: 0.5rem 0 1rem 0;
+}
+.catzine .socialshares div {
+  width: 15rem;
+  margin: 0 auto;
+  float: none;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+}
+.catzine .socialshares a {
+  display: inline-block;
+  width: 2rem;
+  background-color: #00a1e4;
+  color: white;
+  margin-left: 0.5rem;
+}
 .catzine-thumb {
   background-color: white;
   text-align: center;
