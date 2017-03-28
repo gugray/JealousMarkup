@@ -314,6 +314,13 @@ body {
 .content blockquote p:last-child {
   margin-bottom: 0;
 }
+.content p.code {
+  font-family: monospace;
+  font-size: 70%;
+  white-space: pre-wrap;
+  padding: 0.5rem;
+  background-color: #f3f3f3;
+}
 .content .imprint {
   font-size: 0.8rem;
 }

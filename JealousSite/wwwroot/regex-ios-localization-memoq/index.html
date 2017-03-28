@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  <title>Regexing the daylights out of an iOS localization package - Jealous Markup</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700|Bree+Serif&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='/static/jealous.min.css?v=4K5ZNK3PHWFJPKHOZPSJKHFXN4'>
+</head>
+<body>
+  <div class="content-wrap">
+    <div class="header-wrap">
+      <div class="header">
+        <a href="/"><img src="/static/jealous-markup-white.svg" alt="jealous markup" /></a>
+        <div class="subhead">
+          <div class="tagline">Software and language, mostly</div>
+          <div class="links">
+            <a href="/projects">Projects</a>
+            <span> &bull; </span>
+            <a href="https://twitter.com/twilliability" target="_blank" rel="nofollow noreferrer">Twitter</a>
+            <span> &bull; </span>
+            <a href="https://github.com/gugray" target="_blank" rel="nofollow noreferrer">Github</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+
+      
+
+<h1>Regexing the daylights out of an iOS localization package</h1>
+<p class="meta"><span class='date'>March 28, 2017</span>
+<span class='filedunder'>
+<span>memoQ</span>
+<span>iOS</span>
+<span>Localization</span>
+<span>regex</span>
+</span>
+</p>
+
+<p>
+  <i>
+    The is Part 1 of the series
+    <a href="/ios-localization-with-memoq">Localizing an iOS drawing app with memoQ, one cliffhanger at a time</a>.
+  </i>
+</p>
+
+<p>The iOS localization package I received contains a bunch of text files. All of them have a simple enough structure, like so:</p>
+<p class="code">/* Distribute Horizontally */
+"Distribute Horizontally" = "Distribute Horizontally";
+
+/* Distribute Vertically */
+"Distribute Vertically" = "Distribute Vertically";
+
+/* Download Problem */
+"Download Problem" = "Download Problem";
+
+/* Downloading “%@” */
+"Downloading “%@”" = "Downloading “%@”";</p>
+
+<p>
+  The first line is always a comment. Left of the equation sign is what you could consider, with some generosity, a context ID; to the right is the text to translate, in quotation marks. memoQ has no built-in filter for this format, but it’s peanuts for the Regex Text filter. On to a fresh English-Hungarian project; click
+  <i>Import With Options;</i> then, in the dialog for <i>Document import options</i>, click <i>Change filter and configuration for all</i>.
+  Now we’re talking! This is the window to configure the Regex Text filter.
+</p>
+<p>
+  <img src="/files/memoq/regex-import-settings-1.png" alt="." width="602" height="864" />
+</p>
+<p>
+  The first thing to change is the paragraph separator. In our files each section we care about is made up of two lines, and the sections are separated by empty lines, so the second option,
+  <i>Line with whitespace only</i> will work fabulously. On to the <i>Paragraph</i> tab, where we’ll define how to parse each paragraph.
+</p>
+<p>
+  <img src="/files/memoq/regex-import-settings-2.png" alt="." width="602" height="864" />
+</p>
+<p>A single regex will do the trick.</p>
+<p class="code">\/\* ([^\n]+)\*\/\n"[^"]+" += +"([^\n]+)";</p>
+<p>In quasi-human language, this will match:</p>
+<p>
+  <table style="width: 100%;">
+    <tr>
+      <td style="font-family: monospace;" width="30%" valign="top">\/\*</td>
+      <td>/* , followed by</td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" width="30%" valign="top">([^\n]+)</td>
+      <td>a bunch of characters that are not line breaks, followed by</td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" width="30%" valign="top">\*\/\n</td>
+      <td>*/ and a line break, followed by</td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" width="30%" valign="top">"[^"]+" += +</td>
+      <td>a quotation mark, a bunch of non-quotation marks, another quotation mark, one or more spaces, the equal sign, and one or more spaces, followed by</td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" width="30%" valign="top">"([^\n]+)";</td>
+      <td>a quotation mark, a bunch of characters that are not line breaks, a quotation mark, and a semicolon.</td>
+    </tr>
+  </table>
+</p>
+<p>
+  That’s precisely the pattern we see in the text files. The two parts of the regex that are in parentheses define groups: text that memoQ will capture during the import. The first group is superfluous: I was considering to use it as a context ID, but eventually decided not to. The second group is the text to be translated. That’s the only thing we need in the rule’s details under
+  <i>Effect of selected rule:</i> group 2 is our <i>Content group</i>.
+</p>
+<p>
+  Kid youself not: in real life, regex is never that easy. It’s a continuous trial-and-error until you finally get it right. To know just how far you are, you can always switch to the
+  <i>Preview</i> tab and see, at a glance, how your current regex slices up the input. This is what you’ll get as a preview for translation, too.
+</p>
+<p>
+  <img src="/files/memoq/regex-import-settings-3.png" alt="." width="602" height="864" />
+</p>
+<p>
+  With all the effort you put into that regex, you want to make sure you can use it again in the future, so quickly save your work as a new filter configuration. The atavistic floppy disk icon at the top right does just that.
+</p>
+<p>
+  Are we ready to start translating yet? Or is there more localization engineering needed to groom these iOS files? Check the next instalment to find out!
+</p>
+<p>
+  Part 2: <a href="/placeholders-regex-tagger-ios">Workplace safety: get placeholders out of the way with the regex tagger</a>
+</p>
+<p>
+  <img src="/files/memoq/tbc.jpg" alt="." width="437" height="331" />
+</p>
+
+
+    </div>
+    <div class="push">&nbsp;</div>
+  </div>
+  <div class="footer-wrap">
+    <div class="footer">&copy;2017 Gábor L Ugray &bull; <a href="/imprint">Imprint</a></div>
+  </div>
+  <script src='/static/jealous.min.js?v=X2TWUUIMLBCBAIUIFA2QXR4JZI'></script>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-69170449-4', 'auto');
+  ga('send', 'pageview');
+  </script>
+</body>
+</html>

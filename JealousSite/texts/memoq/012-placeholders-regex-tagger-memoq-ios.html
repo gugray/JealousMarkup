@@ -1,0 +1,53 @@
+﻿<div id="x-rel">!placeholders-regex-tagger-ios</div>
+<div id="x-title">Workplace safety: get placeholders out of the way with the regex tagger</div>
+<div id="x-cats">memoQ, iOS, Localization, regex</div>
+<div id="x-date">2017-03-28</div>
+
+
+<h1>Workplace safety: get placeholders out of the way with the regex tagger</h1>
+<p class="meta">{{meta}}</p>
+
+<p>
+  <i>
+    The is Part 2 of the series
+    <a href="/ios-localization-with-memoq">Localizing an iOS drawing app with memoQ, one cliffhanger at a time</a>.
+  </i>
+</p>
+
+<p>
+  The regex text filter will deal with the files in the iOS localization package, but some strings still have odd stuff in there:
+</p>
+<p class="code">Downloading “%@”
+Delete %d Drawings
+</p>
+<p>
+  These are placeholders for information that the app will insert at runtime: the name of a file, the number of drawings about the be deleted, etc. Every software platform has different conventions. With iOS it’s apparently “percentage sign followed by one or two other characters.” Quite frankly, you don’t need to know much more that that when a new format comes your way. When you glance at all the diffent placeholders in your text, the relevant patterns will become clear pretty quickly.
+</p>
+<p>
+  The key thing is, you don’t want these codes show up in their naked form when you’re translating. They are hard to type and easy to mess up, which will make the app crash. And the codes, in turn, mess up your word count as well as your terminology and TM matches.
+</p>
+<p>
+  The regex tagger, a maternal aunt of the regex text filter, is memoQ’s tool to find-replace text and substitute codes like these with a tag that acts like a single character. The command is on the
+  <i>Preparation</i> ribbon tab, and its options look like this:
+</p>
+<p>
+  <img src="/files/memoq/regex-tagger.png" alt="." width="602" height="864" />
+</p>
+<p>The regex rule I used here is:</p>
+<p class="code">%(d|lu|@)</p>
+<p>
+  In human language, it matches a percentage sign, followed by either a “d” or an “lu” or an “@”. $1 in the <i>Display text</i> field says that in the tag that memoQ inserts, I only want to see the d, lu or @, not the %.
+</p>
+<p>Running the regex tagger will turn the nasty text below into the friendly text underneath. When you export your translation, the reverse will automagically happen so you get the correct jumble in the file that goes back to the developer.</p>
+<p>
+  <img src="/files/memoq/segment-untagged.png" alt="." width="235" height="38" />
+</p>
+<p>
+  <img src="/files/memoq/segment-tagged.png" alt="." width="235" height="37" />
+</p>
+<p>
+  Awesomeness all the way. But how do I know this will <i>really</i> work, out there in the real world? Check the next post in the series to find out!
+</p>
+<p>
+  <img src="/files/memoq/tbc.jpg" alt="." width="437" height="331" />
+</p>
