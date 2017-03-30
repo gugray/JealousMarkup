@@ -1,6 +1,9 @@
-https://jealousmarkup.xyz/ios-localization-with-memoq
-https://jealousmarkup.xyz/placeholders-regex-tagger-ios
 https://jealousmarkup.xyz/regex-ios-localization-memoq
+https://jealousmarkup.xyz/hands-off-alignment-memoq-translating-concordance
+https://jealousmarkup.xyz/pdf-to-xliff-with-transpdf
+https://jealousmarkup.xyz/pseudo-translation-with-memoq
+https://jealousmarkup.xyz/placeholders-regex-tagger-ios
+https://jealousmarkup.xyz/ios-localization-with-memoq
 https://jealousmarkup.xyz/texts/has-technology-made-learning-chinese-too-easy-no
 https://jealousmarkup.xyz/texts/color-temperature-of-mandarin-tones
 https://jealousmarkup.xyz/texts/going-the-extra-mile-for-windows-xp
@@ -15,11 +18,11 @@ https://jealousmarkup.xyz/texts/how-zydeo-came-to-be
 https://jealousmarkup.xyz/texts/authorial-analysis-3-writers-disguised-translated
 https://jealousmarkup.xyz/texts/authorial-analysis-2-cross-interrogation-methods
 https://jealousmarkup.xyz/texts/authorial-analysis-1-geometry
-https://jealousmarkup.xyz/catzine-concordance
+https://jealousmarkup.xyz/catzine-segmentation
 https://jealousmarkup.xyz/projects
+https://jealousmarkup.xyz/catzine-what-is-a-translation-memory
+https://jealousmarkup.xyz/catzine-concordance
+https://jealousmarkup.xyz/catzine-terminology
 https://jealousmarkup.xyz/catzine
 https://jealousmarkup.xyz/catzine-pre-translation
-https://jealousmarkup.xyz/catzine-segmentation
 https://jealousmarkup.xyz/catzine-filters
-https://jealousmarkup.xyz/catzine-terminology
-https://jealousmarkup.xyz/catzine-what-is-a-translation-memory

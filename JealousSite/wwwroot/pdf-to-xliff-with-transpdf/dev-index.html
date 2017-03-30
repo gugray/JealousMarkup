@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  <title>Converting a 500-page PDF user manual with TransPDF - Jealous Markup</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700|Bree+Serif&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='/_dev/jealous.css'>
+</head>
+<body>
+  <div class="content-wrap">
+    <div class="header-wrap">
+      <div class="header">
+        <a href="/"><img src="/static/jealous-markup-white.svg" alt="jealous markup" /></a>
+        <div class="subhead">
+          <div class="tagline">Software and language, mostly</div>
+          <div class="links">
+            <a href="/projects">Projects</a>
+            <span> &bull; </span>
+            <a href="https://twitter.com/twilliability" target="_blank" rel="nofollow noreferrer">Twitter</a>
+            <span> &bull; </span>
+            <a href="https://github.com/gugray" target="_blank" rel="nofollow noreferrer">Github</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+
+      
+<h1>Converting a 500-page PDF user manual with TransPDF</h1>
+<p class="meta"><span class='date'>March 28, 2017</span>
+<span class='filedunder'>
+<span>memoQ</span>
+<span>Localization</span>
+</span>
+</p>
+
+<p>
+  <i>
+    The is Part 5 (the last one) of the series
+    <a href="/ios-localization-with-memoq">Localizing an iOS drawing app with memoQ, one cliffhanger at a time</a>.
+  </i>
+</p>
+
+<p>
+  You didn’t quite anticipate you’d need to deal with a pair of huge PDF files in order to localize a tiny iOS app, right? It might be the years I’ve spent in this industry, but I wasn’t particularly surprised. When you decide to trespass in a less familiar subject matter area, as a diligent translator you go online and scavenge the interwebs for useful material. Usually you’ll bump into something you can consider as an authoritative source or de-facto standard.
+</p>
+<p>
+  With the tiny drawing app Inkpad, that source turns out to be Adobe Illustrator, whose user manual is freely available in multiple languages. Here is the
+  <a href="http://help.adobe.com/en_US/illustrator/cs/using/illustrator_cs5_help.pdf" rel="noreferrer nofollow" target="_blank">English file</a>
+  and the
+  <a href="http://help.adobe.com/hu_HU/illustrator/cs/using/illustrator_cs5_help.pdf" rel="noreferrer nofollow" target="_blank">Hungarian translation</a>
+  that I downloaded.
+</p>
+<p>
+  You could of course just keep these two files open, search for expressions in the English text, navigate to the same chapter in the Hungarian text, figure out what the translation might be… But we’re not using a CAT tool to do it that way! If I can manage to somehow  bring this content into memoQ, I will have the extremely powerful concordance function at my fingertips to literally mine it for information.
+</p>
+<p>
+  The problem is the PDF format. The acronym has a whole bunch of pretty accurate readings, most of which I cannot repeat in good company, but “pretty darn funny” not one of them. PDFs are a PITA, a one-way format meant to make sure a nicely typeset document shows up with the exact same nice typesetting no matter where you’re viewing it. It is <i>not</i> meant to make accessing the text easy. (Not to mention recreating a translated document.) Luckily, for my purposes, all I need is the plain text of both files.
+</p>
+<p>
+  To convert the PDF into a civilized format I used Iceni’s wonderful
+  <a href="http://www.iceni.com/transpdf.htm" rel="noreferrer nofollow" target="_blank">TransPDF</a>
+  service. You start by registering for a free trial, and as the registration screen shows, the good folks at Iceni really know their customers well. You can choose the CAT tool you are using from a drop-down list, and you immediately get instructions tailored to your paticular tool.
+</p>
+<p>
+  <img src="/files/memoq/transpdf-signup.png" alt="." width="1178" height="1258" />
+</p>
+<p>
+  Once you’ve registered and logged in, it’s dead simple to upload a PDF and have it processed. When you upload the file you are also prompted for a language pair. The source language is relevant because it will show up in the XLIFF, and this is an important piece of information for your CAT tool. The target language, in turn, will make a difference if you want to translate the text and get it converted back into PDF: the service will look at the target language to make sure all characters show up with the correct font and the like. When the conversion is done, you can retrieve the result as an XLIFF file like so:
+</p>
+<p>
+  <img src="/files/memoq/transpdf-get-xliff.png" alt="." width="1637" height="735" />
+</p>
+<p>
+  Because I had both an English and a Hungarian PDF I needed to do this twice. I will treat both of these as “source” files, so in my case, I won’t be coming back to the TransPDF website again. Normally, you would only have a source file to convert, and you would then be translating that file in memoQ. The really cool thing about TransPDF is that it’s able recreate a fully formatted PDF from the translated XLIFF that you upload, and for that part you will be charged a small fee if you go beyond 25 pages. And when I say this is a cool thing, I really mean cool, as in way out there, extraterrestrially cool. Your only other option to deal with non-trivial PDFs is an OCR (optical character recognition) tool, and let’s just say you’re lucky that I’m not taking you there in this post.
+</p>
+<p>
+  Alrightie, I managed to turn two PDF files into two XLIFF files. What is XLIFF even? What good does it do? Check back for the next installment to find out.
+</p>
+
+
+
+<p>
+  Part 5: <a href="/hands-off-alignment-memoq-translating-concordance">Mine 200 thousand words of translated content through memoQ’s hands-off aligner and translating concordance</a>
+</p>
+<p>
+  <img src="/files/memoq/tbc.jpg" alt="." width="437" height="331" />
+</p>
+
+    </div>
+    <div class="push">&nbsp;</div>
+  </div>
+  <div class="footer-wrap">
+    <div class="footer">&copy;2017 Gábor L Ugray &bull; <a href="/imprint">Imprint</a></div>
+  </div>
+  <script src='/_lib/jquery-3.1.1.min.js'></script>
+<script src='/_lib/jquery.tooltipster.min.js'></script>
+<script src='/_dev/jealous.js'></script>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-69170449-4', 'auto');
+  ga('send', 'pageview');
+  </script>
+</body>
+</html>

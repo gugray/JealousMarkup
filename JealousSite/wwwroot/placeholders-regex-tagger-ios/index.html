@@ -35,9 +35,7 @@
 <p class="meta"><span class='date'>March 28, 2017</span>
 <span class='filedunder'>
 <span>memoQ</span>
-<span>iOS</span>
 <span>Localization</span>
-<span>regex</span>
 </span>
 </p>
 
@@ -58,7 +56,7 @@ Delete %d Drawings
   These are placeholders for information that the app will insert at runtime: the name of a file, the number of drawings about the be deleted, etc. Every software platform has different conventions. With iOS it’s apparently “percentage sign followed by one or two other characters.” Quite frankly, you don’t need to know much more that that when a new format comes your way. When you glance at all the diffent placeholders in your text, the relevant patterns will become clear pretty quickly.
 </p>
 <p>
-  The key thing is, you don’t want these codes show up in their naked form when you’re translating. They are hard to type and easy to mess up, which will make the app crash. And the codes, in turn, mess up your word count as well as your terminology and TM matches.
+  The key thing is, you don’t want these codes to show up in their naked form when you’re translating. They are hard to type and easy to mess up, which will make the app crash. And the codes, in turn, mess up your word count as well as your terminology and TM matches.
 </p>
 <p>
   The regex tagger, a maternal aunt of the regex text filter, is memoQ’s tool to find-replace text and substitute codes like these with a tag that acts like a single character. The command is on the
@@ -81,6 +79,9 @@ Delete %d Drawings
 </p>
 <p>
   Awesomeness all the way. But how do I know this will <i>really</i> work, out there in the real world? Check the next post in the series to find out!
+</p>
+<p>
+  Part 3: <a href="/pseudo-translation-with-memoq">Did I screw up the file filter? Testing the iOS localization package with pseudo-translation</a>
 </p>
 <p>
   <img src="/files/memoq/tbc.jpg" alt="." width="437" height="331" />

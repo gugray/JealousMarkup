@@ -1,6 +1,6 @@
 ﻿<div id="x-rel">!ios-localization-with-memoq</div>
 <div id="x-title">Localizing an iOS drawing app with memoQ, one cliffhanger at a time</div>
-<div id="x-cats">memoQ, iOS, Localization</div>
+<div id="x-cats">memoQ, Localization</div>
 <div id="x-date">2017-03-28</div>
 
 
@@ -8,11 +8,18 @@
 <p class="meta">{{meta}}</p>
 
 <p>
-  <i>This post is the first of a series where I explain how I localized an iOS app with a largely unknown vocabulary using memoQ. These are the series’ installments:</i>
-  <br/>
+  <i>
+    This post is the first of a series where I explain how I used
+    <a href="https://memoq.com" rel="noreferrer nofollow" target="_blank">memoQ</a>
+    to localize an iOS app with a largely unknown vocabulary. These are the series’ installments:
+  </i>
+  <br />
   <ul>
     <li><a href="/regex-ios-localization-memoq">Regexing the daylights out of an iOS localization package</a></li>
     <li><a href="/placeholders-regex-tagger-ios">Workplace safety: get placeholders out of the way with the regex tagger</a></li>
+    <li><a href="/pseudo-translation-with-memoq">Did I screw up the file filter? Testing the iOS localization package with pseudo-translation</a></li>
+    <li><a href="/pdf-to-xliff-with-transpdf">Converting a 500-page PDF user manual with TransPDF</a></li>
+    <li><a href="/hands-off-alignment-memoq-translating-concordance">Mine 200 thousand words of translated content through memoQ’s hands-off aligner and translating concordance</a></li>
   </ul>
 </p>
 
@@ -32,7 +39,7 @@
   I am not in any way affiliated with Inkpad; I simply endorse it because it’s an awesome app worth every cent of the $2.99
   it costs, twice over. At that price point, it’s basically a love of labor to preserve all the work that had gone into its
   <a href="https://github.com/sprang/Inkpad" rel="noreferrer nofollow" target="_blank">open-source predecessor</a>,
-  now that it disappeared from the App Store.
+  now that it's not available anymore in the App Store.
 </p>
 <p>
   So enthused was I with Inkpad that along with a minor bug report, I submitted to Derek my offer to localize the app into Hungarian. I never had hands-on experience with iOS localization, so there’s a brilliant learning opportunity. And who wouldn’t want to conjure up half a day’s worth of after-hours work just for the fun of it?
@@ -44,7 +51,7 @@
 </p>
 <ul>
   <li>The iOS localization package is a bunch of text-based files with a <i>relatively</i> simple format. The emphasis is on relatively: for want of on out-of-the box filter, I need to magick up a regex approach to deal with them in memoQ.</li>
-  <li>Once the strings are comfortably imported, there are still placeholders in there for values that are substituted at runtime. Think of things like "Delete %d Drawings", where %d stands for the number of drawings about to be sent to the eternal hunting fields for drawings. memoQ’s regex tagger comes to the rescue.</li>
+  <li>Once the strings are comfortably imported, there are still placeholders in there for values that are substituted at runtime. Think of things like "Delete %d Drawings", where %d stands for the number of images about to be erased from existence. memoQ’s regex tagger comes to the rescue.</li>
   <li>After so much engineering, how can I be sure I didn’t mess up? It would be horrible if I spent hours translating, only to learn at the end that the output is some utterly useless mess that only achieves a crash instead of a nicely localized app. The best way to verify that is to produce a pseudo-translated deliverable right at the start. The app’s developer can test the files immediately and warn me if there are any problems.</li>
   <li>Phew, now I have all these strings to be translated… Which is when I realize, I know squat about vector graphics in Hungarian. I learned this whole trade in English! To avoid being an impostor, let’s find out about the standard vocabulary – and what better place to start than, say, the documentation of Adobe Illustrator, the mother of all vector graphics software? It’s right there, in English and Hungarian. As two huge PDF files. So the next step is to convert these into a civilized format using the wonderful TransPDF service and some more arcane functions related to XLIFF, numbers, and plain text files in memoQ.</li>
   <li>OK, so I have two huge text files. How do I know what is the translation of what? memoQ’s hands-off aligner, aka LiveAlign, helps with that. And once memoQ has figured out how to pair up these two times 24 thousand sentences, the translating concordance feature is there to tell me how individual words were translated by the good folks that localized Illustrator’s documentation.</li>
