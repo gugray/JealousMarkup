@@ -7,6 +7,13 @@ namespace JealousSite
     {
         public static void Main(string[] args)
         {
+            try
+            {
+                Builder b = new Builder();
+                b.RebuildAll();
+            }
+            catch { }
+            if (args.Length == 1 && args[0] == "--build") return;
             using (var watcher = new Watcher())
             {
                 var host = new WebHostBuilder()

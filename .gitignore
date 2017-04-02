@@ -4,5 +4,18 @@ obj
 *.suo
 
 public
-**/wwwroot/imprint/*
+JealousSite/wwwroot/imprint/*
 imprint.html
+
+JealousSite/wwwroot/*
+!JealousSite/wwwroot/*.*
+JealousSite/wwwroot/index.html
+JealousSite/wwwroot/dev-index.html
+JealousSite/wwwroot/sitemap.txt
+!JealousSite/wwwroot/_dev/
+!JealousSite/wwwroot/_lib/
+!JealousSite/wwwroot/static/
+!JealousSite/wwwroot/files/
+
+
+

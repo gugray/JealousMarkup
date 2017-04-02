@@ -284,6 +284,7 @@ namespace JealousSite
             foreach (var ti in texts)
             {
                 if (ti.Rel.StartsWith("!")) continue;
+                if (ti.NoIndex) continue;
 
                 sb.AppendLine("<div class='toc-item'>");
                 sb.AppendLine("<h2><a href='/texts/" + ti.Rel + "'>" + WebUtility.UrlDecode(ti.Title) + "</a></h2>");
