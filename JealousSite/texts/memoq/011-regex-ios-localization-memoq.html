@@ -1,8 +1,16 @@
 ﻿<div id="x-rel">/regex-ios-localization-memoq</div>
 <div id="x-title">Regexing the daylights out of an iOS localization package</div>
 <div id="x-cats">memoQ, Localization</div>
-<div id="x-date">2017-03-28</div>
-<div id="x-noindex">true</div>
+<div id="x-date">2017-04-03</div>
+<meta name="description" content="Part 1 of the series, Localizing an iOS drawing app with memoQ, one cliffhanger at a time" />
+<meta name="keywords" content="memoQ, regex, localization, iOS" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/memoq/tbc.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
 
 
 <h1>Regexing the daylights out of an iOS localization package</h1>
@@ -11,25 +19,28 @@
 <p>
   <i>
     The is Part 1 of the series
-    <a href="/ios-localization-with-memoq">Localizing an iOS drawing app with memoQ, one cliffhanger at a time</a>.
+    <a href="/texts/ios-localization-with-memoq">Localizing an iOS drawing app with memoQ, one cliffhanger at a time</a>.
   </i>
 </p>
 
 <p>The iOS localization package I received contains a bunch of text files. All of them have a simple enough structure, like so:</p>
-<p class="code">/* Distribute Horizontally */
-"Distribute Horizontally" = "Distribute Horizontally";
+<p class="code">
+  /* Distribute Horizontally */
+  "Distribute Horizontally" = "Distribute Horizontally";
 
-/* Distribute Vertically */
-"Distribute Vertically" = "Distribute Vertically";
+  /* Distribute Vertically */
+  "Distribute Vertically" = "Distribute Vertically";
 
-/* Download Problem */
-"Download Problem" = "Download Problem";
+  /* Download Problem */
+  "Download Problem" = "Download Problem";
 
-/* Downloading “%@” */
-"Downloading “%@”" = "Downloading “%@”";</p>
+  /* Downloading “%@” */
+  "Downloading “%@”" = "Downloading “%@”";
+</p>
 
 <p>
-  The first line is always a comment. Left of the equation sign is what you could consider, with some generosity, a context ID; to the right is the text to translate, in quotation marks. memoQ has no built-in filter for this format, but it’s peanuts for the Regex Text filter. On to a fresh English-Hungarian project; click
+  The first line is always a comment. Left of the equation sign is what you could consider, with some generosity, a context ID; to the right is the text to translate, in quotation marks.
+  <a href="https://memoq.com" rel="noreferrer nofollow" target="_blank">memoQ</a> has no built-in filter for this format, but it’s peanuts for the Regex Text filter. On to a fresh English-Hungarian project; click
   <i>Import With Options;</i> then, in the dialog for <i>Document import options</i>, click <i>Change filter and configuration for all</i>.
   Now we’re talking! This is the window to configure the Regex Text filter.
 </p>
@@ -87,9 +98,11 @@
 <p>
   Are we ready to start translating yet? Or is there more localization engineering needed to groom these iOS files? Check the next instalment to find out!
 </p>
+<!--
 <p>
-  Part 2: <a href="/placeholders-regex-tagger-ios">Workplace safety: get placeholders out of the way with the regex tagger</a>
+  Part 2: <a href="/texts/placeholders-regex-tagger-ios">Workplace safety: get placeholders out of the way with the regex tagger</a>
 </p>
+-->
 <p>
   <img src="/files/memoq/tbc.jpg" alt="." width="437" height="331" />
 </p>
