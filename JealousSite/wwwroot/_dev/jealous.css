@@ -286,6 +286,13 @@ body {
   border: 2px solid #e6e6e6;
   box-sizing: border-box;
 }
+.content span.photocredit {
+  display: block;
+  position: relative;
+  float: right;
+  font-size: 0.8rem;
+  font-style: italic;
+}
 .content p.formula {
   text-align: center;
 }
