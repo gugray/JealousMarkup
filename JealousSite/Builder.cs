@@ -287,7 +287,7 @@ namespace JealousSite
                 if (ti.NoIndex) continue;
 
                 sb.AppendLine("<div class='toc-item'>");
-                sb.AppendLine("<h2><a href='/texts/" + ti.Rel + "'>" + WebUtility.UrlDecode(ti.Title) + "</a></h2>");
+                sb.AppendLine("<h2><a href='/texts" + ti.Rel + "'>" + WebUtility.UrlDecode(ti.Title) + "</a></h2>");
                 sb.AppendLine("<div class='toc-meta'>");
                 sb.AppendLine("<span class='date'>" + months[ti.Date.Month - 1] + " " + ti.Date.Day + ", " + ti.Date.Year + "</span>");
                 if (ti.Cats.Count != 0)
