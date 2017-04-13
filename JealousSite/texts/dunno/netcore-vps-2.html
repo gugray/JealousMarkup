@@ -1,0 +1,68 @@
+﻿<div id="x-rel">/asp-net-core-linux-vps-2</div>
+<div id="x-title">Building an ASP.NET Core web app for a Linux VPS: Part 2</div>
+<div id="x-cats">Software</div>
+<div id="x-date">2016-07-15</div>
+<div id="x-noindex">true</div>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+<h1>Building an ASP.NET Core web app for a Linux VPS: Part 2</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  A quick Windows programmers' guide to building a secure .NET Core web app for a Linux VPS and NGINX. Cross-posted from
+  <a href="https://www.codeproject.com/Articles/1111892/Building-an-ASP-NET-Core-web-app-for-a-Linux-VPS" rel="noreferrer nofollow" target="_blank">CodeProject</a>.
+</p>
+
+<p>
+  In <a href="/texts/asp-net-core-linux-vps-1">Part 1</a> of this series we got .NET up and running on a Debian
+  Virtual Private Server (VPS). Time to build a simple ASP.NET Core 1.0 web app that will greet unnamed sailors surfing by.
+  But first things first: we need to harden our Linux box, which is still running out in the wild with a default setup.
+  <i>Then</i> we're ready to set up NGINX and build that fancy app in C#.
+</p>
+
+<h1>Firewall</h1>
+<p>Remember how excited I sounded about VPSes because they let me build on a full-fledged system for peanuts? If you go for a standard, dumbed-down IIS hosting plan, you don't get any of that, but in exchange a bunch experts will be taking care of the entire system's safety, and they'll be doing a much better job at it than you or I ever could. The price of your freedom with a VPS is that it's your responsibility to ensure a minimum level of security.</p>
+<p>
+  There are apparently two ways to go about setting up a firewall in Linux. The first is for those who truly, really know
+  what they are doing, and/or are willing to spend days learning. You can learn about that way if you Google for
+  <span class="code">iptables</span>. My way is the Uncomplicated Firewall, or <i>ufw</i> for short. Here's how you set it
+  up from the command prompt.
+</p>
+<p class="code"><b>gabor@debian-512mb-fra1-01:~$ sudo apt-get install ufw</b>
+<i>#
+# Many lines of output omitted
+#</i>
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw status</b>
+Status: inactive
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw default deny incoming</b>
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw default allow outgoing</b>
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw allow ssh</b>
+Rules updated
+Rules updated (v6)
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw allow http</b>
+Rules updated
+Rules updated (v6)
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw allow https</b>
+Rules updated
+Rules updated (v6)
+<b>gabor@debian-512mb-fra1-01:~$ sudo ufw enable</b>
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup</p>
+
+<p><i>(If you didn't read the first part: I'm highlighting your own commands in bold for better readability.)</i></p>
+<p>Let's unpack that:</p>
+<ul>
+  <li><i>apt-get</i> installs <i>ufw</i></li>
+  <li>With <i>ufw status</i> you check that the firewall is inactive. (It should be, right after install.) This one matters quite a bit. If you start disabling all connections, you might end up losing the very SSH session you're using, and then you have a fully autonomous server somewhere that no one can ever access again remotely.</li>
+  <li>The next two commands are self-explanatory: they disable all incoming connections, and allow outgoing ones. There's a school that would be much more paranoid about outgoing connections too, but then you have to work extra to download updates or modules, not to mention to call services from your own application.</li>
+  <li>Having established that our baseline is "no incoming connections," the following commands re-enable specific things, such as the ports for SSH, HTTP and HTTPS. The most crucial one is SSH, or you won't be able to get back in again.</li>
+  <li>Finally, <i>ufw enable</i> turns on the firewall with the rules we just set up.</li>
+</ul>
+
+
+<a href="" rel="noreferrer nofollow" target="_blank"></a>

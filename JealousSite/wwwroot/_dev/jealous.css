@@ -328,6 +328,13 @@ body {
   padding: 0.5rem;
   background-color: #f3f3f3;
 }
+.content p.code b {
+  color: #b32a0b;
+}
+.content span.code {
+  font-family: monospace;
+  color: #b32a0b;
+}
 .content .imprint {
   font-size: 0.8rem;
 }
