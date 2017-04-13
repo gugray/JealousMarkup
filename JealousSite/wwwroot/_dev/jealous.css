@@ -496,6 +496,78 @@ table.styleA tr.solidBottom td {
   display: block;
   float: left;
 }
+#localizationQuiz .start {
+  padding: 0.3rem 0.6rem;
+  text-align: center;
+  cursor: default;
+  background-color: #fde0da;
+}
+#localizationQuiz .start:hover {
+  background-color: #feece8;
+}
+#localizationQuiz .start.hidden {
+  display: none;
+}
+#localizationQuiz .qpage {
+  display: none;
+}
+#localizationQuiz .qpage.active {
+  display: block;
+}
+#localizationQuiz .qpage h2 {
+  margin: 0;
+}
+#localizationQuiz .qpage .instruction {
+  font-size: 90%;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+#localizationQuiz .qpage .feedback {
+  display: none;
+  margin-top: 1rem;
+  padding-left: 0.6rem;
+  font-style: italic;
+}
+#localizationQuiz .qpage .option {
+  padding: 0.3rem 0.6rem;
+  cursor: default;
+  margin: 0.1rem 0;
+}
+#localizationQuiz .qpage .option:hover {
+  background-color: #fef4f2;
+}
+#localizationQuiz .qpage .continue {
+  display: none;
+  float: right;
+  width: auto;
+  background-color: #fde0da;
+  padding: 0.3rem 0.6rem;
+  cursor: default;
+}
+#localizationQuiz .qpage .continue:hover {
+  background-color: #feece8;
+}
+#localizationQuiz .qpage.solved .option:hover {
+  background-color: #fbfbfb;
+}
+#localizationQuiz .qpage.solved .option.chosen {
+  color: #b32a0b;
+  font-weight: 600;
+}
+#localizationQuiz .qpage.solved .option.correct,
+#localizationQuiz .qpage.solved .option.correct.chosen {
+  color: #137600;
+  font-weight: 600;
+}
+#localizationQuiz .qpage.solved .continue {
+  display: block;
+}
+#localizationQuiz .qpage.solved.correct .feedback.correct {
+  display: block;
+}
+#localizationQuiz .qpage.solved.false .feedback.false {
+  display: block;
+}
 @media screen and (max-width: 620px) {
   .catzine-thumb {
     width: 100%;

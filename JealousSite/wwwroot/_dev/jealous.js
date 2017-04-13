@@ -23,7 +23,7 @@ JM.site = (function () {
     }
     //$("body").append("<div class='cookies'><div><img src='/static/cookiemonster-white.svg'/></div></div>");
 
-    // Category filter
+    // Category filter (front page)
     $(".catSelector span").click(function (evt) {
       evt.stopPropagation();
       // Show all

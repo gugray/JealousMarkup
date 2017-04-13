@@ -13,6 +13,7 @@
 @shoulderColor: #e0e0e0;
 @textColor: #404040;
 @accentColor: #b32a0b;
+@greenColor: #137600;
 @tocMetaColor: #707070;
 @tocLedeFontSize: 0.85rem;
 @tocMetaFontSize: 0.7rem;
@@ -214,6 +215,44 @@ table.styleA {
   }
   img { border: none; background-color: white; width: 50%; display: block; float: left; }
 }
+
+#localizationQuiz {
+  .start {
+    padding: 0.3rem 0.6rem; text-align: center; cursor: default;
+    background-color: lighten(@accentColor, 55%);
+    &:hover { background-color: lighten(@accentColor, 58%); }
+    &.hidden { display: none; }
+  }
+  .qpage {
+    display: none; &.active { display: block; }
+    h2 { margin: 0; }
+    .instruction { font-size: 90%; font-style: italic; margin-bottom: 1rem; }
+    .feedback { display: none; margin-top: 1rem; padding-left: 0.6rem; font-style: italic; }
+    .option { 
+      padding: 0.3rem 0.6rem; cursor: default; margin: 0.1rem 0;
+      &:hover { background-color: lighten(@accentColor, 60%); }
+    }
+    .continue {
+      display: none;
+      float: right; width: auto; background-color: lighten(@accentColor, 55%); padding: 0.3rem 0.6rem; cursor: default;
+      &:hover { background-color: lighten(@accentColor, 58%); }
+    }
+    &.solved {
+      .option:hover { background-color: @bgColor; }
+      .option.chosen { color: @accentColor; font-weight: 600; }
+      .option.correct, .option.correct.chosen { color: @greenColor; font-weight: 600; }
+      .continue { display: block; }
+    }
+    &.solved.correct {
+      .feedback.correct { display: block; }
+    }
+    &.solved.false {
+      .feedback.false { display: block; }
+    }
+  }
+}
+
+
 @media screen and (max-width: 620px) {
   .catzine-thumb { width: 100%; margin-right: 0; }
   .catzine img { width: 100%; }
