@@ -1,0 +1,123 @@
+﻿<div id="x-rel">/a-curious-cliff</div>
+<div id="x-title">A curious cliff: coincidence, anomaly, or proof of ancestry?</div>
+<div id="x-cats">Chinese, Language, Software</div>
+<div id="x-date">2017-04-16</div>
+
+<h1>A curious cliff: coincidence, anomaly, or proof of ancestry?</h1>
+<p class="meta">{{meta}}</p>
+<p class="lede">
+  As I’m preparing for the release of CHDICT, an open-source Chinese-Hungarian dictionary that I have seeded by
+  translating 10 thousand headwords from the venerable
+  <a href="http://cc-cedict.org/wiki/" rel="noreferrer" target="_blank">CC-CEDICT</a>
+  and
+  <a href="https://handedict.zydeo.net/de" rel="noreferrer" target="_blank">HanDeDict</a>,
+  I became curious to see what proportion of the Chinese vocabulary these sources cover.
+  <br /><br />
+  The results are pretty exciting, at least if you are a data-obsessed language nerd like me. The analysis of these
+  dictionaries, plus their French counterpart
+  <a href="https://chine.in/mandarin/dictionnaire/" rel="noreferrer" target="_blank">CFDICT</a>,
+  reveals a shared idiosyncratic pattern. Is it a trace showing that the German and French dictionaries were derived from the
+  English original? Is it an anomaly in the word frequency list? Is it a ghost in the machine? A hitherto-unknown law of the
+  Chinese lexicon? Read on, and decide for yourself.
+</p>
+
+<h2>Introducing the actors</h2>
+<p>
+  In case you are not into Chinese open-source dictionaries, a short intro. The story began with CC-CEDICT, a collaborative dictionary that was started by Paul Denisowski in 1997. The undertaking was inspired by Jim Breen’s work on EDICT, who had started building a Japanese-English dictionary back in 1991. CEDICT has changed maintainers twice since its inception, and changed its name to CC-CEDICT along the way. It is still being actively developed, and its current website allows you to search over 115,000 Chinese headwords,  or to download the entire dictionary as a text file.
+</p>
+<p>
+  HanDeDict is a Chinese-German dictionary that started in 2006. When its active development stopped in 2011 it contained over 150,000 headwords. CFDICT is a Chinese-French dictionary that started in 2009, and by 2013 exceeded 130 thousand entries. Both projects name CEDICT as their inspiration.
+</p>
+
+<h2>What constitutes a dictionary?</h2>
+<p>
+  The words of any given language are not anyone’s property, and yet the dictionaries that contain definitions or translations for these same words are considered intellectual property. What, exactly, “is” a dictionary, then?
+</p>
+<p>
+  One thing that’s not immediately obvious is the dictionary’s scope: what words, exactly, are included in it? How are those words selected? What is the motivation, and what is the method?
+</p>
+<p>
+  If the number of words in a language is effectively infinite (it is), and your dictionary is inevitably limited, then it’s reasonable to first include more common words: that’s how you ensure people get the maximum benefit out of your work. This is why I chose to analyze each dictionary’s headwords against a list of words ranked by frequency: the selection of headwords is part of what defines a dictionary as a unique intellectual product.
+</p>
+
+<h2>Word frequencies from SUBTLEX-CH</h2>
+<p>
+  No matter what language you’re dealing with, you inevitably face one key problem: nobody really knows (or agrees) what a “word” precisely is. With languages that are written in an alphabetic script, you can get around the problem by saying (chàbuduō, for the sake of simplicity) that a word is whatever stands between two spaces, minus punctuation plus stemming. With Chinese, you are out of luck because the script doesn’t use spaces to indicate word boundaries.
+</p>
+<p>
+  The internet is full of freely available corpus-based character frequency lists. Finding word frequencies, alas,
+  is more difficult. But not completely impossible: there is
+  <a href="http://crr.ugent.be/programs-data/subtitle-frequencies/subtlex-ch" rel="noreferrer" target="_blank">SUBTLEX-CH</a>,
+  based on a 33-million-word corpus of movie subtitles, and tokenized into words through NLP tools. That is the resource that I used.
+</p>
+
+<h2>What does Zipf say?</h2>
+<p>
+  Let’s first take a quick look at SUBTLEX-CH’s word frequencies, out of due diligence. The published ranked list contains (almost) 100,000 words. Let’s plot each word’s frequency against its rank on a graph with two logarithmic scales.
+  <a href="https://en.wikipedia.org/wiki/Zipf%27s_law" rel="noreferrer" target="_blank">Zipf’s law</a>
+  says that we should be seeing a shape made up of one or more straight lines, approximately.
+</p>
+<p>
+  <img src="/files/zydeo-blog/subtlex-freq-rank.png" alt="." width="640" height="480" />
+</p>
+<p>
+  With some generosity, our graph of SUBTLEX-CH’s word frequencies and ranks match the Zipfian predictions. In my superficial judgement there’s greater variation in the slanting angle of the three sections than expected, but the shape is by no means extremely off the mark: this seems like a legit word frequency list all right.
+</p>
+<p>
+  (Admittedly, questions do linger… To the extent the shape is not what one would expect, is that a peculiarity of written Chinese? Is it special to this corpus based on movie subtitles? Does the authors’ word segmentation method play a role? All exciting questions, but I must move on.)
+</p>
+
+<h2>CC-CEDICT’s coverage</h2>
+<p>
+  Now for the interesting part. I used
+  <a href="https://gist.github.com/gugray/a8290d62b8b2e39eaa535457c167b3ff" rel="noreferrer" target="_blank">this quickly hacked-together Python script</a>
+  to plot CC-CEDICT’s coverage against word frequencies. This, precisely, is what’s going on:
+</p>
+<ul>
+  <li>I split the 100,000 words on the ranked frequency list into 100 buckets. Bucket 1 has the 1000 most frequent words; bucket 2 has the next 1000 most frequent words; etc.</li>
+  <li>I took CC-CEDICT’s simplified headwords, and looked up their frequency buckets. For each headword, I incremented the corresponding bucket’s count by one.</li>
+  <li>A point <i>(x, y)</i> on the graph means: For bucket <i>x</i>, the dictionary contains <i>y</i> of the bucket’s 1000 words. The lower the dot, the lower the dictionary’s coverage in that frequency range.</li>
+</ul>
+<p>
+  <img src="/files/zydeo-blog/cedict.png" alt="." width="640" height="480" />
+</p>
+<p>
+  The graph shows that for the most frequent 2 or 3 thousand words, CC-CEDICT has nearly 100% coverage: they’re all in the dictionary. As you move down the list, there’s a nearly straight line all the way down to the middle, sinking to about 300 out of 1000, i.e., 30% coverage.
+</p>
+<p>
+  Between 50k and 70k it gets interesting. The line kind of flattens out with some fluctuation: that’s Plateau 1. Just under 70k there’s a sharp cutoff, the Cliff. From then on, it remains a stable 12% or so almost all the way to the end: Plateau 2.
+</p>
+
+<h2>Curious similarity</h2>
+<p>
+  Without further ado, let’s look at the same curve for HanDeDict:
+</p>
+<p>
+  <img src="/files/zydeo-blog/handedict.png" alt="." width="640" height="480" />
+</p>
+<p>And for CFDICT:</p>
+<p>
+  <img src="/files/zydeo-blog/cfdict.png" alt="." width="640" height="480" />
+</p>
+
+<h2>Conjectures</h2>
+<p>
+  What could possibly the explain this recurring pattern? I have three explanations. I present them in what I perceive to be their order of plausibility.
+</p>
+<p>
+  <b>1: Ancestry</b>. For whatever reason, CC-CEDICT acquired this idiosyncrasy as it evolved. One hypothesis: it probably includes systematically imported word lists for proper names and the like, which contribute to the middle or to the lower frequency ranges. In any case, by the time HanDeDict and CFDICT started, CC-CEDICT was already very near its current size, with this shape established. The German and the French projects largely relied on CC-CEDICT’s headword list for their own scope, and whatever else happened on top of that, the “noise” from their own subsequent development has still not masked the inherited plateau-cliff-plateu shape.
+</p>
+<p>
+  <b>2: Ghost in the machine</b>. SUBTLEX-CH’s word frequencies seem to obey the Zipfian distribution. But maybe, just maybe, there is a subtle effect hiding in there; one that only shows when you project the headwords of truly balanced dictionaries onto the frequency list. The effect might come from the corpus’s unbalanced nature (remember, it’s movie subtitles), or from the particular word segmentation tool the authers used.
+</p>
+<p>
+  <b>3: A natural law of Chinese lexicography</b>. It may happen that there is some underlying regularity within the Chinese lexicon itself, and you would get this shape no matter which dictionary and corpus you combine in your analysis.
+</p>
+
+<h2>Any thoughts?</h2>
+<p>
+  I would love to hear!
+</p>
+<p>
+  And stay tuned until I check back with an analysis of CHDICT’s own coverage. There will be news of a different sort in there.
+</p>
