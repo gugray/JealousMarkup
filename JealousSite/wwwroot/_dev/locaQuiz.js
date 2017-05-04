@@ -11,7 +11,11 @@ JM.locaQuiz = (function () {
   $(document).ready(function () {
     if ($("#localizationQuiz").length == 0) return;
 
-    var locaQuizCount = 1;
+    var locaQuizCount = localStorage.getItem("locaQuizCount");
+    if (!locaQuizCount) {
+      locaQuizCount = 1;
+      localStorage.setItem("locaQuizCount", locaQuizCount);
+    }
 
     $(".start").click(function () {
       $(".start").addClass("hidden");
@@ -23,6 +27,8 @@ JM.locaQuiz = (function () {
         eventAction: 'locaquiz-start',
         eventValue: locaQuizCount
       });
+      ++locaQuizCount;
+      localStorage.setItem("locaQuizCount", locaQuizCount);
     });
 
     $(".option").click(function () {
@@ -52,11 +58,17 @@ JM.locaQuiz = (function () {
       }
       else {
         $("#localizationQuiz .result").addClass("visible");
+        var rewardMsg = "You are<br /> AWESOME";
+        if (score < 3) rewardMsg = "GREAT!<br/>But you're not from this industry,<br/>are you?";
+        else if (score < 7) rewardMsg = "Not too shabby<br/>AT ALL!";
+        $(".result .awesome").html(rewardMsg);
+        $("#locaQuizScore").text(score);
         ga("send", {
           hitType: 'event',
           eventCategory: 'locaquiz',
           eventAction: 'locaquiz-finish',
-          eventValue: score + "#" + result
+          eventLabel: result,
+          eventValue: score
         });
       }
     });
