@@ -568,6 +568,24 @@ table.styleA tr.solidBottom td {
 #localizationQuiz .qpage.solved.false .feedback.false {
   display: block;
 }
+#localizationQuiz .result {
+  display: none;
+}
+#localizationQuiz .result.visible {
+  display: block;
+}
+#localizationQuiz .result p.awesome {
+  text-align: center;
+  font-family: "Bree Serif", serif;
+  font-size: 2rem;
+}
+#localizationQuiz .result p.score {
+  text-align: center;
+  font-size: 1.3rem;
+}
+#localizationQuiz .result p.share {
+  text-align: center;
+}
 @media screen and (max-width: 620px) {
   .catzine-thumb {
     width: 100%;

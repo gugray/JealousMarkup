@@ -11,10 +11,18 @@ JM.locaQuiz = (function () {
   $(document).ready(function () {
     if ($("#localizationQuiz").length == 0) return;
 
+    var locaQuizCount = 1;
+
     $(".start").click(function () {
       $(".start").addClass("hidden");
       $(".qpage[data-qix='1']").addClass("active");
       $("p.lede").css("display", "none");
+      ga("send", {
+        hitType: 'event',
+        eventCategory: 'locaquiz',
+        eventAction: 'locaquiz-start',
+        eventValue: locaQuizCount
+      });
     });
 
     $(".option").click(function () {
@@ -36,9 +44,21 @@ JM.locaQuiz = (function () {
         ++score;
         flag = "Y";
       }
-      result += "!" + flag + "-" + ox;
       var nextIx = elmPage.data("qix") + 1;
-      $(".qpage[data-qix='" + nextIx + "']").addClass("active");
+      if (nextIx > 2) result += "!";
+      result += flag + "-" + ox;
+      if (nextIx <= 10) {
+        $(".qpage[data-qix='" + nextIx + "']").addClass("active");
+      }
+      else {
+        $("#localizationQuiz .result").addClass("visible");
+        ga("send", {
+          hitType: 'event',
+          eventCategory: 'locaquiz',
+          eventAction: 'locaquiz-finish',
+          eventValue: score + "#" + result
+        });
+      }
     });
 
   });
