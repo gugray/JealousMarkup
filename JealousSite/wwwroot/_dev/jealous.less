@@ -258,8 +258,65 @@ table.styleA {
   }
 }
 
+#catjargon {
+  .glossnav {
+    border-top: 1pt solid @accentColor; border-bottom: 1pt solid @accentColor;
+    padding: 0.5rem 0; margin-bottom: 2rem;
+    input {
+      display: block; width: 100%; position: relative; float: left; box-sizing: border-box;
+      background-color: lighten(@accentColor, 55%);
+      font-family: @fntBaseFamily; font-size: @fntBaseSizeFull;
+      padding: 0.3rem; margin-bottom: 0.3rem;
+      border-radius: 0.2rem;
+    }
+    .abc { cursor: default; }
+    .abc span { 
+      width: 3%; display: inline-block; font-size: 0.9rem;
+      border-radius: 0.2rem; text-align: center;
+      &:hover { background-color: lighten(@accentColor, 55%); }
+    }
+    .controls {
+      margin-top: 0.3rem; height: auto; overflow: auto;
+      .ctrl-left { width: auto; font-size: 0.9rem; color: @accentColor; cursor: pointer; }
+      .ctrl-right {
+        width: 1.5rem; height: 1.5rem; float: right; margin-left: 0.3rem;
+        background-color: #87b9ce; color: white; text-align: center; cursor: pointer;
+      }
+    }
+    .disclaimer { 
+      display: none; &.visible { display: block; }
+      margin-top: 0.3rem; font-size: 0.9rem; font-style: italic;
+    }
+  }
+
+  h2 { 
+    margin: 0.5rem 0 0.2rem 0;
+    a:hover { text-decoration: none; } 
+    transition: background-color 1.5s ease;
+    &.flash { background-color: #ef927d; transition: none; } //fea996
+  }
+  p { margin-bottom: 0.4rem; }
+  p.cref { font-style: italic; margin-bottom: 0;   }
+  .entry {
+    .hilite { background-color: @shoulderColor; border-radius: 0.3rem; }
+    margin-bottom: 1rem;
+    &.hidden { display: none; }
+  }
+  .toTop {
+    display: none; &.visible { display: block; }
+    width: 2rem; height: 2rem; position: fixed; right: -4rem; bottom: 1rem; margin-right: -1rem;
+    font-weight: bold; font-family: @fntTitleFamily; font-size: 1.5rem; overflow: hidden;
+    text-align: center; color: white; cursor: pointer;
+    opacity: 0.5; background-color: #808080; transition: background-color 0.5s ease;
+    &:hover { background-color: black; }
+    z-index: 2;
+  }
+}
+
 
 @media screen and (max-width: 620px) {
   .catzine-thumb { width: 100%; margin-right: 0; }
   .catzine img { width: 100%; }
+  #catjargon .glossnav .abc span { width: 6.3%; }
+  #catjargon .glossnav .abc span.even { display: none; }
 }

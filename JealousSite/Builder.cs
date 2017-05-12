@@ -38,7 +38,8 @@ namespace JealousSite
             "<script src='/_lib/jquery-3.1.1.min.js'></script>\n" +
             "<script src='/_lib/jquery.tooltipster.min.js'></script>\n" +
             "<script src='/_dev/jealous.js'></script>\n" +
-            "<script src='/_dev/locaQuiz.js'></script>\n";
+            "<script src='/_dev/locaQuiz.js'></script>\n" +
+            "<script src='/_dev/catJargon.js'></script>\n";
 
         private static readonly string prodIncludeBody =
             "<script src='/static/jealous.min.js?v={{js-hash}}'></script>";

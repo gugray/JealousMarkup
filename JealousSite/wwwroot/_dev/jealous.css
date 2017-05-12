@@ -586,6 +586,122 @@ table.styleA tr.solidBottom td {
 #localizationQuiz .result p.share {
   text-align: center;
 }
+#catjargon .glossnav {
+  border-top: 1pt solid #b32a0b;
+  border-bottom: 1pt solid #b32a0b;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+}
+#catjargon .glossnav input {
+  display: block;
+  width: 100%;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  background-color: #fde0da;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14pt;
+  padding: 0.3rem;
+  margin-bottom: 0.3rem;
+  border-radius: 0.2rem;
+}
+#catjargon .glossnav .abc {
+  cursor: default;
+}
+#catjargon .glossnav .abc span {
+  width: 3%;
+  display: inline-block;
+  font-size: 0.9rem;
+  border-radius: 0.2rem;
+  text-align: center;
+}
+#catjargon .glossnav .abc span:hover {
+  background-color: #fde0da;
+}
+#catjargon .glossnav .controls {
+  margin-top: 0.3rem;
+  height: auto;
+  overflow: auto;
+}
+#catjargon .glossnav .controls .ctrl-left {
+  width: auto;
+  font-size: 0.9rem;
+  color: #b32a0b;
+  cursor: pointer;
+}
+#catjargon .glossnav .controls .ctrl-right {
+  width: 1.5rem;
+  height: 1.5rem;
+  float: right;
+  margin-left: 0.3rem;
+  background-color: #87b9ce;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+#catjargon .glossnav .disclaimer {
+  display: none;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+#catjargon .glossnav .disclaimer.visible {
+  display: block;
+}
+#catjargon h2 {
+  margin: 0.5rem 0 0.2rem 0;
+  transition: background-color 1.5s ease;
+}
+#catjargon h2 a:hover {
+  text-decoration: none;
+}
+#catjargon h2.flash {
+  background-color: #ef927d;
+  transition: none;
+}
+#catjargon p {
+  margin-bottom: 0.4rem;
+}
+#catjargon p.cref {
+  font-style: italic;
+  margin-bottom: 0;
+}
+#catjargon .entry {
+  margin-bottom: 1rem;
+}
+#catjargon .entry .hilite {
+  background-color: #e0e0e0;
+  border-radius: 0.3rem;
+}
+#catjargon .entry.hidden {
+  display: none;
+}
+#catjargon .toTop {
+  display: none;
+  width: 2rem;
+  height: 2rem;
+  position: fixed;
+  right: -4rem;
+  bottom: 1rem;
+  margin-right: -1rem;
+  font-weight: bold;
+  font-family: "Bree Serif", serif;
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  opacity: 0.5;
+  background-color: #808080;
+  transition: background-color 0.5s ease;
+  z-index: 2;
+}
+#catjargon .toTop.visible {
+  display: block;
+}
+#catjargon .toTop:hover {
+  background-color: black;
+}
 @media screen and (max-width: 620px) {
   .catzine-thumb {
     width: 100%;
@@ -593,5 +709,11 @@ table.styleA tr.solidBottom td {
   }
   .catzine img {
     width: 100%;
+  }
+  #catjargon .glossnav .abc span {
+    width: 6.3%;
+  }
+  #catjargon .glossnav .abc span.even {
+    display: none;
   }
 }
