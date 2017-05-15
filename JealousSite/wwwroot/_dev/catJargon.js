@@ -11,7 +11,7 @@ JM.catJargon = (function () {
     if ("onhashchange" in window) {
       window.onhashchange = function () {
         var entryId = window.location.hash.substr(1);
-        var elmEntry = $("a[name='" + entryId + "']").closest("h2");
+        var elmEntry = $("a[name='" + entryId + "']").closest(".entry");
         elmEntry.addClass("flash");
         setTimeout(function () {
           elmEntry.removeClass("flash");
@@ -28,16 +28,36 @@ JM.catJargon = (function () {
     });
 
     $("#txtSearch").val("");
-    $("#txtSearch").bind("input", onSearchChanged);
+    $("#txtSearch").bind("input", function () {
+      $(".disclaimer").removeClass("visible"); $("#toggleDisclaimer").removeClass("selected");
+      $(".glossary-toc").removeClass("visible"); $("#toggleTOC").removeClass("selected");
+      onSearchChanged();
+    });
     if (window.location.hash == "") {
       // This screws in-page navigation thru anchors
       setTimeout(function () { $("#txtSearch").focus(); }, 50);
     }
 
     $("#toggleDisclaimer").click(function () {
-      if ($(".disclaimer").hasClass("visible")) $(".disclaimer").removeClass("visible");
-      else $(".disclaimer").addClass("visible");
+      if ($(".disclaimer").hasClass("visible")) {
+        $(".disclaimer").removeClass("visible"); $("#toggleDisclaimer").removeClass("selected");
+      }
+      else {
+        $(".disclaimer").addClass("visible"); $(this).addClass("selected");
+        $(".glossary-toc").removeClass("visible"); $("#toggleTOC").removeClass("selected");
+      }
     });
+    $("#toggleTOC").click(function () {
+      if ($(".glossary-toc").hasClass("visible")) {
+        $(".glossary-toc").removeClass("visible"); $("#toggleTOC").removeClass("selected");
+      }
+      else {
+        $(".disclaimer").removeClass("visible"); $("#toggleDisclaimer").removeClass("selected");
+        $(".glossary-toc").addClass("visible"); $(this).addClass("selected");
+      }
+    });
+
+    buildTOC();
 
     //buildIndex();
 
@@ -56,6 +76,24 @@ JM.catJargon = (function () {
     var bw = $("body").width();
     $(".toTop").css("right", bw - cr);
     $(".toTop").addClass("visible");
+  }
+
+  function esc(s) {
+    return s.replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+  }
+
+  function buildTOC() {
+    var html = "";
+    $(".entry h2 a").each(function () {
+      var hw = $(this).text();
+      var id = $(this).attr("name");
+      if (html != "") html += "&nbsp;&bull; ";
+      html += "<a href='#" + id + "'>" + esc(hw) + "</a>";
+    });
+    $(".glossary-toc").html(html);
   }
 
   function buildIndex() {

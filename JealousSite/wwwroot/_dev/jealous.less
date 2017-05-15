@@ -269,31 +269,26 @@ table.styleA {
       padding: 0.3rem; margin-bottom: 0.3rem;
       border-radius: 0.2rem;
     }
-    .abc { cursor: default; }
-    .abc span { 
-      width: 3%; display: inline-block; font-size: 0.9rem;
-      border-radius: 0.2rem; text-align: center;
-      &:hover { background-color: lighten(@accentColor, 55%); }
-    }
     .controls {
       margin-top: 0.3rem; height: auto; overflow: auto;
-      .ctrl-left { width: auto; font-size: 0.9rem; color: @accentColor; cursor: pointer; }
+      .ctrl-left { width: auto; font-size: 0.9rem; color: @accentColor; cursor: pointer; padding: 0 0.2rem; border-radius: 0.2rem; }
+      .ctrl-left:nth-child(2) { margin-left: 1rem; }
+      .ctrl-left.selected { background-color: lighten(@accentColor, 55%); color: @textColor; }
       .ctrl-right {
         width: 1.5rem; height: 1.5rem; float: right; margin-left: 0.3rem;
         background-color: #87b9ce; color: white; text-align: center; cursor: pointer;
       }
     }
-    .disclaimer { 
+    .disclaimer, .glossary-toc { 
       display: none; &.visible { display: block; }
       margin-top: 0.3rem; font-size: 0.9rem; font-style: italic;
     }
+    .glossary-toc { font-style: normal; }
   }
 
   h2 { 
     margin: 0.5rem 0 0.2rem 0;
     a:hover { text-decoration: none; } 
-    transition: background-color 1.5s ease;
-    &.flash { background-color: #ef927d; transition: none; } //fea996
   }
   p { margin-bottom: 0.4rem; }
   p.cref { font-style: italic; margin-bottom: 0;   }
@@ -301,6 +296,8 @@ table.styleA {
     .hilite { background-color: @shoulderColor; border-radius: 0.3rem; }
     margin-bottom: 1rem;
     &.hidden { display: none; }
+    transition: background-color 1.5s ease;
+    &.flash { background-color: #ef927d; transition: none; } //fea996
   }
   .toTop {
     display: none; &.visible { display: block; }

@@ -605,19 +605,6 @@ table.styleA tr.solidBottom td {
   margin-bottom: 0.3rem;
   border-radius: 0.2rem;
 }
-#catjargon .glossnav .abc {
-  cursor: default;
-}
-#catjargon .glossnav .abc span {
-  width: 3%;
-  display: inline-block;
-  font-size: 0.9rem;
-  border-radius: 0.2rem;
-  text-align: center;
-}
-#catjargon .glossnav .abc span:hover {
-  background-color: #fde0da;
-}
 #catjargon .glossnav .controls {
   margin-top: 0.3rem;
   height: auto;
@@ -628,6 +615,15 @@ table.styleA tr.solidBottom td {
   font-size: 0.9rem;
   color: #b32a0b;
   cursor: pointer;
+  padding: 0 0.2rem;
+  border-radius: 0.2rem;
+}
+#catjargon .glossnav .controls .ctrl-left:nth-child(2) {
+  margin-left: 1rem;
+}
+#catjargon .glossnav .controls .ctrl-left.selected {
+  background-color: #fde0da;
+  color: #404040;
 }
 #catjargon .glossnav .controls .ctrl-right {
   width: 1.5rem;
@@ -639,25 +635,25 @@ table.styleA tr.solidBottom td {
   text-align: center;
   cursor: pointer;
 }
-#catjargon .glossnav .disclaimer {
+#catjargon .glossnav .disclaimer,
+#catjargon .glossnav .glossary-toc {
   display: none;
   margin-top: 0.3rem;
   font-size: 0.9rem;
   font-style: italic;
 }
-#catjargon .glossnav .disclaimer.visible {
+#catjargon .glossnav .disclaimer.visible,
+#catjargon .glossnav .glossary-toc.visible {
   display: block;
+}
+#catjargon .glossnav .glossary-toc {
+  font-style: normal;
 }
 #catjargon h2 {
   margin: 0.5rem 0 0.2rem 0;
-  transition: background-color 1.5s ease;
 }
 #catjargon h2 a:hover {
   text-decoration: none;
-}
-#catjargon h2.flash {
-  background-color: #ef927d;
-  transition: none;
 }
 #catjargon p {
   margin-bottom: 0.4rem;
@@ -668,6 +664,7 @@ table.styleA tr.solidBottom td {
 }
 #catjargon .entry {
   margin-bottom: 1rem;
+  transition: background-color 1.5s ease;
 }
 #catjargon .entry .hilite {
   background-color: #e0e0e0;
@@ -675,6 +672,10 @@ table.styleA tr.solidBottom td {
 }
 #catjargon .entry.hidden {
   display: none;
+}
+#catjargon .entry.flash {
+  background-color: #ef927d;
+  transition: none;
 }
 #catjargon .toTop {
   display: none;
