@@ -38,7 +38,7 @@ JM.catJargon = (function () {
       setTimeout(function () { $("#txtSearch").focus(); }, 50);
     }
 
-    $("#toggleDisclaimer").click(function () {
+    $("#toggleDisclaimer").click(function (evt) {
       if ($(".disclaimer").hasClass("visible")) {
         $(".disclaimer").removeClass("visible"); $("#toggleDisclaimer").removeClass("selected");
       }
@@ -46,8 +46,9 @@ JM.catJargon = (function () {
         $(".disclaimer").addClass("visible"); $(this).addClass("selected");
         $(".glossary-toc").removeClass("visible"); $("#toggleTOC").removeClass("selected");
       }
+      evt.preventDefault();
     });
-    $("#toggleTOC").click(function () {
+    $("#toggleTOC").click(function (evt) {
       if ($(".glossary-toc").hasClass("visible")) {
         $(".glossary-toc").removeClass("visible"); $("#toggleTOC").removeClass("selected");
       }
@@ -55,6 +56,7 @@ JM.catJargon = (function () {
         $(".disclaimer").removeClass("visible"); $("#toggleDisclaimer").removeClass("selected");
         $(".glossary-toc").addClass("visible"); $(this).addClass("selected");
       }
+      evt.preventDefault();
     });
 
     buildTOC();

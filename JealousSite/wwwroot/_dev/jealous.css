@@ -631,9 +631,12 @@ table.styleA tr.solidBottom td {
   float: right;
   margin-left: 0.3rem;
   background-color: #87b9ce;
-  color: white;
   text-align: center;
   cursor: pointer;
+}
+#catjargon .glossnav .controls .ctrl-right a {
+  color: white;
+  text-decoration: none;
 }
 #catjargon .glossnav .disclaimer,
 #catjargon .glossnav .glossary-toc {
