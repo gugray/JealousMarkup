@@ -1,0 +1,89 @@
+﻿<div id="x-rel">/lsp-keyword-analysis</div>
+<div id="x-title">Language connects (or separates?) the top 50 LSPs</div>
+<div id="x-cats">Stuff, NLP</div>
+<div id="x-date">2017-05-19</div>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/other/cat-teacher.jpeg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<div id="x-noindex">true</div>
+
+<h1>Language connects (or separates?) the top 50 LSPs</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  Is translation destined to become a high-tech commodity, or will it evolve as a
+  high value generator? This question is one of the industry’s defining narratives
+  today, so I was curious to see how the world’s top LSPs position themselves on the
+  market. I analyzed the language from these companies’ home pages and built the
+  interactive visualization below.
+  <br />
+  I’ll let you explore and leave the conclusions to you. What patterns do
+  you find? Do they match up with your own impression of these companies? If you’re
+  one of the LSPs: does the language match with your own market positioning?
+  I’m excited to hear.
+  <br />
+  A more detailed explanation of the methodology, the source data, and the code to
+  reproduce, follows below the interactive part.
+</p>
+
+<div id="lspKeyControls">
+  <span class="label">Clusters:</span>
+  <span class="ctrl-left" id="clust2">two</span>
+  <span class="ctrl-left" id="clust3">three</span>
+  <span class="ctrl-left" id="clust4">four</span>
+  <span class="ctrl-left selected" id="clust5">five</span>
+  <span class="ctrl-left" id="clust6">six</span>
+  <span class="ctrl-right" id="stem">surface</span>
+</div>
+<div id="lspKeyChart">
+  <!-- <canvas id="lsp-keychart-canvas"></canvas> -->
+</div>
+<div id="lspKeyLegend">
+</div>
+
+<h2>Methodology</h2>
+<p>-- WIP --</p>
+
+<h2>Data and code</h2>
+<p>
+  [Download] The LSPs home pages in the analysis, saved manually on May 17,  2017.
+</p>
+<p>
+  [Gist] The tiny Python scrip to extract plain text from the HTML pages.
+</p>
+<p>
+  [Download] The result of the plain text conversion.
+</p>
+<p>
+  [Gist] The Python script I used to produce the data for the interactive visualization.
+</p>
+
+<h2>References</h2>
+<p>
+  Top 100 Language Service Providers: 2016. <i>CSA Research</i><br />
+  http://www.commonsenseadvisory.com/Marketing/2016-largest-LSPs.aspx
+</p>
+<p>
+  Document Clustering with Python. <i>Brandon Rose</i><br />
+  http://brandonrose.org/clustering
+</p>
+<p>
+  TF-IDF on Wikipedia: https://en.wikipedia.org/wiki/Tf%E2%80%93idf
+</p>
+<p>
+  The most influential paper Gerard Salton Never Wrote:
+  http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.184.910&rep=rep1&type=pdf
+</p>
+<p>
+  K-means clustering on Wikipedia: https://en.wikipedia.org/wiki/K-means_clustering
+</p>
+<p>
+  Multidimensional scaling on Wikipedia: https://en.wikipedia.org/wiki/Multidimensional_scaling
+</p>
