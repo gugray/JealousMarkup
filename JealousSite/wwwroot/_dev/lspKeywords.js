@@ -14,7 +14,7 @@ JM.lspKeywords = (function () {
   $(document).ready(function () {
     if ($("#lspKeyChart").length == 0) return;
 
-    reqCount = 10;
+    reqCount = 11;
     loadJson("/files/lsp-keywords/data-stem-6.json", "stem-6");
     loadJson("/files/lsp-keywords/data-stem-5.json", "stem-5");
     loadJson("/files/lsp-keywords/data-stem-4.json", "stem-4");
@@ -25,6 +25,17 @@ JM.lspKeywords = (function () {
     loadJson("/files/lsp-keywords/data-nostem-4.json", "nostem-4");
     loadJson("/files/lsp-keywords/data-nostem-3.json", "nostem-3");
     loadJson("/files/lsp-keywords/data-nostem-2.json", "nostem-2");
+    // Load Chart.js on demand
+    $.ajax({
+      type: "GET",
+      url: "/static/lib/chart-2.1.6.min.js",
+      success: function () {
+        --reqCount;
+        if (reqCount == 0) dataReady();
+      },
+      dataType: "script",
+      cache: false
+    });
 
     $(".walkthrough").click(function () {
       if ($(".lspKeyWalker").hasClass("visible")) {
