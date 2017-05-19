@@ -20,7 +20,7 @@
 <p class="lede">
   Is translation destined to become a high-tech commodity, or will it evolve as a
   strong value generator? This question is one of the industry’s defining narratives
-  today, so I was curious to see how the world’s top LSPs position themselves on the
+  today, so I was curious to see how the world’s top LSPs[<a href="#ref1">1</a>] position themselves on the
   market. I analyzed the language from these companies’ home pages and built an
   interactive visualization.
 </p>
@@ -29,13 +29,13 @@
 </p>
 <div class="lspKeyWalker">
   <div class="lspWalkStep step0 visible">
-    Every bubble represents an LSP. You can mouse-over to see their website URL.<br/>
-    LSPs that rank higher on the top 50 list have a larger bubble.<br/>
+    Every bubble represents an LSP. You can mouse-over to see their website URL.<br />
+    LSPs that rank higher on the top 50 list have a larger bubble.<br />
     If two bubbles are close, that means the sites use similar language.
   </div>
   <div class="lspWalkStep step1">
     The analysis finds the most characteristic words in each website, and clusters
-    LSPs that use similar language on their home page.<br/>
+    LSPs that use similar language on their home page.<br />
     The outcome varies if you create a different number of clusters. You can play with this
     by changing the number at the top.
   </div>
@@ -50,7 +50,7 @@
     rank on the top 50 list. The smaller the number, the larger the LSP.
   </div>
   <div class="lspWalkStep step5">
-    If you analyze surface forms, "agency" and "agencies" are different words. This also affects the outcome.<br/>
+    If you analyze surface forms, "agency" and "agencies" are different words. This also affects the outcome.<br />
     With this button you can toggle between surface forms and stems.
   </div>
   <div class="walkCommands">
@@ -74,42 +74,157 @@
 <div id="lspKeyLegend">
 </div>
 
-<h2>Methodology</h2>
-<p>-- WIP --</p>
+<h2>The analysis</h2>
+<p>
+  I won’t draw any conclusions from the data myself; the whole point is to let you explore
+  and find your own insights. What patterns do <i>you</i> see? Do they match up with your perception
+  of these companies? If you are one of the LSPs: does the language rhyme with your own
+  market positioning? I am excited to hear.
+</p>
+<p>
+  Also, I don’t do document clustering every day, so I may well have made errors. At the end I
+  include links to all the data and scripts used in the analysis. Give me a shout if you notice anything odd.
+</p>
+
+<h3>Population</h3>
+<p>
+  To obtain a selection of LSPs I consulted CSA’s top 100 list for 2016[<a href="#ref2">2</a>].
+  I only used the first half so that it’s still humanly possible to get an overview in the visualization.
+  Already since 2016 this landscape has been altered by mergers and acquisitions.
+  #23 <i>Merrill Brink International</i> figures in my analysis as <i>United Language Group</i>.
+  #42 <i>Global Language Solutions</i> has been acquired by #7 <i>Welocalize</i> and does not have a
+  website, so I skipped it altogether. Consequently, my list’s #50 is <i>Mother Tongue Writers</i>,
+  which ranks #51 on the original CSA list.
+</p>
+
+<h3>Data sourcing</h3>
+<p>
+  I was curious to see how different LSPs present themselves publicly, so I decided to
+  analyze the content published on their websites. To keep this truly simple, I only looked
+  at the home page that welcomes visitors. In a very few instances the default page is not
+  English; the only navigation I undertook was to switch to the English version in these cases.
+</p>
+<p>
+  I manually saved the home pages as pure HTML (May 17, 2017), and extracted the plain text
+  in preparation for the analysis. Throughout the rest, documents (i.e., LPSs) are identified
+  by their pure website URL.
+</p>
+
+<h3>Analysis</h3>
+<p>
+  I followed Brandon Rose’s document clustering guide[<a href="#ref3">3</a>] very closely.
+  The subject of his experiment was Hollywood movies, which he clustered based on their Wikipedia
+  and IMDB synopses. I did the same with a few tweaks, replacing synopses with home page content
+  and movies with LSPs. The rest of this section describes the process in some detail.
+</p>
+<p>
+  (1) Text is normalized to lowercase and tokenized. To reduce noise I used NLTK’s[<a href="#ref4">4</a>]
+  English stopword list, but also eliminated tokens that contained digits or were shorter than
+  2 characters. I ran the entire analysis twice, once with stemming and once without. The
+  stemmer is NLTK’s Porter Stemmer.
+</p>
+<p>
+  (2) Each document is mapped into a vector space[<a href="#ref5">5</a>] using
+  TF-IDF[<a href="#ref6">6</a>], a staple in information retrieval. In this representation
+  the similarity between any two documents
+  can be expressed as the cosine of their vectors’ angle. The TF-IDF vectorizer has a band-pass
+  filter that greatly affects the result. Words that occur in too few documents are unhelpful
+  for finding similarities; words that occur in too many documents are not distinctive enough.
+</p>
+<p>
+  I set the low cut-off to a pretty low 0.05, i.e., it drops words that occur in only one or two
+  documents. Basically this gets rid of brand names. The high cut-off point is also relatively
+  low at 0.60. I found that with higher values the results are less informative; the variations
+  on “translation” are too frequent. In other words, these are empirically found values. In practice a lot of
+  NLP is “tweak it until you hit TLAR[<a href="#ref7">7</a>].”
+</p>
+<p>
+  (3) The next step uses k-means clustering[<a href="#ref8">8</a>] to build N groups of similar
+  documents. I ran the anlysis for values 2 through 6. This is the main control you find in the
+  interactive visualization.
+</p>
+<p>
+  (4) For each cluster the script identifies the 6 words that are closest to the cluster’s center.
+  The visualization shows these in bold below the bubble chart. I didn’t make those texts up;
+  they are what “best describes” each cluster’s choice of words.
+</p>
+<p>
+  (5) The visualization uses colors to indicate clusters. But you also want to get an idea how
+  close the different documents are, i.e., how similar they are. To project points from a high-dimensional
+  space onto a 2D chart, the script uses multidimensional scaling[<a href="#ref9">9</a>].
+</p>
+
+<h3>Visualization</h3>
+<p>
+  I used the script to produce all the combinations of the two parameters: cluster count and
+  stemming/surface form. This page uses Chart.js[<a href="#ref10">10</a>] for the bubble chart.
+  I used JS/HTML/LESS to build the interaction surrounding the chart itself.
+</p>
+<p>
+  Five of the six cluster colors come from a 2005 David Foster Wallace article[<a href="#ref11">11</a>]
+  in The Atlantic. I don’t think repurposing them here amounts to IP theft, and I really like those colors.
+</p>
 
 <h2>Data and code</h2>
 <p>
-  [Download] The LSPs home pages in the analysis, saved manually on May 17,  2017.
+  [<a href="/files/lsp-keywords/lsp-source-html.zip">Download</a>]
+  The analyzed LSP home pages, saved manually on May 17,  2017.
 </p>
 <p>
-  [Gist] The tiny Python scrip to extract plain text from the HTML pages.
+  [<a href="https://gist.github.com/gugray/786ba0f86301e110b50f43c021541543" rel="noreferrer nofollow" target="_blank">Gist</a>]
+  Python script to extract plain text from the HTML pages.
 </p>
 <p>
-  [Download] The result of the plain text conversion.
+  [<a href="/files/lsp-keywords/lsp-source-txt.zip">Download</a>]
+  Result of the plain text conversion.
 </p>
 <p>
-  [Gist] The Python script I used to produce the data for the interactive visualization.
+  [<a href="https://gist.github.com/gugray/0fbd6f9efaf9e0fa90ffed75dbd379f4" rel="noreferrer nofollow" target="_blank">Gist</a>]
+  Python script to produce the data for the interactive visualization.
 </p>
 
 <h2>References</h2>
 <p>
-  Top 100 Language Service Providers: 2016. <i>CSA Research</i><br />
-  http://www.commonsenseadvisory.com/Marketing/2016-largest-LSPs.aspx
+  [<a name="ref1">1</a>] If you’re not from the translation industry: LSP stands for language
+  service provider, aka a company that provides translations and other language services.
 </p>
 <p>
-  Document Clustering with Python. <i>Brandon Rose</i><br />
-  http://brandonrose.org/clustering
+  [<a name="ref2">2</a>] Top 100 Language Service Providers: 2016. <i>CSA Research</i><br />
+  <a href="http://www.commonsenseadvisory.com/Marketing/2016-largest-LSPs.aspx" rel="noreferrer nofollow" target="_blank">http://www.commonsenseadvisory.com/Marketing/2016-largest-LSPs.aspx</a>
 </p>
 <p>
-  TF-IDF on Wikipedia: https://en.wikipedia.org/wiki/Tf%E2%80%93idf
+  [<a name="ref3">3</a>] Document Clustering with Python. <i>Brandon Rose</i><br />
+  <a href="http://brandonrose.org/clustering" rel="noreferrer nofollow" target="_blank">http://brandonrose.org/clustering</a>
 </p>
 <p>
-  The most influential paper Gerard Salton Never Wrote:
-  http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.184.910&rep=rep1&type=pdf
+  [<a name="ref4">4</a>] Natural Language Toolkit:<br/>
+  <a href="http://www.nltk.org/" rel="noreferrer nofollow" target="_blank">http://www.nltk.org/</a>
 </p>
 <p>
-  K-means clustering on Wikipedia: https://en.wikipedia.org/wiki/K-means_clustering
+  [<a name="ref5">5</a>] The most influential paper Gerard Salton Never Wrote. <i>David Dubin</i><br />
+  <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.184.910&rep=rep1&type=pdf" rel="noreferrer nofollow" target="_blank">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.184.910&rep=rep1&type=pdf</a>
 </p>
 <p>
-  Multidimensional scaling on Wikipedia: https://en.wikipedia.org/wiki/Multidimensional_scaling
+  [<a name="ref6">6</a>] TF-IDF on Wikipedia:<br />
+  <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" rel="noreferrer nofollow" target="_blank">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a>
+</p>
+<p>
+  [<a name="ref7">7</a>] That Looks About Right. A key technique in aviation and natural language processing.<br/>
+  <a href="http://johnandmartha.kingschools.com/2016/11/21/when-tlar-beats-perfection/" rel="noreferrer nofollow" target="_blank">http://johnandmartha.kingschools.com/2016/11/21/when-tlar-beats-perfection/</a>
+</p>
+<p>
+  [<a name="ref8">8</a>] K-means clustering on Wikipedia:<br />
+  <a href="https://en.wikipedia.org/wiki/K-means_clustering" rel="noreferrer nofollow" target="_blank">https://en.wikipedia.org/wiki/K-means_clustering</a>
+</p>
+<p>
+  [<a name="ref9">9</a>] Multidimensional scaling on Wikipedia:<br />
+  <a href="https://en.wikipedia.org/wiki/Multidimensional_scaling" rel="noreferrer nofollow" target="_blank">https://en.wikipedia.org/wiki/Multidimensional_scaling</a>
+</p>
+<p>
+  [<a name="ref10">10</a>] Chart.js:<br />
+  <a href="http://www.chartjs.org/" rel="noreferrer nofollow" target="_blank">http://www.chartjs.org/</a>
+</p>
+<p>
+  [<a name="ref11">11</a>] Host. The Atlantic, April 2005. <i>David Foster Wallace</i><br />
+  <a href="https://www.theatlantic.com/magazine/archive/2005/04/host/303812/" rel="noreferrer nofollow" target="_blank">https://www.theatlantic.com/magazine/archive/2005/04/host/303812/</a>
 </p>
