@@ -790,6 +790,20 @@ table.styleA tr.solidBottom td {
   color: #b32a0b;
   cursor: pointer;
 }
+.lspKeyHead .sharer {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  float: right;
+  margin-left: 0.3rem;
+  background-color: #87b9ce;
+  text-align: center;
+  cursor: pointer;
+}
+.lspKeyHead .sharer a {
+  color: white;
+  text-decoration: none;
+}
 .lspKeyWalker {
   display: none;
   position: absolute;
