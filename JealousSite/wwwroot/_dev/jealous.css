@@ -782,6 +782,58 @@ table.styleA tr.solidBottom td {
 #lspKeyLegend div {
   margin-bottom: 0.8rem;
 }
+.lspKeyHead .walkthrough {
+  color: #b32a0b;
+  cursor: pointer;
+}
+.lspKeyWalker {
+  display: none;
+  position: absolute;
+  top: 20rem;
+  z-index: 2;
+  background-color: #f9edd6;
+  padding: 0.3rem 0.5rem;
+  width: 20rem;
+  border: 1px solid #e0e0e0;
+  font-size: 0.9rem;
+  -moz-box-shadow: 0 0 0.5rem #e0e0e0;
+  -webkit-box-shadow: 0 0 0.5rem #e0e0e0;
+  box-shadow: 0 0 0.5rem #e0e0e0;
+}
+.lspKeyWalker.visible {
+  display: block;
+}
+.lspKeyWalker .lspWalkStep {
+  display: none;
+  line-height: 1.1;
+  height: auto;
+  overflow: hidden;
+  border-bottom: 1pt solid #e0e0e0;
+  padding-bottom: 0.3rem;
+}
+.lspKeyWalker .lspWalkStep.visible {
+  display: block;
+}
+.lspKeyWalker .walkCommands {
+  padding-top: 0.2rem;
+}
+.lspKeyWalker .walkCommands span {
+  font-size: 0.9rem;
+  display: inline-block;
+  position: relative;
+  float: left;
+  color: #b32a0b;
+  cursor: pointer;
+}
+.lspKeyWalker .walkCommands .next {
+  font-weight: 600;
+  float: right;
+  padding: 0 0.2rem;
+  border-radius: 0.2rem;
+}
+.lspKeyWalker .walkCommands .next:hover {
+  background-color: #fde0da;
+}
 @media screen and (max-width: 620px) {
   .catzine-thumb {
     width: 100%;

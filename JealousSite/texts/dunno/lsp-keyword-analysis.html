@@ -19,19 +19,45 @@
 
 <p class="lede">
   Is translation destined to become a high-tech commodity, or will it evolve as a
-  high value generator? This question is one of the industry’s defining narratives
+  strong value generator? This question is one of the industry’s defining narratives
   today, so I was curious to see how the world’s top LSPs position themselves on the
-  market. I analyzed the language from these companies’ home pages and built the
-  interactive visualization below.
-  <br />
-  I’ll let you explore and leave the conclusions to you. What patterns do
-  you find? Do they match up with your own impression of these companies? If you’re
-  one of the LSPs: does the language match with your own market positioning?
-  I’m excited to hear.
-  <br />
-  A more detailed explanation of the methodology, the source data, and the code to
-  reproduce, follows below the interactive part.
+  market. I analyzed the language from these companies’ home pages and built an
+  interactive visualization.
 </p>
+<p class="lspKeyHead">
+  <span class="walkthrough">How do I use this?</span>
+</p>
+<div class="lspKeyWalker">
+  <div class="lspWalkStep step0 visible">
+    Every bubble represents an LSP. You can mouse-over to see their website URL.<br/>
+    LSPs that rank higher on the top 50 list have a larger bubble.<br/>
+    If two bubbles are close, that means the sites use similar language.
+  </div>
+  <div class="lspWalkStep step1">
+    The analysis finds the most characteristic words in each website, and clusters
+    LSPs that use similar language on their home page.<br/>
+    The outcome varies if you create a different number of clusters. You can play with this
+    by changing the number at the top.
+  </div>
+  <div class="lspWalkStep step2">
+    This section has details about the clusters. Bubbles in the same cluster share the same color.
+  </div>
+  <div class="lspWalkStep step3">
+    The analysis automatically extracts each cluster's most characteristic words: this is what you see in bold.
+  </div>
+  <div class="lspWalkStep step4">
+    The cluster's members are listed in italics. The number means the LSP's
+    rank on the top 50 list. The smaller the number, the larger the LSP.
+  </div>
+  <div class="lspWalkStep step5">
+    If you analyze surface forms, "agency" and "agencies" are different words. This also affects the outcome.<br/>
+    With this button you can toggle between surface forms and stems.
+  </div>
+  <div class="walkCommands">
+    <span class="close">Close</span>
+    <span class="next">Next</span>
+  </div>
+</div>
 
 <div id="lspKeyControls">
   <span class="label">Clusters:</span>

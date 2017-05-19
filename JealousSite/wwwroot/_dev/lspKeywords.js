@@ -9,6 +9,7 @@ JM.lspKeywords = (function () {
   var colors = ["#f9bd4e", "#50cea8", "#a6d5e8", "#c493ff", "#e1708c", "#3eabb4"];
   var plottables = {};
   var reqCount = 0;
+  var walkStep = 0;
 
   $(document).ready(function () {
     if ($("#lspKeyChart").length == 0) return;
@@ -24,7 +25,76 @@ JM.lspKeywords = (function () {
     loadJson("/files/lsp-keywords/data-nostem-4.json", "nostem-4");
     loadJson("/files/lsp-keywords/data-nostem-3.json", "nostem-3");
     loadJson("/files/lsp-keywords/data-nostem-2.json", "nostem-2");
+
+    $(".walkthrough").click(function () {
+      if ($(".lspKeyWalker").hasClass("visible")) {
+        $(".lspKeyWalker").removeClass("visible");
+        return;
+      }
+      walkStep = 0;
+      doWalk();
+    });
+    $(".walkCommands .next").click(function () {
+      ++walkStep;
+      doWalk();
+    });
+    $(".walkCommands .close").click(function () {
+      $(".lspKeyWalker").removeClass("visible");
+    });
+    // DBG
+    //doWalk();
   });
+
+  function doWalk() {
+    $(".lspWalkStep").removeClass("visible");
+    if (walkStep == 6) {
+      $(".lspKeyWalker").removeClass("visible");
+      return;
+    }
+    var currStepClass = ".lspWalkStep.step" + walkStep;
+    $(currStepClass).addClass("visible");
+
+    $(".lspKeyWalker").addClass("visible");
+    var offset = null;
+    if (walkStep == 0) {
+      $(".walkCommands .next").text("Next");
+      $(".walkCommands .close").text("Close");
+      var top = $("#lspKeyChart").position().top + 120;
+      $(".lspKeyWalker").css("top", top);
+      $(".lspKeyWalker").css("left", "");
+      $(".lspKeyWalker").css("right", "");
+      offset = $(".lspKeyWalker").offset();
+      offset.top -= 140;
+    }
+    else if (walkStep == 1) {
+      var top = $("#lspKeyChart").position().top + 5;
+      $(".lspKeyWalker").css("top", top);
+      $(".lspKeyWalker").css("left", "100px");
+    }
+    else if (walkStep == 2) {
+      var top = $("#lspKeyLegend").position().top;
+      $(".lspKeyWalker").css("top", top + 100);
+      $(".lspKeyWalker").css("left", "50px");
+      offset = $(".lspKeyWalker").offset();
+      offset.top -= 140;
+    }
+    else if (walkStep == 5) {
+      $(".walkCommands .next").text("Finish");
+      $(".walkCommands .close").text("");
+      var top = $("#lspKeyChart").position().top + 5;
+      $(".lspKeyWalker").css("top", top);
+      $(".lspKeyWalker").css("left", "");
+      $(".lspKeyWalker").css("right", "20px");
+      offset = $(".lspKeyWalker").offset();
+      offset.top -= 140;
+    }
+    if (offset) {
+      $('html, body').animate({
+        scrollTop: offset.top - 100,
+        scrollLeft: offset.left
+      });
+    }
+  }
 
   function esc(s) {
     return s.replace(/&/g, '&amp;')

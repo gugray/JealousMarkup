@@ -190,6 +190,10 @@ table.styleA {
   tr.solidBottom td { border-bottom: 1pt solid @textColor; }
 }
 
+// **************************************
+// CATZINE specific
+// **************************************
+
 .catzine {
   text-align: center;
   img { background-color: white; max-width: 28rem; }
@@ -215,6 +219,10 @@ table.styleA {
   }
   img { border: none; background-color: white; width: 50%; display: block; float: left; }
 }
+
+// **************************************
+// Localization Quiz specific
+// **************************************
 
 #localizationQuiz {
   .start {
@@ -257,6 +265,10 @@ table.styleA {
     p.share { text-align: center; }
   }
 }
+
+// **************************************
+// CAT tool glossary specific
+// **************************************
 
 #catjargon {
   .glossnav {
@@ -311,6 +323,10 @@ table.styleA {
   }
 }
 
+// **************************************
+// LSP keyword analysis specific
+// **************************************
+
 #lspKeyChart {
   border-top: 1pt solid @accentColor; border-bottom: 1pt solid @accentColor; padding: 0.5rem 0;
   canvas {
@@ -343,6 +359,34 @@ table.styleA {
   u { text-decoration: none; padding: 0 0.2rem; border: 1px solid @textColor; font-size: 0.9rem; border-radius: 0.2rem; }
   div { margin-bottom: 0.8rem; }
 }
+
+.lspKeyHead {
+  .walkthrough { color: @accentColor; cursor: pointer; }
+}
+
+.lspKeyWalker {
+  display: none; &.visible { display: block; }
+  position: absolute; top: 20rem; z-index: 2; background-color: #f9edd6;;
+  padding: 0.3rem 0.5rem;
+  width: 20rem; border: 1px solid @shoulderColor; font-size: 0.9rem;
+  -moz-box-shadow: 0 0 0.5rem @shoulderColor; -webkit-box-shadow: 0 0 0.5rem @shoulderColor; box-shadow: 0 0 0.5rem @shoulderColor;
+  .lspWalkStep { 
+    display: none; &.visible { display: block; }
+    line-height: 1.1; height: auto; overflow: hidden; border-bottom: 1pt solid @shoulderColor; padding-bottom: 0.3rem; 
+  }
+  .walkCommands {
+    padding-top: 0.2rem;
+    span { font-size: 0.9rem; display: inline-block; position: relative; float: left; color: @accentColor; cursor: pointer; }
+    .next {
+      font-weight: 600; float: right; &:hover { background-color: lighten(@accentColor, 55%); }
+      padding: 0 0.2rem; border-radius: 0.2rem;
+    }
+  }
+}
+
+// **************************************
+// RESPONSIVE LAYOUT
+// **************************************
 
 @media screen and (max-width: 620px) {
   .catzine-thumb { width: 100%; margin-right: 0; }
