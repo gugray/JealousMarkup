@@ -177,7 +177,7 @@ JM.lspKeywords = (function () {
       var clust = pbl[i];
       html += "<div class='cluster" + i + " cluster'>";
       html += "<span class='label'>";
-      html += "Cluster " + abc[i] + ": " + (clust.sites.length + 1);
+      html += "Cluster " + abc[i] + ": " + (clust.sites.length);
       html += "</span> ";
       html += "<b>" + esc(clust.words) + "</b>";
       html += "<br/><i>";
@@ -191,6 +191,10 @@ JM.lspKeywords = (function () {
       html += "</div>";
     }
     $("#lspKeyLegend").html(html);
+  }
+
+  function hiliteUrl(dsix, ix) {
+    $(".cluster" + dsix + " u:nth-child(" + (ix + 1) + ")").addClass("hilite");
   }
 
   function initChart(pbl) {
@@ -222,6 +226,12 @@ JM.lspKeywords = (function () {
               var datapoint = dataset.data[tti.index];
               return datapoint.tooltip;
             }
+          }
+        },
+        hover: {
+          onHover: function (arg) {
+            if (!arg || !arg.length || arg.length == 0) $(".cluster u").removeClass("hilite");
+            else hiliteUrl(arg[0]._datasetIndex, arg[0]._index);
           }
         }
       }

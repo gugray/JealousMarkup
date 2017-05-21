@@ -766,22 +766,28 @@ table.styleA tr.solidBottom td {
 #lspKeyViz #lspKeyLegend .cluster {
   padding-bottom: 0.3rem;
 }
-#lspKeyViz #lspKeyLegend .cluster0 .label {
+#lspKeyViz #lspKeyLegend .cluster0 .label,
+#lspKeyViz #lspKeyLegend .cluster0 u.hilite {
   background-color: #f9bd4e;
 }
-#lspKeyViz #lspKeyLegend .cluster1 .label {
+#lspKeyViz #lspKeyLegend .cluster1 .label,
+#lspKeyViz #lspKeyLegend .cluster1 u.hilite {
   background-color: #50cea8;
 }
-#lspKeyViz #lspKeyLegend .cluster2 .label {
+#lspKeyViz #lspKeyLegend .cluster2 .label,
+#lspKeyViz #lspKeyLegend .cluster2 u.hilite {
   background-color: #a6d5e8;
 }
-#lspKeyViz #lspKeyLegend .cluster3 .label {
+#lspKeyViz #lspKeyLegend .cluster3 .label,
+#lspKeyViz #lspKeyLegend .cluster3 u.hilite {
   background-color: #c493ff;
 }
-#lspKeyViz #lspKeyLegend .cluster4 .label {
+#lspKeyViz #lspKeyLegend .cluster4 .label,
+#lspKeyViz #lspKeyLegend .cluster4 u.hilite {
   background-color: #e1708c;
 }
-#lspKeyViz #lspKeyLegend .cluster5 .label {
+#lspKeyViz #lspKeyLegend .cluster5 .label,
+#lspKeyViz #lspKeyLegend .cluster5 u.hilite {
   background-color: #3eabb4;
 }
 #lspKeyViz #lspKeyLegend u {
@@ -963,6 +969,9 @@ table.styleA tr.solidBottom td {
     width: 6.3%;
   }
   #catjargon .glossnav .abc span.even {
+    display: none;
+  }
+  .lspKeyHead .enlarge {
     display: none;
   }
 }

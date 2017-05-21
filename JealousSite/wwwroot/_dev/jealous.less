@@ -352,12 +352,12 @@ table.styleA {
     margin-top: 0.5rem; margin-bottom: 2rem; border-bottom: 1pt solid @accentColor; font-size: 0.9rem;
     .label { padding: 0 0.3rem; border-radius: 0.3rem; }
     .cluster { padding-bottom: 0.3rem; }
-    .cluster0 .label { background-color: #f9bd4e; }
-    .cluster1 .label { background-color: #50cea8; }
-    .cluster2 .label { background-color: #a6d5e8; }
-    .cluster3 .label { background-color: #c493ff; }
-    .cluster4 .label { background-color: #e1708c; }
-    .cluster5 .label { background-color: #3eabb4; }
+    .cluster0 { .label, u.hilite { background-color: #f9bd4e; } }
+    .cluster1 { .label, u.hilite { background-color: #50cea8; } }
+    .cluster2 { .label, u.hilite { background-color: #a6d5e8; } }
+    .cluster3 { .label, u.hilite { background-color: #c493ff; } }
+    .cluster4 { .label, u.hilite { background-color: #e1708c; } }
+    .cluster5 { .label, u.hilite { background-color: #3eabb4; } }
     u { text-decoration: none; padding: 0 0.2rem; border: 1px solid @textColor; font-size: 0.75rem; border-radius: 0.2rem; }
     div { margin-bottom: 0.8rem; overflow-y: hidden; }
   }
@@ -422,7 +422,7 @@ table.styleA {
 }
 
 // **************************************
-// RESPONSIVE LAYOUT
+// RESPONSIVE LAYOUT - SMALL
 // **************************************
 
 @media screen and (max-width: 620px) {
@@ -430,4 +430,5 @@ table.styleA {
   .catzine img { width: 100%; }
   #catjargon .glossnav .abc span { width: 6.3%; }
   #catjargon .glossnav .abc span.even { display: none; }
+  .lspKeyHead .enlarge { display: none; }
 }
