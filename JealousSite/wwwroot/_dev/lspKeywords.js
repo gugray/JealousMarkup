@@ -12,7 +12,7 @@ JM.lspKeywords = (function () {
   var walkStep = 0;
 
   $(document).ready(function () {
-    if ($("#lspKeyChart").length == 0) return;
+    if ($("#lspKeyViz").length == 0) return;
 
     reqCount = 11;
     loadJson("/files/lsp-keywords/data-stem-6.json", "stem-6");
@@ -25,18 +25,20 @@ JM.lspKeywords = (function () {
     loadJson("/files/lsp-keywords/data-nostem-4.json", "nostem-4");
     loadJson("/files/lsp-keywords/data-nostem-3.json", "nostem-3");
     loadJson("/files/lsp-keywords/data-nostem-2.json", "nostem-2");
-    // Load Chart.js on demand
-    $.ajax({
-      type: "GET",
-      url: "/static/lib/chart-2.1.6.min.js",
-      success: function () {
-        --reqCount;
-        if (reqCount == 0) dataReady();
-      },
-      dataType: "script",
-      cache: false
-    });
+    loadChartJS();
 
+    $(".ctrl-minimize").click(function () {
+      $("#lspKeyViz").removeClass("large");
+      $("body").css("overflow-y", "scroll");
+      $("#lspKeyChart canvas").css("height", "17rem");
+      $(".lspKeyWalker").removeClass("visible");
+    });
+    $(".enlarge").click(function () {
+      $("#lspKeyViz").addClass("large");
+      $("body").css("overflow-y", "hidden");
+      $("#lspKeyChart canvas").css("height", "100% !important");
+      $(".lspKeyWalker").removeClass("visible");
+    });
     $(".walkthrough").click(function () {
       if ($(".lspKeyWalker").hasClass("visible")) {
         $(".lspKeyWalker").removeClass("visible");
@@ -52,6 +54,7 @@ JM.lspKeywords = (function () {
     $(".walkCommands .close").click(function () {
       $(".lspKeyWalker").removeClass("visible");
     });
+
     // DBG
     //doWalk();
   });
@@ -64,46 +67,76 @@ JM.lspKeywords = (function () {
     }
     var currStepClass = ".lspWalkStep.step" + walkStep;
     $(currStepClass).addClass("visible");
-
     $(".lspKeyWalker").addClass("visible");
-    var offset = null;
+
+    // First/last step: switch button texts etc.
     if (walkStep == 0) {
       $(".walkCommands .next").text("Next");
       $(".walkCommands .close").text("Close");
-      var top = $("#lspKeyChart").position().top + 120;
-      $(".lspKeyWalker").css("top", top);
-      $(".lspKeyWalker").css("left", "");
-      $(".lspKeyWalker").css("right", "");
-      offset = $(".lspKeyWalker").offset();
-      offset.top -= 140;
-    }
-    else if (walkStep == 1) {
-      var top = $("#lspKeyChart").position().top + 5;
-      $(".lspKeyWalker").css("top", top);
-      $(".lspKeyWalker").css("left", "100px");
-    }
-    else if (walkStep == 2) {
-      var top = $("#lspKeyLegend").position().top;
-      $(".lspKeyWalker").css("top", top + 100);
-      $(".lspKeyWalker").css("left", "50px");
-      offset = $(".lspKeyWalker").offset();
-      offset.top -= 140;
     }
     else if (walkStep == 5) {
       $(".walkCommands .next").text("Finish");
       $(".walkCommands .close").text("");
-      var top = $("#lspKeyChart").position().top + 5;
-      $(".lspKeyWalker").css("top", top);
-      $(".lspKeyWalker").css("left", "");
-      $(".lspKeyWalker").css("right", "20px");
-      offset = $(".lspKeyWalker").offset();
-      offset.top -= 140;
     }
-    if (offset) {
-      $('html, body').animate({
-        scrollTop: offset.top - 100,
-        scrollLeft: offset.left
-      });
+
+    // Different positioning logic in full screen mode
+    if ($("#lspKeyViz").hasClass("large")) {
+      if (walkStep == 0) {
+        $(".lspKeyWalker").css("top", "10rem");
+        $(".lspKeyWalker").css("left", "4rem");
+        $(".lspKeyWalker").css("right", "");
+      }
+      else if (walkStep == 1) {
+        $(".lspKeyWalker").css("top", "2.5rem");
+        $(".lspKeyWalker").css("left", "2rem");
+      }
+      else if (walkStep == 2) {
+        $(".lspKeyWalker").css("top", "6rem");
+        $(".lspKeyWalker").css("left", "");
+        $(".lspKeyWalker").css("right", "2rem");
+      }
+      else if (walkStep == 5) {
+        $(".lspKeyWalker").css("top", "2.5rem");
+        $(".lspKeyWalker").css("left", "17rem");
+        $(".lspKeyWalker").css("right", "");
+      }
+    }
+    else {
+      var offset = null;
+      if (walkStep == 0) {
+        var top = $("#lspKeyChart").position().top + 120;
+        $(".lspKeyWalker").css("top", top);
+        $(".lspKeyWalker").css("left", "");
+        $(".lspKeyWalker").css("right", "");
+        offset = $(".lspKeyWalker").offset();
+        offset.top -= 140;
+      }
+      else if (walkStep == 1) {
+        var top = $("#lspKeyChart").position().top + 5;
+        $(".lspKeyWalker").css("top", top);
+        $(".lspKeyWalker").css("left", "100px");
+      }
+      else if (walkStep == 2) {
+        var top = $("#lspKeyLegend").position().top;
+        $(".lspKeyWalker").css("top", top + 100);
+        $(".lspKeyWalker").css("left", "50px");
+        offset = $(".lspKeyWalker").offset();
+        offset.top -= 140;
+      }
+      else if (walkStep == 5) {
+        var top = $("#lspKeyChart").position().top + 5;
+        $(".lspKeyWalker").css("top", top);
+        $(".lspKeyWalker").css("left", "");
+        $(".lspKeyWalker").css("right", "20px");
+        offset = $(".lspKeyWalker").offset();
+        offset.top -= 140;
+      }
+      if (offset) {
+        $('html, body').animate({
+          scrollTop: offset.top - 100,
+          scrollLeft: offset.left
+        });
+      }
     }
   }
 
@@ -142,7 +175,7 @@ JM.lspKeywords = (function () {
     var html = "";
     for (var i = 0; i != pbl.length; ++i) {
       var clust = pbl[i];
-      html += "<div class='cluster" + i + "'>";
+      html += "<div class='cluster" + i + " cluster'>";
       html += "<span class='label'>";
       html += "Cluster " + abc[i] + ": " + (clust.sites.length + 1);
       html += "</span> ";
@@ -172,6 +205,7 @@ JM.lspKeywords = (function () {
       data: chartData,
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           xAxes: [{
             display: false
@@ -239,4 +273,18 @@ JM.lspKeywords = (function () {
     };
     xhr.send();
   }
+
+  function loadChartJS() {
+    $.ajax({
+      type: "GET",
+      url: "/static/lib/chart-2.1.6.min.js",
+      success: function () {
+        --reqCount;
+        if (reqCount == 0) dataReady();
+      },
+      dataType: "script",
+      cache: false
+    });
+  }
+
 })();

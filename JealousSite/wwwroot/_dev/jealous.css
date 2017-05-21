@@ -710,13 +710,13 @@ table.styleA tr.solidBottom td {
 #catjargon .toTop:hover {
   background-color: black;
 }
-#lspKeyChart {
+#lspKeyViz #lspKeyChart {
   border-top: 1pt solid #b32a0b;
   border-bottom: 1pt solid #b32a0b;
   padding: 0.5rem 0;
   min-height: 19rem;
 }
-#lspKeyChart canvas {
+#lspKeyViz #lspKeyChart canvas {
   display: block;
   position: relative;
   float: left;
@@ -724,11 +724,11 @@ table.styleA tr.solidBottom td {
   width: 100%;
   height: 17rem;
 }
-#lspKeyControls {
+#lspKeyViz #lspKeyControls {
   border-top: 1pt solid #b32a0b;
   padding: 0.5rem 0;
 }
-#lspKeyControls span {
+#lspKeyViz #lspKeyControls span {
   display: inline-block;
   position: relative;
   float: left;
@@ -736,63 +736,74 @@ table.styleA tr.solidBottom td {
   padding: 0 0.2rem;
   cursor: default;
 }
-#lspKeyControls .label {
+#lspKeyViz #lspKeyControls .label {
   font-weight: bold;
 }
-#lspKeyControls .ctrl-left {
+#lspKeyViz #lspKeyControls .ctrl-left {
   margin-left: 0.2rem;
 }
-#lspKeyControls .ctrl-left:hover,
-#lspKeyControls .ctrl-left.selected {
+#lspKeyViz #lspKeyControls .ctrl-left:hover,
+#lspKeyViz #lspKeyControls .ctrl-left.selected {
   background-color: #fde0da;
 }
-#lspKeyControls .ctrl-right {
+#lspKeyViz #lspKeyControls .ctrl-right {
   float: right;
   background-color: #fde0da;
 }
-#lspKeyLegend {
+#lspKeyViz #lspKeyMinimize {
+  display: none;
+}
+#lspKeyViz #lspKeyLegend {
   margin-top: 0.5rem;
   margin-bottom: 2rem;
   border-bottom: 1pt solid #b32a0b;
+  font-size: 0.9rem;
 }
-#lspKeyLegend .label {
+#lspKeyViz #lspKeyLegend .label {
   padding: 0 0.3rem;
   border-radius: 0.3rem;
 }
-#lspKeyLegend .cluster0 .label {
+#lspKeyViz #lspKeyLegend .cluster {
+  padding-bottom: 0.3rem;
+}
+#lspKeyViz #lspKeyLegend .cluster0 .label {
   background-color: #f9bd4e;
 }
-#lspKeyLegend .cluster1 .label {
+#lspKeyViz #lspKeyLegend .cluster1 .label {
   background-color: #50cea8;
 }
-#lspKeyLegend .cluster2 .label {
+#lspKeyViz #lspKeyLegend .cluster2 .label {
   background-color: #a6d5e8;
 }
-#lspKeyLegend .cluster3 .label {
+#lspKeyViz #lspKeyLegend .cluster3 .label {
   background-color: #c493ff;
 }
-#lspKeyLegend .cluster4 .label {
+#lspKeyViz #lspKeyLegend .cluster4 .label {
   background-color: #e1708c;
 }
-#lspKeyLegend .cluster5 .label {
+#lspKeyViz #lspKeyLegend .cluster5 .label {
   background-color: #3eabb4;
 }
-#lspKeyLegend u {
+#lspKeyViz #lspKeyLegend u {
   text-decoration: none;
   padding: 0 0.2rem;
   border: 1px solid #404040;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   border-radius: 0.2rem;
 }
-#lspKeyLegend div {
+#lspKeyViz #lspKeyLegend div {
   margin-bottom: 0.8rem;
   overflow-y: hidden;
 }
-.lspKeyHead .walkthrough {
+#lspKeyViz .lspKeyHead .walkthrough,
+#lspKeyViz .lspKeyHead .enlarge {
   color: #b32a0b;
   cursor: pointer;
 }
-.lspKeyHead .sharer {
+#lspKeyViz .lspKeyHead .enlarge {
+  margin-left: 3rem;
+}
+#lspKeyViz .lspKeyHead .sharer {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
@@ -802,11 +813,11 @@ table.styleA tr.solidBottom td {
   text-align: center;
   cursor: pointer;
 }
-.lspKeyHead .sharer a {
+#lspKeyViz .lspKeyHead .sharer a {
   color: white;
   text-decoration: none;
 }
-.lspKeyWalker {
+#lspKeyViz .lspKeyWalker {
   display: none;
   position: absolute;
   top: 20rem;
@@ -820,10 +831,10 @@ table.styleA tr.solidBottom td {
   -webkit-box-shadow: 0 0 0.5rem #e0e0e0;
   box-shadow: 0 0 0.5rem #e0e0e0;
 }
-.lspKeyWalker.visible {
+#lspKeyViz .lspKeyWalker.visible {
   display: block;
 }
-.lspKeyWalker .lspWalkStep {
+#lspKeyViz .lspKeyWalker .lspWalkStep {
   display: none;
   line-height: 1.1;
   height: auto;
@@ -831,13 +842,13 @@ table.styleA tr.solidBottom td {
   border-bottom: 1pt solid #e0e0e0;
   padding-bottom: 0.3rem;
 }
-.lspKeyWalker .lspWalkStep.visible {
+#lspKeyViz .lspKeyWalker .lspWalkStep.visible {
   display: block;
 }
-.lspKeyWalker .walkCommands {
+#lspKeyViz .lspKeyWalker .walkCommands {
   padding-top: 0.2rem;
 }
-.lspKeyWalker .walkCommands span {
+#lspKeyViz .lspKeyWalker .walkCommands span {
   font-size: 0.9rem;
   display: inline-block;
   position: relative;
@@ -845,14 +856,100 @@ table.styleA tr.solidBottom td {
   color: #b32a0b;
   cursor: pointer;
 }
-.lspKeyWalker .walkCommands .next {
+#lspKeyViz .lspKeyWalker .walkCommands .next {
   font-weight: 600;
   float: right;
   padding: 0 0.2rem;
   border-radius: 0.2rem;
 }
-.lspKeyWalker .walkCommands .next:hover {
-  background-color: #fde0da;
+#lspKeyViz .lspKeyWalker .walkCommands .next:hover {
+  background-color: #e0e0e0;
+}
+#lspKeyViz.large {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  max-height: 100%;
+  overflow: hidden;
+}
+#lspKeyViz.large #lspKeyControls {
+  position: absolute;
+  width: 60%;
+  top: 0;
+  left: 0;
+  border: 0;
+  background-color: #f8f8f8;
+  padding-left: 1rem;
+  height: 2.5rem;
+}
+#lspKeyViz.large #lspKeyControls .ctrl-right {
+  float: left;
+  margin-left: 2rem;
+  z-index: 3;
+}
+#lspKeyViz.large #lspKeyControls .ctrl-left {
+  z-index: 3;
+}
+#lspKeyViz.large .lspKeyHead {
+  position: absolute;
+  width: 60%;
+  margin-top: 0.5rem;
+  z-index: 2;
+}
+#lspKeyViz.large .lspKeyHead .enlarge,
+#lspKeyViz.large .lspKeyHead .sharer {
+  display: none;
+}
+#lspKeyViz.large .lspKeyHead .walkthrough {
+  float: right;
+}
+#lspKeyViz.large .lspKeyHead .walkthrough span {
+  display: none;
+}
+#lspKeyViz.large #lspKeyMinimize {
+  display: block;
+  position: absolute;
+  width: 40%;
+  top: 0;
+  right: 0;
+  background-color: #f8f8f8;
+  padding-top: 0.5rem;
+  color: #b32a0b;
+  height: 2.5rem;
+}
+#lspKeyViz.large #lspKeyMinimize .ctrl-minimize {
+  display: inline-block;
+  float: right;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+#lspKeyViz.large #lspKeyChart {
+  position: fixed;
+  width: 60%;
+  height: 100%;
+  padding: 3rem 0 0 0;
+  border: 0;
+}
+#lspKeyViz.large #lspKeyChart canvas {
+  width: 100%;
+  height: 100% !important;
+}
+#lspKeyViz.large #lspKeyLegend {
+  position: fixed;
+  width: 40%;
+  height: 100% !important;
+  top: 3rem;
+  right: 0;
+  padding-left: 0.5rem;
+  border: 0;
+  overflow-y: auto;
+}
+#lspKeyViz.large .lspKeyWalker {
+  position: fixed;
 }
 @media screen and (max-width: 620px) {
   .catzine-thumb {
