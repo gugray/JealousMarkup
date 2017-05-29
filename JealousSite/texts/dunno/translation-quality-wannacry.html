@@ -1,0 +1,206 @@
+﻿<div id="x-rel">/translation-quality-wannacry</div>
+<div id="x-title">Translation quality. WannaCry?</div>
+<div id="x-cats">Localization, Software</div>
+<div id="x-date">2017-05-29</div>
+<meta name="description" content="Quality matters, and it doesn’t. Ransomware reveals the industry’s future. Technology that empowers comes to the rescue." />
+<meta name="keywords" content="WannaCry, translation, quality, translation quality, machine translation, technology" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/other/work-safety-horse.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<h1>Translation quality. WannaCry?</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  An idiosyncratic mix of human and machine translation might be the key to tracing down the notorious ransomware, WannaCry. What does the incident tell us about the translating profession’s prospects? A post on – translation quality.
+</p>
+
+<p>
+  <img src="/files/other/work-safety-horse.jpg" alt="." width="600" height="463" />
+</p>
+
+<h2>Quality matters, and it doesn’t</h2>
+<p>
+  Flashpoint’s stunning linguistic analysis[<a href="#ref1">1</a>] of the WannaCry malware was easily the most
+  intriguing piece of news I read last week (and we do live in interesting times). This one detail by
+  itself blows my mind: WannaCry’s ransome notice was dutifully localized into no less
+  [<a href="#ref2">2</a>] than 28 languages. When even the rogues are with us on the #L10n bandwagon,
+  what other proof do you need that we live in a globalized age?
+</p>
+<p>
+  But it gets more exciting. A close look at those texts reveals that only the two Chinese versions and
+  the English text were authored by a human; the other 25 are all machine translations. A typo in the
+  Chinese suggests that a Pinyin input method was used. Substituting 帮组 bāngzǔ for 帮助 bāngzhù is
+  indicative of a Chinese speaker hailing from a southern topolect. Other vocabulary choices support
+  the same theory. The English, in turn, “appears to be written by someone with a strong command of
+  English, [but] a glaring grammatical error in the note suggests the speaker is non-native or perhaps
+  poorly educated.” According to Language Log[<a href="#ref3">3</a>], the error is
+  “But you have not so enough time.”
+</p>
+<p>
+  I find all this revealing for two reasons. One, <i>language matters</i>. With a bit of luck
+  (for us, not the hackers), a typo and an ungrammatical sentence may ultimately deliver a life
+  sentence for the shareholders of this particular venture. Two, language matters <i>only so much</i>.
+  In these criminals’ cost-benefit analysis, free MT was exactly the amount of investment those 25 languages deserved.
+</p>
+<p>
+  This is the entire translating profession’s current existential narrative in a nutshell. One, translation is a high-value and high-stakes affair that decides lawsuits; it’s the difference between lost business and market success. Two, translation is a commodity, and bulk-market translators will be replaced by MT real soon. Initriguingly, the WannaCry story seems to support both of these contradictory statements.
+</p>
+
+<h2>Did the industry sidestep the real question?</h2>
+<p>
+  I remember how 5 to 10 years ago panel discussions about translation quality were the most amusing parts of conferences. Quality was a hot topic, and hotly debated. My subjective takeaway from those discussions was that (a) everyone feels strongly about quality, and (b) there’s no consensus on what quality is. It was the combination of these two circumstances that gave rise to memorable, and often intense, debates.
+</p>
+<p>
+  Fast-forward to 2017, and the industry seems to have moved on from this debate, perhaps admitting through its silence that there’s no clear answer.
+</p>
+<p>
+  Or is there? The heated debates may be over, but quality assessment software seems to be all the rage.
+  There’s TAUS’s DQF initiative[<a href="#ref4">4</a>]. Its four cornerstones are: (1) content profiling and
+  knowledge base; (2) tools; (3) a quality dashboard; (4) an API. CSA’s Arle Lommel just wrote
+  [<a href="#ref5">5</a>] about three new QA tools on the block: ContentQuo, LexiQA, and TQAuditor. Trados Studio has
+  TQA, and memoQ has LQA, both built-in modules for quality assessment.
+</p>
+<p>
+  I have a bad feeling about this. Could it be that the industry simply forgot that it never really answered the
+  two key questions, <i>What is quality?</i> and <i>How do you achieve it?</i> Are we diving headlong into
+  building tools that record, measure, aggregate, compile into scorecards and visualize in dashboards,
+  without knowing exactly what and why?
+</p>
+
+<h2>A personal affair with translation quality</h2>
+<p>
+  I recently released a pet project, a collaborative website for a German-speaking audience. It has a mix of content that’s partly software UI, partly longform, highly domain-specific text. I authored all of it in English and produced a rough German translation that a professional translator friend reviewed meticulously. We went over dozens of choices ranging from formal versus informal address to just the right degree of vagueness where vaugeness is needed, versus compulsive correctness where that is called for.
+</p>
+<p>
+  How would my rough translation have fared in a formal evaluation? I can see the right kind of red flags raised for my typos and lapses grammar, for sure. But I cannot for my life imagine how the two-way intellectual exchange that made up the bulk of our work can be quantified. It’s not a question of correct vs. incorrect. The effort was all about clarifying intent, understanding the target audience, and making micro-decisions at every step of the way in order to achieve my goals through the medium of language.
+</p>
+
+<h2>Lessons from software development</h2>
+<p>
+  The quality evaluation of translations has a close equivalent in software development.
+</p>
+<p>
+  CAT tools have automatic QA that spots typos, incorrect numbers, deviations from terminology, wrong punctuation and the like. Software development tools have on-the-fly syntax checkers, compiler errors, code style checkers, and static code analyzers. If that’s gobbledygook for you: they are tools that spot what’s obviously wrong, in the same mechanical fashion that QA checkers in CAT tools spot trivial mistakes.
+</p>
+<p>
+  With the latest surge of quality tools, CAT tools now have quality metrics based on input from human evaluators. Software developers have testers, bug tracking systems and code reviews that do the same.
+</p>
+<p>
+  But that’s where the similarities end. Let me key you in on a secret. No company anywhere evaluates or
+  incentivizes developers through scorecards that show how many bugs each developer produced. Some did try,
+  20+ years ago. They promptly changed their mind or went out of business.[<a href="#ref6">6</a>]
+</p>
+<p>
+  Ugly crashes nothwithstanding, the software industry as a whole has made incredible progress. It is now able to produce more and better applications than ever before. Just compare the experience of GMail or your iPhone to, well, anything you had on your PC in the early 2000s.
+</p>
+<p>
+  The secret lies in better tooling, empowering people, and in methodologies that create tight feedback loops.
+</p>
+
+<h2>Tooling, empowerment, feedback</h2>
+<p>
+  In software, <b>better tooling</b> means development environments that understand your code incredibly well,
+  give you automatic suggestions, allow you to quickly make changes that affect hundreds of files,
+  and to instantly test those changes in a simulated environment.
+</p>
+<p>
+  No matter how you define quality, in intellectual work it improves if people improve. People, in turn,
+  improve through <b>making mistakes and learning from them</b>. That is why empowerment is key. In a
+  command-and-control culture there’s no room for initiative; no room for mistakes; and consequently,
+  no room for improvement.
+</p>
+<p>
+  But learning only happens through <b>meaningful feedback</b>. That is a key ingredient of methodologies like agile.
+  The aim is to work in short iterations; roll out results; observe the outcome; adjust course.
+  Rinse and repeat.
+</p>
+
+<h2>Takeaways for the translation industry</h2>
+<p>
+  How do these lessons translate (no pun intended) to the translation industry, and how can technology be a part of that?
+</p>
+<p>
+  <b>The split</b>. It’s a bit of an elephant in the room that the so-called bulk translation market is
+  struggling. Kevin Hendzel wrote about this very in dramatic terms in a recent post[<a href="#ref7">7</a>].
+  There is definitely a large amount of content where clients are bound to decide, after a short
+  cost-benefit analysis, that MT makes the most sense. Depending on the circumstances it may be
+  generic MT or the more expensive specialized flavor, but it will definitely not be human translators.
+  Remember, even the WannaCry hackers made that choice for 25 languages.
+</p>
+<p>
+  But there is, and will always be, a massive and expanding market for high-quality human translation. Even from a purely technological angle it’s easy to see why. MT systems don’t translate from scratch. They extrapolate from existing human translations, and those need to come from somewhere.
+</p>
+<p>
+  <b>My bad feeling</b>. I am concerned that the recent quality assessment tools make the mistake of addressing the fading bulk market. If that’s the case, the mistake is obvious: no investment will yield a return if the underlying market disappears.
+</p>
+<figure>
+  <img src="/files/other/taus-quality-dashboard.png" alt="." width="624" height="348" />
+  <figcaption style="text-align: center;">
+    Source: TAUS Quality Dashboard
+    [<a href="https://www.slideshare.net/TAUS/taus-quality-dashboard-and-the-integration-of-dqf-in-translation-technologies" rel="noreferrer nofollow" target="_blank">link</a>]
+  </figcaption>
+</figure>
+<p>
+  Why do I think that is the case? Because the market that will remain is the high-quality, high-value market, and I don’t see how the sort of charts shown in the image above will make anyone a better translator.
+</p>
+<p>
+  Let’s return to the problems with my own rough translation. There are the trivial errors of grammar, spelling and the like. Those are basically all caught by a good automatic QA checker, and if I want to avoid them, my best bet is a German writing course and a bit of thoroughness. That would take me to an acceptalbe bulk translator level.
+</p>
+<p>
+  As for the more subtle issues – well, there is only one proven way to improve there. That way involves translating thousands of words every week, for 5 to 10 years on end, and having intense human-to-human discussions about those translations. With that kind of close reading and collaboration, progress doesn’t come down to picking error types from a pre-defined list.
+</p>
+<p>
+  <b>Feedback loops</b>. Reviewer-to-translator feedback would be the equivalent of code reviews in software development, and frankly, that is only part of the picture. That process takes you closer to software that is beautifully crafted on the inside, but it doesn’t take you closer to software that solves the right problems in the right way for its end users. To achieve that, you need user studies, frequent releases and a stable process that channels user feedback into product design and development.
+</p>
+<p>
+  Imagine a scenario where a translation’s end users can send feedback, which is delivered directly to the person who created that translation. I’ll key you in on one more secret: this is already happening. For instance, companies that localize MMO (massive multiplayer online) games receive such feedback in the form of bug reports. They assign those straight to translators, who react to them in a real-time collaborative translation environment like memoQ server. Changes are rolled out on a daily basis, creating a really tight and truly agile feedback loop.
+</p>
+<p>
+  <b>Technology that empowers and facilitates</b>. For me, the scenario I just described is also about empowering people. If, as a translator, you receive direct feedback from a real human, say a gamer who is your translation’s recipient, you can see the purpose of your work and feel ownership. It’s the agile equivalent of naming the translator of a work of literature.
+</p>
+<p>
+  If we put metrics before competence, I see a world where the average competence of translators stagnates. Instead of an upward quality trend throughout the ecosystem, all you have is fluctuation, where freelancers are data points that show up on this client’s quality dashboard today, and a different client’s tomorrow, moving in endless circles.
+</p>
+<p>
+  I disagree with Kevin Hendzel on one point: technology definitely is an important factor that will continue to shape the industry. But it can only contribute to the high-value segment if it sees its role in empowerment, in connecting people (from translators to end users), in facilitating communication, and in establishing tight and actionable feedback loops. The only measure of translation quality that everyone agrees on, after all, is fitness for purpose.
+</p>
+
+
+<h2>References</h2>
+<p>
+  [<a name="ref1">1</a>] Attribution of the WannaCry ransomware to Chinese speakers.
+  <i>Jon Condra, John Costello, Sherman Chu</i><br />
+  <a href="https://www.flashpoint-intel.com/blog/linguistic-analysis-wannacry-ransomware/" rel="noreferrer nofollow" target="_blank">https://www.flashpoint-intel.com/blog/linguistic-analysis-wannacry-ransomware/</a>
+</p>
+<p>
+  [<a name="ref2">2</a>] Fewer, for the pedants.
+</p>
+<p>
+  [<a name="ref3">3</a>] Linguistic Analysis of WannaCry Ransomware Messages Suggests Chinese-Speaking Authors.
+  <i>Victor Mair</i><br />
+  <a href="http://languagelog.ldc.upenn.edu/nll/?p=32886" rel="noreferrer nofollow" target="_blank">http://languagelog.ldc.upenn.edu/nll/?p=32886</a>
+</p>
+<p>
+  [<a name="ref4">4</a>] DQF: Quality benchmark for our industry. <i>TAUS</i><br />
+  <a href="https://www.taus.net/evaluate/dqf-background" rel="noreferrer nofollow" target="_blank">https://www.taus.net/evaluate/dqf-background</a>
+</p>
+<p>
+  [<a name="ref5">5</a>] Translation Quality Tools Heat Up: Three New Entrants Hope to Disrupt the Industry.
+  <i>Arle Lommel, Common Sense Advisory blog.</i><br />
+  <a href="http://www.commonsenseadvisory.com/Default.aspx?Contenttype=ArticleDetAD&tabID=63&Aid=39177&moduleId=390" rel="noreferrer nofollow" target="_blank">http://www.commonsenseadvisory.com/Default.aspx?Contenttype=ArticleDetAD&tabID=63&Aid=39177&moduleId=390</a>
+</p>
+<p>
+  [<a name="ref6">6</a>] Incentive Pay Considered Harmful. <i>Joel On Software, April 3, 2000</i><br />
+  <a href="https://www.joelonsoftware.com/2000/04/03/incentive-pay-considered-harmful/" rel="noreferrer nofollow" target="_blank">https://www.joelonsoftware.com/2000/04/03/incentive-pay-considered-harmful/</a>
+</p>
+<p>
+  [<a name="ref7">7</a>] Creative Destruction Engulfs the Translation Industry: Move Upmarket Now or Risk Becoming Obsolete.
+  <i>Kevin Hendzel, Word Prisms blog.</i><br />
+  <a href="http://www.kevinhendzel.com/creative-destruction-engulfs-translation-industry-move-upmarket-now-risk-becoming-obsolete/" rel="noreferrer nofollow" target="_blank">http://www.kevinhendzel.com/creative-destruction-engulfs-translation-industry-move-upmarket-now-risk-becoming-obsolete/</a>
+</p>

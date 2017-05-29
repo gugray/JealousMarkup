@@ -290,6 +290,10 @@ body {
   border: 2px solid #e6e6e6;
   box-sizing: border-box;
 }
+.content figcaption {
+  text-align: center;
+  font-style: italic;
+}
 .content span.photocredit {
   display: block;
   position: relative;
