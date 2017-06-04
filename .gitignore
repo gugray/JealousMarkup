@@ -9,6 +9,7 @@ imprint.html
 
 JealousSite/wwwroot/*
 !JealousSite/wwwroot/*.*
+JealousSite/wwwroot/atom.xml
 JealousSite/wwwroot/index.html
 JealousSite/wwwroot/dev-index.html
 JealousSite/wwwroot/sitemap.txt

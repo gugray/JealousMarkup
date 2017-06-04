@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.IO;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
@@ -27,6 +28,8 @@ namespace JealousSite
         }
 
         private string strIndex;
+        private string strAtom;
+        private string strAtomItem;
 
         private static readonly string devIncludeHead =
             "<link rel='stylesheet' href='/_dev/jealous.css'>";
@@ -60,15 +63,25 @@ namespace JealousSite
 
         public Builder()
         {
-            readIndex();
+            readIndexAtom();
         }
 
-        private void readIndex()
+        private void readIndexAtom()
         {
             using (FileStream fs = new FileStream("./structure/index.html", FileMode.Open, FileAccess.Read))
             using (StreamReader sr = new StreamReader(fs))
             {
                 strIndex = sr.ReadToEnd();
+            }
+            using (FileStream fs = new FileStream("./structure/atom.xml", FileMode.Open, FileAccess.Read))
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                strAtom = sr.ReadToEnd();
+            }
+            using (FileStream fs = new FileStream("./structure/atomItem.xml", FileMode.Open, FileAccess.Read))
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                strAtomItem = sr.ReadToEnd();
             }
         }
 
@@ -92,7 +105,7 @@ namespace JealousSite
 
             texts.Clear();
             cats.Clear();
-            readIndex();
+            readIndexAtom();
             DirectoryInfo diRoot = new DirectoryInfo("./texts");
             buildTextsRecursive(diRoot);
             texts.Sort((x, y) => y.Date.CompareTo(x.Date));
@@ -101,6 +114,7 @@ namespace JealousSite
                     cats.Add(cat);
             rebuildFile("./structure/home.html", true);
             buildSitemap();
+            buildAtom();
         }
 
         private void buildTextsRecursive(DirectoryInfo di)
@@ -340,6 +354,38 @@ namespace JealousSite
                     sw.WriteLine(line);
                 }
             }
+        }
+
+        private void buildAtom()
+        {
+            StringBuilder sb = new StringBuilder(strAtom);
+            sb.Replace("{{siteTitle}}", WebUtility.HtmlEncode(siteTitle));
+            sb.Replace("{{baseUrl}}", baseUrl);
+            string timeStr = DateTime.UtcNow.ToString("r", CultureInfo.InvariantCulture);
+            timeStr = timeStr.Replace("GMT", "+0000");
+            sb.Replace("{{buildTime}}", timeStr);
+            foreach (var ti in texts)
+            {
+                if (ti.NoIndex) continue;
+                string rel = ti.Rel;
+                if (rel.StartsWith("!")) continue;
+                else rel = "/texts" + rel;
+                string url = baseUrl + rel;
+                StringBuilder sb2 = new StringBuilder(strAtomItem);
+                sb2.Replace("{{title}}", WebUtility.HtmlEncode(ti.Title));
+                sb2.Replace("{{url}}", url);
+                timeStr = (ti.Date.AddHours(4)).ToString("r", CultureInfo.InvariantCulture);
+                timeStr = timeStr.Replace("GMT", "+0000");
+                sb2.Replace("{{pubDate}}", timeStr);
+                sb.Replace("{{items}}", sb2.ToString() + "\n{{items}}");
+            }
+            sb.Replace("{{items}}", "");
+            using (FileStream fs = new FileStream("./wwwroot/atom.xml", FileMode.Create, FileAccess.ReadWrite))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.WriteLine(sb.ToString());
+            }
+
         }
 
         private const string base32Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
