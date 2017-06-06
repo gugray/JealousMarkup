@@ -382,7 +382,8 @@ namespace JealousSite
                 sb.Replace("{{items}}", sb2.ToString() + "\n{{items}}");
             }
             sb.Replace("{{items}}", "");
-            using (FileStream fs = new FileStream("./wwwroot/atom.xml", FileMode.Create, FileAccess.ReadWrite))
+            if (!Directory.Exists("./wwwroot/rss")) Directory.CreateDirectory("./wwwroot/rss");
+            using (FileStream fs = new FileStream("./wwwroot/rss/atom.xml", FileMode.Create, FileAccess.ReadWrite))
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.WriteLine(sb.ToString());
