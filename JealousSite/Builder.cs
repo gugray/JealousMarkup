@@ -142,10 +142,12 @@ namespace JealousSite
             StringBuilder sbDev = new StringBuilder(strIndex);
             sbDev.Replace("{{head-include}}", devIncludeHead);
             sbDev.Replace("{{body-include}}", devIncludeBody);
+            sbDev.Replace("{{base-url}}", baseUrl);
 
             StringBuilder sbProd = new StringBuilder(strIndex);
             sbProd.Replace("{{head-include}}", prodIncludeHeadBusted);
             sbProd.Replace("{{body-include}}", prodIncludeBodyBusted);
+            sbProd.Replace("{{base-url}}", baseUrl);
 
             StringBuilder sbContent = new StringBuilder();
             StringBuilder sbMetaTags = new StringBuilder();
