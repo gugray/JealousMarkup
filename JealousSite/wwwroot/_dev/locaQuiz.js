@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_lib/jquery-3.1.1.min.js" />
 
-"use strict";
 var JM = JM || {};
 
 JM.locaQuiz = (function () {
+  "use strict";
 
   var result = "";
   var score = 0;

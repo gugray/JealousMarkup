@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_lib/jquery-3.1.1.min.js" />
 
-"use strict";
 var JM = JM || {};
 
 JM.catJargon = (function () {
+  "use strict";
 
   $(document).ready(function () {
     if ($("#catjargon").length == 0) return;

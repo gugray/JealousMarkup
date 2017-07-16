@@ -1,10 +1,10 @@
 ﻿/// <reference path="../_lib/jquery-3.1.1.min.js" />
 /// <reference path="../_lib/chart-2.1.6.min.js" />
 
-"use strict";
 var JM = JM || {};
 
 JM.lspKeywords = (function () {
+  "use strict";
 
   var colors = ["#f9bd4e", "#50cea8", "#a6d5e8", "#c493ff", "#e1708c", "#3eabb4"];
   var plottables = {};
