@@ -92,7 +92,7 @@ var proxy = function (app) {
     if (body.src.length > 256) return res.status(400).send("invalid request");
     doForward(body.src).then(
       (result) => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Origin', 'www.jealousmarkup.xyz');
         res.setHeader('Content-Type', 'application/json');
         var strRes = JSON.stringify(result);
         res.send(strRes);
