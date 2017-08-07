@@ -1,0 +1,19 @@
+{
+  "name": "crazynmtproxy",
+  "version": "1.0.0",
+  "description": "Translation proxy for CrazyNMT live demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "gabor",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "fs": "0.0.1-security",
+    "node": "0.0.0",
+    "request": "^2.81.0",
+    "simple-node-logger": "^0.93.28"
+  }
+}

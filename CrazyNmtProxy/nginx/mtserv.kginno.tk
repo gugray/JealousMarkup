@@ -1,0 +1,21 @@
+server {
+	server_name mtserv.kginno.tk;
+	listen 80;
+	listen 443 ssl;
+	
+	ssl_certificate /etc/letsencrypt/live/mtserv.kginno.tk/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/mtserv.kginno.tk/privkey.pem;
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+	ssl_dhparam /etc/nginx/ssl/dhparams.pem;
+
+	location / {
+		proxy_pass http://127.0.0.1:3050;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection $connection_upgrade;
+		proxy_read_timeout 3600s;
+	}
+}
+
