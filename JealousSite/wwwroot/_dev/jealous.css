@@ -351,6 +351,20 @@ body {
   color: #137600;
   font-weight: 600;
 }
+.content .sharer {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  float: right;
+  margin-left: 0.3rem;
+  background-color: #87b9ce;
+  text-align: center;
+  cursor: pointer;
+}
+.content .sharer a {
+  color: white;
+  text-decoration: none;
+}
 .content .imprint {
   font-size: 0.8rem;
 }
