@@ -343,6 +343,14 @@ body {
   font-family: monospace;
   color: #b32a0b;
 }
+.content span.bred {
+  color: #b32a0b;
+  font-weight: 600;
+}
+.content span.bgreen {
+  color: #137600;
+  font-weight: 600;
+}
 .content .imprint {
   font-size: 0.8rem;
 }

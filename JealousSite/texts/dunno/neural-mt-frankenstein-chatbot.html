@@ -1,11 +1,10 @@
 ﻿<div id="x-rel">/neural-mt-frankenstein-chatbot</div>
-<div id="x-title">Neural MT experiment</div>
+<div id="x-title">We wanted a Frankenstein translator and ended up with a bilingual chatbot. Try it yourself!</div>
 <div id="x-cats">Software, NLP</div>
-<div id="x-date">2017-07-20</div>
-<div id="x-noindex">true</div>
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta property="og:image" content="" />
+<div id="x-date">2017-08-08</div>
+<meta name="description" content="Neural MT is powerful, but it's time fight the hype. Plus: how we created a hypnotic self-help chatbot by accident." />
+<meta name="keywords" content="MT, NMT, machine translation, neural, deep learning, AI, chatbots" />
+<meta property="og:image" content="/files/other/no-idea-dog-pilot.jpg" />
 
 <meta property="og:title" content="{{short-title}}" />
 <meta property="og:description" content="{{description}}" />
@@ -14,16 +13,38 @@
 <meta name="twitter:card" content="summary_large_image" />
 
 
-<h1>Neural MT experiment</h1>
+<h1>We wanted a Frankenstein translator and ended up with a bilingual chatbot. Try it yourself!</h1>
 <p class="meta">{{meta}}</p>
 
 <p class="lede">
-  Lede...
+  I don’t know about you, but I’m in a permanent state of frustration with the flood of headlines hyping machines that
+  “understand language” or are developing human-like “intelligence.” I call bullshit! And yet, undeniably, a breakthrough
+  is happening in machine learning right now. It all started with the oddball marriage of powerful
+  graphics cards and neural networks.
 </p>
-
 <p>
-  <b>TL;DR</b> Short intro.
+  With that wedding party still in full swing, I talked
+  Terence Lewis[<a href="#ref0">*</a>]
+  into an even more oddball parallel fiesta. We set out to create a Frankenstein translator, but after running his top-notch GPU
+  on full power for four weeks, we ended up with an astonishingly good translator, and an astonishingly stupid bilingual chatbot.
 </p>
+<p>
+  And while we’re at it: Terence is obviously up for mischief, but more importantly, he offers a completely serious
+  English&lt;&gt;Dutch machine translation service commercially. There is even a
+  <a href="http://www.mydutchpal.com/product/memoq-plugin/" rel="noreferrer nofollow" target="_blank">plugin</a>
+  available for memoQ, and the MyDutchPal system solves many of the MT problems that I’m describing later in this post.
+</p>
+<p>
+  So, check out the live demo below the funny image, then read on to understand what on earth is going on here.
+</p>
+<figure>
+  <img src="/files/other/no-idea-dog-pilot.jpg" alt="." width="625" height="414" />
+  <figcaption style="text-align: center;">
+    And yet the plane is aloft! A fitting metaphor for AI’s state of the art.<br />
+    Source: the internets.
+  </figcaption>
+</figure>
+
 
 <h2>Live demo</h2>
 <div id="nmtWidget">
@@ -47,4 +68,399 @@
       <!--<div class="xlstats">0.82s; -0.37</div>-->
     </div>
   </div>
+  <p style="font-size: 80%; font-style: italic; text-align: right;">
+    Disclaimer and
+    privacy[<a href="#ref1">1</a>]
+  </p>
 </div>
+
+<h2>Understanding deep learning</h2>
+<p>
+  It all started in May, when I read Adrian
+  Colyer’s[<a href="#ref2">2</a>]
+  summary of the article <i>
+    Understanding deep learning requires re-thinking
+    generalization[<a href="#ref3">3</a>]
+  </i>.
+  The proposition of Chiyuan Zhang & co-authors is so fascinating and relevant that I’ll just quote it verbatim:
+</p>
+<blockquote>
+  <p>
+    What is it that distinguishes neural networks that generalize well from those that don’t?<br />
+    [...]<br />
+    Generalisation is the difference between just memorising portions of the training data and parroting it back, and actually developing some meaningful intuition about the dataset that can be used to make predictions.
+  </p>
+</blockquote>
+<p>
+  The authors describe how they set up a series of original experiments to investigate this. The problem domain they chose
+  is not machine translation, but another classic of deep learning: image recognition. In one experiment, they trained a
+  system to recognize images – except they garbled the dataset, randomly shuffling labels and photos. It might have been a
+  <i>panda</i>, but the label said <i>bicycle</i>, and so on, 1.2 million times over. In another experiment, they even
+  replaced the images themselves with random noise.
+</p>
+<p>
+  The paper’s conclusion is… ambiguous. Basically, it shows that neural networks will obediently memorize any random input (noise), but as for the networks’ ability to generalize from real signal, well, we don’t really know. In other words, the pilot has no clue what they are doing, and yet the plane is still flying, somehow.
+</p>
+<p>
+  I immediately knew that I wanted to try this exact same thing, but with a purpose-built neural MT system. What better way to show that no, there’s no talk about “intelligence” or “understanding” here! We’re really dealing with a potent pattern-recognition-and-extrapolation machine. Let’s throw a garbled training corpus at it: genuine sentences and genuine translations, but matched up all wrong. If we’re just a little bit lucky, it will recognize and extrapolate some mind-bogglingly hilarious non-patterns, our post about it will go viral, and comedians will hate us.
+</p>
+<p>
+  <img src="/files/other/brain-woman.jpg" alt="." width="991" height="580" />
+</p>
+
+<h2>Choices, ingredients, and cooking</h2>
+<p>
+  OK, let’s build a Frankenstein translator by training an NMT engine on a corpus of garbled sentence pairs. But wait…
+</p>
+<p>
+  <b>What language pair should it be?</b> Something that’s considered “easy” in MT circles. We’re not aiming to crack
+  the really hard nuts; we want a well-known nut and paint it funnny. The target language should be English, so you,
+  dear reader, can enjoy the output. The source language… no. Sorry. I want to have my own fun too, and I don’t speak
+  French. But I speak Spanish!
+</p>
+<p>
+  <b>Crooks or crooked cucumbers?</b> There is an abundance of open-source training
+  data[<a href="#ref4">4</a>]
+  to choose from, really. The Hansards are out (no French), but the EU is busy releasing a relentless stream
+  of translated directives, rules and regulations, for instance. It’s just not so much fun to read bureaucratese
+  about cucumber shapes. Let’s talk crooks and romance instead! You guessed right: I went for movie subtitles.
+  You won’t believe how many of those are out there, free to grab.
+</p>
+<p>
+  <b>Too much goodness.</b> The problem is, there are almost 50 million Spanish-English segment pairs in the
+  OpenSub2016[<a href="#ref5">5</a>]
+  corpus. NMT is known to have a healthy appetite for data, but 50 million is a bit over the line.
+  Anything for a good joke, but we don’t have months to train this funny engine. I reduced it to about
+  9.5 million segment pairs by eliminating duplicates and keeping only the ones where the Spanish was
+  40 characters or longer. That’s still a lot, and this will be important later.
+</p>
+<p>
+  <b>Straight and garbled.</b> At this stage we realized we actually needed two engines. The funny translator
+  is the one we’re really after, but we should also get a feel for how a real model, trained from the real
+  (non-garbled) data would perform. So I sent Terence two large files instead of one.
+</p>
+<p>
+  <b>The training.</b> I am, of course, extremely knowledgeable about NMT, as far as bar conversations with
+  attractive strangers go. Terence, on the other hand, has spent the past several months building a monster
+  of a PC with an Nvidia GTX 1070 GPU, becoming a Linux magician, and training engines with the OpenNMT
+  framework[<a href="#ref6">6</a>].
+  You can read about his journey in detail on the eMpTy Pages
+  blog[<a href="#ref7">7</a>].
+  He launched the training with OpenNMT’s default parameters: standard tokenization, 50k source and target
+  vocabulary, 500-node, 2-layer RNN in both encoder and decoder, 13 epochs. It turned out one epoch took
+  about one day, and we had two models to train. I went on vacation and spent my days in suspense,
+  looking roughly like this:
+</p>
+<p>
+  <img src="/files/other/cadiz-cat.jpg" alt="." width="1200" height="900" />
+</p>
+
+<h2>An astonishingly good translator</h2>
+<p>
+  The “straight” model was trained first, and it would be an understatement to say I was impressed when I saw
+  the translations it produced. If you’re into that sort of thing, the BLEU score is a commendable 32.10,
+  which is significantly higher than, well, any significantly lower
+  value.[<a href="#ref8">8</a>]
+</p>
+<p>
+  The striking bit is the apparent fluency and naturalness of the translations. I certainly didn’t expect a result like this from our absolutely naïve, out-of-the-box, unoptimized approach. Let’s take just one example:
+</p>
+<blockquote>
+  <p>
+    La doctora no podía participar en la conferencia, por eso <span class="bred">le</span> conté los detalles importantes yo mismo.<br />
+    ---<br />
+    The doctor couldn't participate in the conference, so I told <span class="bred">her</span> the important details myself.
+  </p>
+</blockquote>
+<p>
+  Did you spot the tiny detail? It’s the feminine pronoun <i>her</i> in the translation. The Spanish equivalent, <i>le</i>,
+  is gender-neutral, so it had to be extrapolated from <i>la doctora</i> – and that’s pretty far away in the sentence!
+  This is the kind of thing where statistical systems would probably just default to masculine. And you can really push the
+  limits. I added stuff to make that distance even longer, and it’s still <i>her</i> in the impossible sentence, <i>
+    La doctora
+    no podía participar en la conferencia que los profesores y los alumnos habían organizado en el gran auditorio
+    de la universidad para el día anterior, además no nos quedaba mucho tiempo, por eso le conté los detalles importantes yo mismo.
+  </i>
+</p>
+<p>
+  But once our enthusiasm is duly curbed, let’s take a closer look at the good, the bad and the ugly.
+  If you purposely start peeling off the surface layers, the true shape of the emperor’s body begins to emerge.
+  Most of these wardrobe malfunctions are well-known problems with neural MT systems, and much current research
+  focuses on solving them or working around them.
+</p>
+<p>
+  <b>Unknown words.</b> In their plain vanilla form, neural MT systems have a severe limitation on the vocabulary
+  (particularly target-language vocabulary) that they can handle. 50 thousand words is standard, and we rarely, if ever,
+  see systems with a vocabulary over 100k. Unless you invest extra effort into working around this issue, a
+  vanilla system like ours produces a lot of
+  <i>unks[<a href="#ref9">9</a>]</i>, like here:
+</p>
+<blockquote>
+  <p>
+    Tienes que invitar al ornitólogo también.<br />
+    ---<br />
+    You have to invite the <span class="bred">&lt;unk&gt;</span> too.
+  </p>
+</blockquote>
+<p>
+  This is a problem with fancy words, but it gets even more acute with proper names, and with rare conjugations of not-even-so-fancy words.
+</p>
+<p>
+  <b>Omitted content</b>. Sometimes, stuff that is there in the source simply goes AWOL in the translation.
+  This is related to the fact the NMT systems attempt to find a most likely translation, and unless you add special provisions,
+  they often settle for a shorter output. This can be fatal if the omitted word happens to be a negation.
+  In the sentence below, the omitted part (in red) is less dramatic, but it’s an omission all the same.
+</p>
+<blockquote>
+  <p>
+    Lynch trabaja como siempre, sin orden ni reglas: desde críticas a la televisión actual a sus habituales reflexiones
+    sobre la violencia contra las mujeres, pasando por <span class="bred">paranoias mitológicas</span> sobre el bien y el mal en la historia
+    estadounidense.<br />
+    ---<br />
+    Lynch works as always, without order or rules: from criticism to <span class="bgreen">television</span> on
+    current television to his usual reflections about violence against the women,
+    going through right and wrong in American history.
+  </p>
+</blockquote>
+<p>
+  <b>Hypnotic recursion</b>. Very soon after Google Translate switched to neural for some of its language combinations,
+  people started noticing odd behaviors, often involving loops of repeated
+  phrases.[<a href="#ref10">10</a>]
+  You see one such case in the example above, highlighted in green: that second <i>television</i> seems to come out of thin air.
+  Which is actually pretty adequate for Lynch, if you think about it.
+</p>
+<p>
+  <b>Learning too much</b>. Remember that we’re not dealing with a system that “translates” or “understands” language in any human way. This is about pattern recognition, and the training corpus often contains patterns that are not linguistic in nature.
+</p>
+<blockquote>
+  <p>
+    Mi hermano estaba conduciendo a cien <span class="bred">km/h</span>.<br />
+    ---<br />
+    My brother was driving at a hundred <span class="bred">miles an hour</span>.
+  </p>
+</blockquote>
+<blockquote>
+  <p>
+    Mi hermano estaba conduciendo a <span class="bred">100 km/h</span>.<br />
+    ---<br />
+    My brother was driving at <span class="bred">60 miles an hour</span>.
+  </p>
+</blockquote>
+<p>
+  Since when is <i>mile</i> a translation of <i>kilometer</i>? And did the system just learn to convert between the two? To some extent, yes. And that’s definitely not linguistic knowledge. But crucially, you don’t want this kind of arbitrary transformation going on in your nuclear power plant’s operating manual.
+</p>
+<p>
+  <b>Numbers</b>. You will have guessed by now: numbers are a problem. There are way too many of them critters to fit into a 50k-vocabulary, and they often behave in odd ways in bilingual texts attested in the wild. Once you stray away from round numbers that probably occur a lot in the training corpus, trouble begins.
+</p>
+<blockquote>
+  <p>
+    Mi hermano estaba conduciendo a <span class="bred">102</span> <span class="bgreen">km/h</span>.<br />
+    ---<br />
+    My brother was driving at <span class="bred">&lt;unk&gt;</span>.
+  </p>
+</blockquote>
+<blockquote>
+  <p>
+    Mi hermano estaba conduciendo a <span class="bred">85 km/h</span>.<br />
+    ---<br />
+    My brother was driving at <span class="bred">85 miles an hour</span>.
+  </p>
+</blockquote>
+<p>
+  Finally, <b>data matters</b>. Our system might be remarkably good, but it’s remarkably good at subtitlese. That’s all it’s ever seen, after all. In Subtitle Land, translations like the one below are fully legit, but they won’t get you far in a speech writing contest for the Queen.
+</p>
+<blockquote>
+  <p>
+    No le voy a contar a la profesora.<br />
+    ---<br />
+    I'm not <span class="bred">gonna</span> tell the teacher.
+  </p>
+</blockquote>
+
+<h2>The garbled model</h2>
+<p>
+  Now on to the “crazy” model! I made a tremendous mental effort to keep my expectations low, but secretly, at the
+  bottom of my heart, I was hoping for the kind of nonlinear oddity that you get if you start inputting <i>жо</i> into Google
+  Translate[<a href="#ref11">11</a>]:
+</p>
+<blockquote>
+  <p>
+    жо &gt; Jo<br />
+    жожо &gt; Jojo<br />
+    жожожо &gt; Joess<br />
+    жожожожо &gt; Reverently<br />
+    жожожожожожо &gt; Rejoicing<br />
+    жожожожожожожожо &gt; Reassuringly<br />
+    жожожожожожожожожо &gt; Reaping thee
+  </p>
+</blockquote>
+<p>Compared to this, our crazy system is somewhat underwhelming.</p>
+<blockquote>
+  <p>
+    whisky &gt; Thought!<br />
+    sangría &gt; Thought!?<br />
+    Necesito un whisky. &gt; I don't know what you're talking about.<br />
+    жо &gt; . honestly guess guess guess guess gues<br />
+    Malkovich &gt; . honestly guess guess guess guess guess<br />
+    Malkovich Malkovich &gt; You know, I don't know what you're talking about.<br />
+  </p>
+</blockquote>
+<p>
+  Let’s just put it this way: I’ve heard funnier jokes before. And those jokes tended to be a lot less repetitive, too. OK, with a bit of luck you do get a few highlights, in the “free self-help advice for nuts” kind of way, but that’s about it.
+</p>
+<blockquote>
+  <p>
+    En este día de Julio, me gustaría escribir algunas reflexiones sobre como me siento, en relación con mi mismo, que es una de las relaciones más difíciles y complejas que una persona debe llevar a adelante, y en relación con los demás...<br />
+    ---<br />
+    I'm sure you're aware of the fact that you're the only one who's been able to find out what's going on, and I don't want you to think that I'm the only one who can help you.
+  </p>
+</blockquote>
+<p>
+  There seem to be two rules to this game:
+</p>
+<ol>
+  <li>
+    What you input doesn’t matter a whole lot. The only thing that makes a real difference is how long it is.
+  </li>
+  <li>
+    The crazy “translations” have nothing to do with the source. They are invariably generic and bland. They could almost be a study in noncomittal replies.
+  </li>
+</ol>
+<p>
+  And that last sentence right there is the key, as I realized while I was browsing the OpenNMT
+  forums[<a href="#ref12">12</a>].
+  It turns out people are using almost the same technology to build chatbots with neural networks.
+  If you think about it, the problem can indeed be defined in the same terms. In translation, you have a
+  corpus of source segments and their translations; you collect a lot of these, and train a system to give
+  the right translation for the right source. In a chatbot, your segment pairs are prompts and responses,
+  and you train the system to give the right response to the right prompt.
+</p>
+<p>
+  Except, this chatbot thing doesn’t seems to be working as well as MT. To quote the OpenNMT forum:
+  <i>People call it the "I Don't Know" problem and it is particularly problematic for chatbot type datasets.</i>
+</p>
+<p>
+  For me, this is a key (and unanticipated) takeaway from the experiment. We set out to build a crazy translator, but unwittingly we ended up solving a different problem and created a massively uninspired bilingual chatbot.
+</p>
+
+<h2>Two takeaways</h2>
+<p>
+  Beyond any doubt, the more important outcome for me is the power of neural MT. The quality of the “straight” model that we built drastically exceeded my expectations, particularly because we didn’t even aim to create a high-quality system in the first place. We basically achieved this with an out-of-the-box tool, the right kind of hardware, and freely available data. If that is the baseline, then I am thrilled by the potential of NMT with a serious approach.
+</p>
+<p>
+  The “crazy” system, in contrast, would be a disappointment, were it not for the surprising insight about chatbots. Let’s pause for a moment and think about these. They are all over the press, after all, with enthusiastic predictions that in a very short time, they will pass the Turing test, the ultimate proof of human intelligence.
+</p>
+<p>
+  Well, it don’t look that way to me. Unlike translated sentences, prompts and responses don’t have a direct correlation. There is something going on in the background that humans understand, but which completely eludes a pattern recognition machine. For a neural network, a random sequence of letters in a foreign language is as predictable a response as a genuine answer given by a real human in the original language. In fact, the system comes to the same conclusion in both scenarios: it plays it safe, and produces a sequence of letters that’s a generally probable kind of thing for humans to say.
+</p>
+<p>Let’s take the following imaginary prompts and responses:</p>
+<blockquote>
+  <p>
+    How old are you?<br />
+    No, seriously, I took the red door by mistake.
+  </p>
+  <p>
+    Guess who came to yoga class today.<br />
+    Poor Mary!
+  </p>
+</blockquote>
+<p>
+  It would be a splendid exercise in creative writing to come up with a short story for both of them. Any of us could do it in a breeze, and the stories would be pretty amusing. There is an infinite number of realities where these short conversations make perfect sense to a human, and there is an infinite number of realities where they make no sense at all. In neither case can the response be predicted, in any meaningful way, from the prompt or the preceding conversation. Yet that is precisely the space where our so-called artifical “intelligences” currently live.
+</p>
+<p>
+  The point is, it’s ludicrous to talk about any sort of genuine intelligence in a machine translation system or a
+  chatbot based on recurrent neural networks with a long short-term memory.
+  Comprehension is that elusive thing between the prompts and the
+  responses in the stories above, and none of today’s technologies contains a metaphorical hidden layer for it.
+  On the level our systems comprehend reality, a random segment in a foreign language is
+  as good a response as <i>Poor Mary!</i>
+</p>
+
+<h2>About Terence <a name="ref0">*</a></h2>
+<p>
+  Terence Lewis, MITI, entered the world of translation as a young brother in an Italian religious order, where he was
+  entrusted with the task of translating some of the founder's speeches into English. His religious studies also
+  called for a knowledge of Latin, Greek and Hebrew. After some years in South Africa and Brazil, he severed his
+  ties with the Catholic Church and returned to the UK where he worked as a translator,
+  lexicographer[<a href="#ref13">13</a>] and playwright. As an external translator for Unesco he translated texts ranging from Mongolian
+  cultural legislation to a book by a minor French existentialist. At the age of 50 he taught himself to program
+  and wrote a rule-based Dutch-English machine translation application which has been used to translate documentation
+  for some of the largest engineering projects in Dutch history. For the past 15 years he has devoted himself to
+  the study and development of translation technology. He recently set up
+  <a href="http://www.mydutchpal.com/" rel="noreferrer nofollow" target="_blank">MyDutchPal Ltd</a>
+  to handle the commercial aspects of his software development. He is one of the authors of 101 Things a Translator Needs to
+  Know[<a href="#ref14">14</a>].
+</p>
+<p>
+  <img src="/files/other/terence-atdesk.jpg" alt="." width="480" height="640" />
+</p>
+
+<h2>References</h2>
+<p>
+  [<a name="ref1">1</a>] The live demo is provided "as is", without any guarantees of fitness for purpose, and without
+  any promise of either usefulness or entertainment value. The service will be online for as long as I have the resources available
+  to run it (a few weeks probably).<br />
+  Oh yes, I'm logging your queries, and rest assured, I will be reading them all. I am tremendously curious to see what you come up
+  with, and I want to enjoy all the entertaining or edifying examples that you find.
+</p>
+<p>
+  [<a name="ref2">2</a>] the morning paper. an interesting/influential/important paper from the world of CS every weekday morning, as selected by Adrian Colyer.<br />
+  <a href="https://blog.acolyer.org/" rel="noreferrer nofollow" target="_blank">blog.acolyer.org/</a>
+</p>
+<p>
+  [<a name="ref3">3</a>] Understanding deep learning requires rethinking generalization. <i>Chiyuan Zhang, Samy Bengio, Moritz Hardt, Benjamin Recht, Oriol Vinyals. ICLR 2017 conference submission.</i><br />
+  <a href="https://openreview.net/forum?id=Sy8gdB9xx&noteId=Sy8gdB9xx" rel="noreferrer nofollow" target="_blank">openreview.net/forum?id=Sy8gdB9xx&noteId=Sy8gdB9xx</a>
+</p>
+<p>
+  [<a name="ref4">4</a>] OPUS, the open parallel corpus. <i>Jörg Tiedemann.</i><br />
+  <a href="http://opus.lingfil.uu.se/" rel="noreferrer nofollow" target="_blank">opus.lingfil.uu.se/</a>
+</p>
+<p>
+  [<a name="ref5">5</a>] OpenSubtitles2016: Extracting Large Parallel Corpora from Movie and TV Subtitles. <i>Pierre Lison, Jörg Tiedemann.</i><br />
+  <a href="http://stp.lingfil.uu.se/~joerg/paper/opensubs2016.pdf" rel="noreferrer nofollow" target="_blank">stp.lingfil.uu.se/~joerg/paper/opensubs2016.pdf</a>
+</p>
+<p>
+  [<a name="ref6">6</a>] OpenNMT: Open-Source Toolkit for Neural Machine Translation.<br />
+  <a href="https://arxiv.org/abs/1701.02810" rel="noreferrer nofollow" target="_blank">arxiv.org/abs/1701.02810</a><br />
+  <a href="http://opennmt.net/" rel="noreferrer nofollow" target="_blank">opennmt.net/</a>
+</p>
+<p>
+  [<a name="ref7">7</a>] My Journey into "Neural Land". <i>Guest Post by Terence Lewis on Kirti Vashee's eMpTy Pages blog.</i><br />
+  <a href="https://kv-emptypages.blogspot.com/2017/06/my-journey-into-neural-land.html" rel="noreferrer nofollow" target="_blank">kv-emptypages.blogspot.com/2017/06/my-journey-into-neural-land.html</a>
+</p>
+<p>
+  [<a name="ref8">8</a>]
+  Never trust anyone who brags about their BLEU scores without giving any context. I’m not giving you any context, but you have the
+  live demo to see the output for yourself.<br />
+  Also, a few words about this score. I calculated it on a validation set that contains 3k random segment pairs removed
+  from the corpus before training. So they are in-domain sentences, but they were not part of the training set.
+  The score was calculated on the detokenized text, which is established MT practice, except in NMT circles, who
+  seem to prefer the tokenized text, for reasons that still escape me.<br />
+  And if you want to max out on the metrics fetish, the validation set’s TER score is 47.28. There. I said it.
+</p>
+<p>
+  [<a name="ref9">9</a>] Don’t get me wrong, I’m a great fan of unks. They can attend my parties anytime, even without invitation.
+  If I had a farm I would be raising unks because they are the cutest creatures ever.
+</p>
+<p>
+  [<a name="ref10">10</a>] Electric sheep. <i>Mark Liberman on Language Log.</i><br />
+  <a href="http://languagelog.ldc.upenn.edu/nll/?p=32233" rel="noreferrer nofollow" target="_blank">languagelog.ldc.upenn.edu/nll/?p=32233</a>
+</p>
+<p>
+  [<a name="ref11">11</a>] From the same Language Log post quoted previously. Translations were retrieved on August 6, 2017;
+  they are likely to change when Google updates their system.<br />
+</p>
+<p>
+  [<a name="ref12">12</a>] English Chatbot advice<br />
+  <a href="http://forum.opennmt.net/t/english-chatbot-advice/32/5" rel="noreferrer nofollow" target="_blank">forum.opennmt.net/t/english-chatbot-advice/32/5</a>
+</p>
+<p>
+  [<a name="ref13">13</a>] Harrap's English-Brazilian Portuguese business dictionary. <i>Terence Lewis, Lígia Xavier, Cláudio Solano.</i>
+  [<a href="http://www.worldcat.org/title/harraps-english-brazilian-portuguese-business-dictionary/oclc/10403443" rel="noreferrer nofollow" target="_blank">link</a>]
+</p>
+<p>
+  [<a name="ref14">14</a>] 101 Things a Translator Needs to Know. <i>ISBN 978-91-637-5411-1</i><br />
+  <a href="https://www.101things4translators.com" rel="noreferrer nofollow" target="_blank">www.101things4translators.com</a>
+</p>
+
+
