@@ -86,13 +86,23 @@ var proxy = function (app) {
     });
   }
 
+  const allowedOrigins = ["https://www.jealousmarkup.xyz", "https://jealousmarkup.xyz"];
+
   app.post("/xlate", function (req, res) {
+    // Origin filtering
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) == -1)
+      return res.status(400).send("origin not allowed");
+    res.setHeader("Access-Control-Allow-Origin", origin);
+
+    // Verify request
     var body = req.body;
     if (!body.src) return res.status(400).send("invalid request");
     if (body.src.length > 256) return res.status(400).send("invalid request");
+
+    // Forward request - promise
     doForward(body.src).then(
       (result) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://www.jealousmarkup.xyz');
         res.setHeader('Content-Type', 'application/json');
         var strRes = JSON.stringify(result);
         res.send(strRes);
