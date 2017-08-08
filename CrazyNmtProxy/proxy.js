@@ -11,6 +11,9 @@ var proxy = function (app) {
   });
 
   function doLog(src, real, crazy) {
+    src = src + "";
+    real = real + "";
+    crazy = crazy + "";
     src = src.replace(/\t/g, " ");
     real = real.replace(/\t/g, " ");
     crazy = crazy.replace(/\t/g, " ");
