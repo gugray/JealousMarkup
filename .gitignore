@@ -3,7 +3,7 @@ node_modules
 obj
 *.suo
 
-public
+# public
 JealousSite/wwwroot/imprint/*
 imprint.html
 
