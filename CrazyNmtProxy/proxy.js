@@ -11,13 +11,16 @@ var proxy = function (app) {
   });
 
   function doLog(src, real, crazy) {
-    src = "" + src;
-    real = "" + real;
-    crazy = "" + crazy;
-    src = src.replace(/\t/g, " ");
-    real = real.replace(/\t/g, " ");
-    crazy = crazy.replace(/\t/g, " ");
-    appLog.info(src + "\t" + real + "\t" + crazy);
+    try {
+      src = "" + src;
+      real = "" + real;
+      crazy = "" + crazy;
+      src = src.replace(/\t/g, " ");
+      real = real.replace(/\t/g, " ");
+      crazy = crazy.replace(/\t/g, " ");
+      appLog.info(src + "\t" + real + "\t" + crazy);
+    }
+    catch (ex) { }
   }
 
   var reqCount = 0;
@@ -43,23 +46,26 @@ var proxy = function (app) {
         json: reqData
       };
       request(reqOpt1, function (err, res, body) {
-        if (xCrazy) --reqCount;
-        if (err && !returnedErr) {
-          returnedErr = true;
-          return reject("translate request failed (real)");
+        try {
+          if (xCrazy) --reqCount;
+          if (err && !returnedErr) {
+            returnedErr = true;
+            return reject("translate request failed (real)");
+          }
+          xReal = body[0][0];
+          xRealSec = (new Date() - dtStart) / 1000;
+          if (xCrazy) {
+            doLog(src, xReal, xCrazy);
+            return resolve({
+              status: "ok",
+              real: xReal,
+              real_sec: xRealSec,
+              crazy: xCrazy,
+              crazy_sec: xCrazySec
+            });
+          }
         }
-        xReal = body[0][0];
-        xRealSec = (new Date() - dtStart) / 1000;
-        if (xCrazy) {
-          doLog(src, xReal, xCrazy);
-          return resolve({
-            status: "ok",
-            real: xReal,
-            real_sec: xRealSec,
-            crazy: xCrazy,
-            crazy_sec: xCrazySec
-          });
-        }
+        catch (ex) { console.log("err"); return reject(ex); }
       });
       var reqOpt2 = {
         uri: 'http://127.0.0.1:7785/translator/translate',
@@ -68,23 +74,26 @@ var proxy = function (app) {
         json: reqData
       };
       request(reqOpt2, function (err, res, body) {
-        if (xReal) --reqCount;
-        if (err && !returnedErr) {
-          returnedErr = true;
-          return reject("translate request failed (crazy)");
+        try {
+          if (xReal) --reqCount;
+          if (err && !returnedErr) {
+            returnedErr = true;
+            return reject("translate request failed (crazy)");
+          }
+          xCrazy = body[0][0];
+          xCrazySec = (new Date() - dtStart) / 1000;
+          if (xReal) {
+            doLog(src, xReal.tgt, xCrazy.tgt);
+            return resolve({
+              status: "ok",
+              real: xReal,
+              real_sec: xRealSec,
+              crazy: xCrazy,
+              crazy_sec: xCrazySec
+            });
+          }
         }
-        xCrazy = body[0][0];
-        xCrazySec = (new Date() - dtStart) / 1000;
-        if (xReal) {
-          doLog(src, xReal.tgt, xCrazy.tgt);
-          return resolve({
-            status: "ok",
-            real: xReal,
-            real_sec: xRealSec,
-            crazy: xCrazy,
-            crazy_sec: xCrazySec
-          });
-        }
+        catch (ex) { console.log("err"); return reject(ex); }
       });
     });
   }
@@ -101,10 +110,11 @@ var proxy = function (app) {
     // Verify request
     var body = req.body;
     if (!body.src) return res.status(400).send("invalid request");
-    if (body.src.length > 256) return res.status(400).send("invalid request");
+    var src = "" + body.src;
+    if (src.length > 256) return res.status(400).send("invalid request");
 
     // Forward request - promise
-    doForward(body.src).then(
+    doForward(src).then(
       (result) => {
         res.setHeader('Content-Type', 'application/json');
         var strRes = JSON.stringify(result);
