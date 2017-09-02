@@ -1,0 +1,348 @@
+﻿<div id="x-rel">/neural-mt-looking-for-a-business-model</div>
+<div id="x-title">Neural MT: hip young technology looking for a business model</div>
+<div id="x-cats">Localization, NLP</div>
+<div id="x-date">2017-09-04</div>
+<div id="x-noindex"></div>
+
+<meta name="description" content="Linguee has been bitten by the MT bug. Will they find a market? Where is the business in MT, anyway?" />
+<meta name="keywords" content="DeepL, Linguee, machine translation, neural MT, language industry, business model" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/other/nmt-looking.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<h1>Neural MT: hip young technology looking for a business model</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  Hello! I am Neural M. Translation. I’m new around here. I am intelligent, witty, sometimes wildly funny, and I’m mostly reliable. My experiences so far have been mixed, but I haven’t given up on finding a business model for lifelong love.
+</p>
+
+<p>
+  That’s the sort of thing that came to my mind when I read the reports about DeepL
+  Translator[<a href="#ref1">1</a>],
+  the latest contender in the bustling neural MT space. The quality is impressive and the packaging is appealing, but is all the glittering stuff really gold? And how will the company make money with it all? Where’s the business in MT, anyway?
+</p>
+<p>
+  I don’t have an answer to any of these questions. I invite you to think together.
+</p>
+<p>
+  <b>Update</b>: I already finished writing this post when I found
+  <a href="https://www.youtube.com/watch?v=DrOS6wyEzFI" rel="noreferrer nofollow" target="_blank">this talk</a>
+  (in German) by Gereon Frahling, the sparkling mind behind Linguee, from May 2017. It contains the best intro to neural networks I’ve ever heard, and sheds more light on all the thinking and speculation here. I decided not to change my text, but let you draw your own conclusions instead.
+</p>
+
+<p>
+  <img src="/files/other/nmt-looking.jpg" alt="." width="700" height="394" />
+</p>
+
+<h2>Scratching the DeepL surface</h2>
+<p>
+  If you’ve never heard about DeepL before, that’s normal: the company changed its name from Linguee on August 24, just a few days before launching the online translator. The
+  website[<a href="#ref2">2</a>]
+  doesn’t exactly flood you with information beyond the live demo, but the little that is there tells an interesting story. First up are the charts with the system’s BLEU scores:
+</p>
+<figure>
+  <img src="/files/other/linguee-y-truncated.png" alt="." width="1191" height="665" />
+  <figcaption style="text-align: center;">
+    Source: DeepL website
+  </figcaption>
+</figure>
+<p>I’ll spare you the bickering about truncated Y axes and just show what the full diagram on the left looks like:</p>
+<figure>
+  <img src="/files/other/linguee-y-ok.png" alt="." width="1433" height="1074" />
+  <figcaption style="text-align: center;">
+    Source: @kvashee
+  </figcaption>
+</figure>
+<p>
+  This section seems to be aimed at folks who know a bit about the MT field. There are <i>numbers (!)</i> and references to
+  <i>research papers (!)</i>, but the effect is immediately destroyed because DeepL’s creators have chosen not to pubish their
+  own work. All you get is the terse sentence, <i>Specific details of our network architecture will not be published at this time.</i>
+  So while my subjective judgement confirms that the English/German translator is mighty good, I wonder why the manipulation
+  is needed if your product really speaks for itself. Whence the insecurity?
+</p>
+<p>
+  Unfortunately, it gets worse when the text begins to boast about the datacenter in Iceland. What do these huge numbers even mean?
+</p>
+
+<h2>My petaFLOPS are bigger than your petaFLOPS</h2>
+<p>
+  The neural in NMT refers to neural networks, an approach to solving computationally complex tasks that’s been around for decades. It involves lots and lots of floating-point calculations: adding and multiplying fractional numbers. Large-scale computations of this sort have become affordable only in the last few years, thanks to a completely different market: high-end graphics cards, aka GPUs. All those incredibly realistic-looking monsters you shoot down in video games are made up of millions of tiny triangles on the screen, and the GPU calculates the right form and color of each of them to account for shape, texture, light and shadow. It’s an amusing coincidence that these are just the sort of calculations needed to train and run neural networks, and that the massive games industry has been a driver of GPU innovation.
+</p>
+<p>
+  One TFLOPS or teraFLOPS simply means the hardware can do 1,000 billion floating-point calculations per second. 5.1 petaFLOPS equals 5,100 TFLOPS. NVIDIA’s current high-end GPU, the GTX 1080 Ti, can do 11 TFLOPS.
+</p>
+<p>
+  How would I build a 5.1 PFLOPS supercomputer? I would take lots of perfectly normal PCs and put 8 GPUs in each: that’s 88 TFLOPS per PC. To get to 5.1 PFLOPS, I’d need 58 PCs like that. One such GPU costs around €1,000, so I’d spend €464k there; plus the PCs, some other hardware to network them and the like, and the supercomputer costs between €600k and €700k.
+</p>
+<p>
+  The stated reason for going to Iceland is the price of electricity, which makes some sense. In Germany, 1kWh easily costs
+  up to €0.350 for households; in Iceland, it’s
+  €0.055[<a href="#ref3">3</a>].
+  Germany finances its <i>Energiewende</i> largely by overcharging households, so as a business you’re likely to get a better
+  price, but Iceland will still be 3 to 6 times cheaper.
+</p>
+<p>
+  A PC with 8 GPUs might use 1500kW when fully loaded. Assuming they run at 50% capacity on average, and 8760 hours in a year, the annual electricity bill for the whole datacenter will be about €21k in Iceland.
+</p>
+<p>
+  But is this really the world’s 23rd largest supercomputer, as the link to the Top 500
+  list[<a href="#ref4">4</a>]
+  claims? If you look at the TFLOPS values, it sounds about right. But there’s a catch. TFLOPS has been used to compare CPUs, which can do lots of interesting things, but floating-point calculations are not exactly their forte. A GPU, in turn, is an army of clones: it has thousands of units that can do the exact same calculation in parallel, but only a single type of calculation at a time. Like calculating one million tiny triangles in one go; or one million neurons in one go. Comparing CPU-heavy supercomputers with a farm of GPUs is like comparing blackberries to coconuts. They’re both fruits and round, but the similarity ends there.
+</p>
+
+<h2>Business model: free (or cheap) commodity MT</h2>
+<p>
+  There are several signs suggesting that DeepL intends to sell MT as a commodity to millions of end users. The exaggerated, semi-scientific and semi-technical messages support this. The highly professional and successful PR campaign for the launch is another sign. Also, the testimonials on the website come from la Reppublica (Italy), RTL Z (Holland), TechCrunch (USA), Le Monde (France) and the like – all high-profile outlets for general audiences.
+</p>
+<p>
+  Right now there is only one way to make money from mass content on the Internet: ads. And that in fact seems to have been the company’s model so far. Here’s Linguee’s traffic history from Alexa:
+</p>
+
+<p>
+  <img src="/files/other/linguee-alexa.png" alt="." width="1771" height="597" />
+</p>
+
+<p>
+  With 11.5 million monthly sessions, almost 3 pageviews per session, and a global rank of around 2,500, linguee.com is a
+  pretty valuable site. Two online calculators place the domain’s value at $115k and
+  $510k.[<a href="#ref5">5</a>][<a href="#ref6">6</a>]
+</p>
+<p>
+  If you assume an average ad
+  revenue[<a href="#ref7">7</a>] of $1 per thousand impressions (PTM), that would yield a monthly ad revenue of $34,500.
+  This kind of mileage, however, varies greatly, and it may be several times higher, especially if the ads are well targeted.
+  Which they may (or may not) be on a site where people go to search in a sort of dictionary.
+</p>
+<p>
+  Let’s take a generous $3 PTM. That yields an annual revenue of $1.2mln, which I’ll just pretend is the same in euros. Assuming a 3-year depreciation for the initial datacenter investment and adding the energy cost, you’d need an extra traffic of about 2 million sessions to break even, ignoring wages and development costs. That could be achievable, I guess.
+</p>
+
+<h2>Why commodity MT is a bad idea nonetheless</h2>
+<p>
+  What speaks against this approach? Let’s play devil’s advocate.
+</p>
+<p>
+  <b>Barrier to switch.</b> It’s hard to make people switch from a brand (Google) that is so strong it’s become a generic term like Kleenex. Is the current quality edge enough? Can you spin a strong enough David-versus-Goliath narrative? Raise enough FUD about privacy? Get away with a limited set of languages?
+</p>
+<p>
+  <b>Too big a gamble.</b> Public records show that Linguee/DeepL had a €2.4mln balance sheet in 2015, up from €1.2 the year before. Revenue numbers are not available, but the figures are roughly in line with the ballpark ad income that we just calculated. From this base, is it a sensible move to blow €700k on a top-notch datacenter, before your product even gains traction? Either the real business model is different, or the story about the datacenter is not completely accurate. Otherwise, this may be a rash step to take.
+</p>
+<p>
+  <b>Unsustainable edge.</b> Even if you have an edge now, and you have a dozen really smart people, and you convince end users to move to your service and click on your ads, and your investment starts to pay off, can you compete with Google’s generic MT in the long run?
+</p>
+<p>
+  I think you definitely cannot. Instead of explaining this right away, let’s take a closer look at the elephant in the room.
+</p>
+
+<h2>Google in the MT space</h2>
+<p>
+  First, the humbling facts. From a 2016 paper[<a href="#ref8">8</a>]
+  we can indirectly get some interesting figures about Google’s neural MT technology. One thing that stands out is the team size:
+  there are 5 main authors, and a further 26 contributors.
+</p>
+<p>
+  Then there’s the training corpus: for a major language pair such as English/French, it’s between 3.5 billion and 35 billion
+  sentence pairs. That’s 100-1000 times larger than the datasets used to train the state-of-the-art systems at the annual WMT
+  challenge.[<a href="#ref9">9</a>] Systran’s 2016 paper[<a href="#ref10">10</a>]
+  reports datasets ranging from 1 million to over 10 million segments, but billions are nowhere to be found in the text.
+</p>
+<p>
+  In this one respect, DeepL may be the single company that can compete with Google. After all, they spent the past 8 years crawling, classifying and cleansing bilingual content from the web.
+</p>
+<p>
+  Next, there is pure engineering: the ability to optimize these systems and make them work at scale, both to cope with
+  billion-segment datasets and to serve thousands of request per second. A small company can make a heroic effort to create a
+  comparable system right now, but it cannot be competitive with Google over several years. And <i>every company</i> in the
+  language industry is homeopathically small in this comparison.
+</p>
+<p>
+  Third, there is hardware. Google recently announced its custom-developed TPU,[<a href="#ref11">11</a>]
+  which is basically a GPU on steroids. Compared to the 11 TFLOPS you get out of the top-notch GTX 1080 Ti,
+  a single TPU delivers 180 TFLOPS.[<a href="#ref12">12</a>]
+  It’s not for sale, but Google is giving away 1000 of these in the cloud for researchers to use for free.
+  Your datacenter in Iceland might be competitive today, but it will not be in 1, 2 or 3 years.
+</p>
+<p>
+  Fourth, there is research. Surprisingly, Google’s MT team is very transparent about their work. They publish their
+  architecture and results in papers, and they helpfully include a link to an open-source
+  repository[<a href="#ref13">13</a>]
+  containing the code and a tutorial. You can grab it and do it yourself, using whatever hardware and data you can
+  get your hands on. So, you can be very smart and build a better system now, but you cannot out-research
+  Google over 1, 2 or 3 years. This is why DeepL’s hush-hush approach to technology is particularly odd.
+</p>
+
+<h3>But what’s in it for Google?</h3>
+<p>
+  It’s an almost universal misunderstanding that Google is in the translation business with its MT offering. It is not. Google trades in personal information about its real products: you and me. It monetizes it by selling to its customers, the advertisers, through a superior ad targeting and brokering solution. This works to the extent that people and markets move online, so Google invests in growing internet penetration and end user engagement. Browsers suck? No problem, we build one. There are no telephone cables? No problem, we send balloons. People don’t spend enough time online because they don’t find enough content in their language? No problem, we give them Google Translate.
+</p>
+<p>
+  If Google wants to squash something, it gets squashed.[<a href="#ref14">14</a>]
+  If they don’t, and even do the opposite by sharing knowledge and access freely, that means they don’t see themselves competing in that area, but consider it instead as promoting good old internet pentration.
+</p>
+<p>
+  Sometimes Google’s generosity washes over what used to be an entire industry full of businesses. That’s what happened to maps. As a commodity, maps are gone. Cartography is now a niche market for governments, military, GPS system developers and nature-loving hikers. The rest of us just flip open our phones; mass-market map publishers are out of the game.
+</p>
+<p>That is precisely your future if you are striving to offer generic MT.</p>
+
+<h2>Business model: professional translation</h2>
+<p>
+  If it’s not mass-market generic translation, then let’s look closer to home: right here at the language industry. Granted, there are still many cute little businesses around that email attachments back and forth and keep their terminology in Excel sheets. But generally, MT post-editing has become a well-known and accepted tool in the toolset of LSPs, next to workflow automation, QA, online collaboration and the rest. Even a number of adventurous translators embrace MT as one way to be more productive.
+</p>
+<p>
+  The business landscape is still pretty much in flux, however. We see some use of low-priced generic MT via CAT tool plugins. We see MT companies offering customized MT that is more expensive, but still priced on a per-word, throughput basis. We see MT companies charging per customized engine, or selling solutions that involve consultancy. We see MT companies selling high-ticket solutions to corporations at the $50k+ level where the bulk of the cost is customer acquisition (golf club memberships, attending the right parties, completing 100-page RFPs etc.). We see LSPs developing more or less half-baked solutions on their own. We see LSPs acquiring professional MT outfits to bring competence in-house. We even see one-man-shows run by a single very competent man or woman, selling to adventurous translators. (Hello, Terence! Hello, Tom!)
+</p>
+<p>
+  There are some indications that DeepL might be considering this route. The copy on the teaser site talks about translators, and the live demo itself is a refreshingly original approach that points towards interactive MT. You can override the initial translation at every word, and if you choose a different alternative, the rest of the sentence miraculously updates to complete the translation down a new path.
+</p>
+<p>
+  The difficulty with this model is that translation/localization is a complex space in terms of processes, tools, workflows,
+  and interacting systems. Mike Dillinger showed this slide in his memoQfest 2017
+  keynote[<a href="#ref15">15</a>] to illustrate how researchers tend to think about MT:
+</p>
+
+<p>
+  <img src="/files/other/mt-in-the-lab.png" alt="." width="900" height="676" />
+</p>
+
+<p>He immediately followed it up with this other slide that shows how MT fits into a real-life translation workflow:</p>
+
+<p>
+  <img src="/files/other/mt-real-life.png" alt="." width="900" height="676" />
+</p>
+
+<p>
+  Where does this leave you, the enthusastic MT startup that wants to sell to the language industry? It’s doable, but it’s a lot of work that has nothing to do with the thing you truly enjoy doing (machine translation). You need to learn about workflows and formats and systems; you need to educate and evangelize; you need to build countless integrations that are boring and break all the time. And you already have a shark tank full of competitors. Those of us who are in it think the party is good, but it’s not the kind of party where startup types tend to turn up.
+</p>
+<p>
+  What does that mean in numbers? I looked at the latest available figures of Systran.[<a href="#ref16">16</a>]
+  They are from 2013, before the company was de-listed from the stock exchange. Their revenue then was $14.76mln, with a very flatly rising trend over the preceding two years. If your current revenue is around €2mln, that’s a desirable target, but remember that Systran is the company selling high-ticket solutions through a sales force that stays in expensive hotels and hangs out with politicians and CEOs. That sort of business is not an obvious match for a small, young and hungry internet startup.
+</p>
+
+<h2>Business model: commercial lubricant</h2>
+<p>
+  By far the most interesting scenario, for me at least, is what companies like eBay or Booking.com are doing.
+  They are not in the translation business, and they both have internal MT
+  departments.[<a href="#ref17">17</a>][<a href="#ref18">18</a>]
+  The funny thing is, they are not MTing their own content. Both companies are transaction brokers, and they translate the content of their customers in order to expand their outreach to potential buyers. With eBay it’s the product descriptions on their e-commerce site; with Booking.com, it’s the property descriptions.
+</p>
+<p>
+  For these companies, MT is not about “translation” in the traditional sense. MT is a commercial lubricant.
+</p>
+<p>
+  The obvious e-commerce suspect, Amazon, has also just decided to hop on the MT
+  train.[<a href="#ref19">19</a>]
+  The only surprising thing about that move is that it’s come so late. The fact that they also intend to offer it as an API in AWS is true Amazon form; that’s how AWS itself got started, as a way to monetize idle capacity when it’s not Black Friday o’clock.
+</p>
+<p>
+  So we’ve covered eBay, Booking.com and Amazon. Let’s skip over the few dozen other companies with their own MT that I’m too ignorant to know. What about the thousands of smaller companies for whom MT would make sense as well, but that are not big enough to make it profitable to cook their own stew?
+</p>
+<p>
+  That’s precisely where an interesting market may be waiting for smart MT companies like DeepL.
+</p>
+
+<h2>Speed dating epilogue</h2>
+<p>
+  Will <i>Neural M. Translation</i>, the latest user to join TranslateCupid, find their ideal match in an attractive business model? The jury is still out.
+</p>
+<p>
+  If I’m DeepL, I can go for commoditized generic MT, but at this party, I feel like a German Shepherd that accidentally jumped into the wrong pool, one patrolled by a loan shark. It feels so wrong that I even get my metaphors all mixed up when I talk about it.
+</p>
+<p>
+  I can knock on the door of translation companies, but they mostly don’t understand what I’m talking about in my pitch, and many of them already have a vacuum cleaner anyway, thank you very much.
+</p>
+<p>
+  Maybe I’ll check out a few interesting businesses downtown that are big enough so they can afford me, but not so big that the goons at the reception won’t even let me say Hi.
+</p>
+<p>
+  Will it be something completely different? I am very excited to see which way DeepL goes, once they actually reveal their plans. Nobody has figured out a truly appealing business model for MT yet, but I know few other companies that have proven to be as smart and innovative in language technology as Linguee/DeepL. I hope to be surprised.
+</p>
+<p>
+  Should we brace for the language industry’s imminent “disruption?” If I weren’t so annoyed by this brainlessly repeated question, I would simply find it ridiculous. Translation is a $40bln industry globally. Let’s not talk about disruption at the $1mln or even $100mln level. Get back to me when you see the first business model that passes $1bln in revenues with a robust hockey-stick curve.
+</p>
+<p>
+  Or, maybe not. If machine learning enables a new breed of lifestyle companies with a million bucks of profit a year for a handful of owners, I’m absolutely cool with that.
+</p>
+
+<h2>References</h2>
+<p>
+  [<a name="ref1">1</a>]
+  <a href="https://www.deepl.com/translator" rel="noreferrer nofollow" target="_blank">www.deepl.com/translator</a>
+</p>
+<p>
+  [<a name="ref2">2</a>]
+  <a href="https://www.deepl.com/press.html" rel="noreferrer nofollow" target="_blank">www.deepl.com/press.html</a>
+</p>
+<p>
+  [<a name="ref3">3</a>]
+  <a href="https://en.wikipedia.org/wiki/Electricity_pricing" rel="noreferrer nofollow" target="_blank">en.wikipedia.org/wiki/Electricity_pricing</a>
+</p>
+<p>
+  [<a name="ref4">4</a>]
+  <a href="https://www.top500.org/list/2017/06/" rel="noreferrer nofollow" target="_blank">www.top500.org/list/2017/06/</a>
+</p>
+<p>
+  [<a name="ref5">5</a>]
+  <a href="https://www.freevaluator.com/" rel="noreferrer nofollow" target="_blank">www.freevaluator.com/</a>
+</p>
+<p>
+  [<a name="ref6">6</a>]
+  <a href="https://www.estibot.com/appraise.php" rel="noreferrer nofollow" target="_blank">www.estibot.com/appraise.php</a>
+</p>
+<p>
+  [<a name="ref7">7</a>]
+  <a href="https://www.quora.com/How-much-does-a-website-with-AdSense-earn-on-average-per-100-000-impressions" rel="noreferrer nofollow" target="_blank">www.quora.com/How-much-does-a-website-with-AdSense-earn-on-average-per-100-000-impressions</a>
+</p>
+<p>
+  [<a name="ref8">8</a>]
+  <a href="https://arxiv.org/abs/1609.08144" rel="noreferrer nofollow" target="_blank">arxiv.org/abs/1609.08144</a>
+</p>
+<p>
+  [<a name="ref9">9</a>]
+  <a href="http://www.statmt.org/wmt17/translation-task.html" rel="noreferrer nofollow" target="_blank">www.statmt.org/wmt17/translation-task.html</a>
+</p>
+<p>
+  [<a name="ref10">10</a>]
+  <a href="https://arxiv.org/abs/1610.05540" rel="noreferrer nofollow" target="_blank">arxiv.org/abs/1610.05540</a>
+</p>
+<p>
+  [<a name="ref11">11</a>]
+  <a href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu" rel="noreferrer nofollow" target="_blank">cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu</a>
+</p>
+<p>
+  [<a name="ref12">12</a>]
+  <a href="https://www.theinquirer.net/inquirer/news/3010365/google-announces-tpu-20-with-180-teraflop-max-out-for-ai-acceleration" rel="noreferrer nofollow" target="_blank">www.theinquirer.net/inquirer/news/3010365/google-announces-tpu-20-with-180-teraflop-max-out-for-ai-acceleration</a>
+</p>
+<p>
+  [<a name="ref13">13</a>]
+  <a href="https://github.com/tensorflow/tensor2tensor#walkthrough" rel="noreferrer nofollow" target="_blank">github.com/tensorflow/tensor2tensor#walkthrough</a>
+</p>
+<p>
+  [<a name="ref14">14</a>]
+  <a href="https://gizmodo.com/yes-google-uses-its-power-to-quash-ideas-it-doesn-t-li-1798646437" rel="noreferrer nofollow" target="_blank">gizmodo.com/yes-google-uses-its-power-to-quash-ideas-it-doesn-t-li-1798646437</a>
+</p>
+<p>
+  [<a name="ref15">15</a>]
+  <a href="https://www.memoq.com/Kilgray/media/memoQfest/memoQfest2017/Presentations/Hybrid-intelligence-translation-forging-a-real-partnership-between-humans-and-machines.pdf" rel="noreferrer nofollow" target="_blank">www.memoq.com/Kilgray/media/memoQfest/memoQfest2017/Presentations/Hybrid-intelligence-translation-forging-a-real-partnership-between-humans-and-machines.pdf</a>
+</p>
+<p>
+  [<a name="ref16">16</a>]
+  <a href="http://www.hoovers.com/company-information/cs/revenue-financial.systran_sa.69b0b68eaf2bf14f.html" rel="noreferrer nofollow" target="_blank">www.hoovers.com/company-information/cs/revenue-financial.systran_sa.69b0b68eaf2bf14f.html</a>
+</p>
+<p>
+  [<a name="ref17">17</a>]
+  <a href="https://slator.com/features/inside-ebay-translation-machine/" rel="noreferrer nofollow" target="_blank">slator.com/features/inside-ebay-translation-machine/</a>
+</p>
+<p>
+  [<a name="ref18">18</a>]
+  <a href="https://slator.com/technology/booking-com-builds-harvard-framework-run-neural-mt-scale/" rel="noreferrer nofollow" target="_blank">slator.com/technology/booking-com-builds-harvard-framework-run-neural-mt-scale/</a>
+</p>
+<p>
+  [<a name="ref19">19</a>]
+  <a href="https://slator.com/technology/whats-amazon-up-to-in-machine-translation/" rel="noreferrer nofollow" target="_blank">slator.com/technology/whats-amazon-up-to-in-machine-translation/</a>
+</p>
