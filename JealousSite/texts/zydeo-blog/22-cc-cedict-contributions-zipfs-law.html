@@ -1,0 +1,288 @@
+﻿<div id="x-rel">/cc-cedict-contributions-zipfs-law</div>
+<div id="x-title">CC-CEDICT contributions follow Zipf’s law</div>
+<div id="x-cats">Chinese, NLP, Stuff</div>
+<div id="x-date">2017-11-20</div>
+<div id="x-noindex"></div>
+
+<h1>CC-CEDICT contributions follow Zipf’s law</h1>
+<p class="meta">{{meta}}</p>
+<p class="lede">
+  There’s an egalitarian ethos of the crowd around Open Source. But studies of popular software projects and of Wikipedia show that not all contributors are created equal. Typically, the vast majority of edits comes from a small group of people. An analysis of the change log of CC-CEDICT, the open-source Chinese-English dictionary, confirms this.
+</p>
+
+<h2>Does creativity scale?</h2>
+<p>
+  Open Source’s <i>touché</i> argument is the wisdom of the crowd, ideally a really large crowd. The argument is as simple as it is captivating: how could the outcome not be superior to the product of small, limited teams if you have hundreds or thousands of passionate volunteers contributing their knowledge? The same reasoning is repeated for software like Linux and knowledge bases like Wikipedia.
+</p>
+<p>
+  Since it is software, and not knowledge bases, that is in the habit of eating the world, it’s natural that software
+  folks were the first to start looking at the way productivity scales with team size. The genre’s classic is
+  Fred Brooks’ 1975 book <i>The Mythical Man-Month</i>,[<a href="#ref01">1</a>] which argued that a software team’s
+  productivity does not grow in tandem with its size. On the contrary, there’s a threshold at about 12 people
+  beyond which productivity begins to sink.
+</p>
+<p>
+  If that is true, how can massive open-source projects possibly outperform carefully managed closed-source efforts?
+  Mocus, Fielding & Herbsleb analyzed the source code and issue history of the Apache web server in
+  2000[<a href="#ref02">2</a>] and found that a small core of developers was in fact responsible for the vast
+  majority of code changes.
+</p>
+<p>
+  Sornette, Maillart & Ghezzi [<a href="#ref03">3</a>] argued in 2014 that Brooks’ law does not hold true for
+  open-source projects. Unexpectedly, these teams keep growing more productive as they gain more members.
+  The whole, the authors say, is more than the sum of its parts.
+</p>
+<p>
+  Unfortunately that study seems to be isolated. Recently, Scholtes, Mavrodiev & Schweitzer analyzed 580,000
+  commits from 58 popular projects on Github[<a href="#ref04">4</a>] and showed that adding developers reduces
+  average productivity.
+</p>
+<p>
+  One could argue, however, that knowledge bases are different from software. Changing one Wikipedia article does not invalidate any other articles, while in software a bug in any single line can break the whole application. Perhaps you need a lot more team-wide coordination and planning to make progress with software, and knowledge bases can accommodate input from many more contributors.
+</p>
+<p>
+  That may well be true, but a recent study of Wikipedia[<a href="#ref05">5</a>] still shows that 77% of
+  articles are written by only 1% of editors.
+</p>
+<p>
+  Since I recently launched an open-source dictionary[<a href="#ref06">6</a>] myself, I am extremely curious
+  to understand how community-edited knowledge bases fare over time. Luckily it is possible to browse the
+  change history of CC-CEDICT, the resource that inspired my own project. I decided to adapt the approaches
+  used to analyze software code and take a close look at CC-CEDICT’s evolution.
+</p>
+
+<h2>10 years of CC-CEDICT history</h2>
+<p>
+  My event horizon begins in 2007, when MDBG[<a href="#ref07">7</a>] took over CEDICT from its previous
+  maintainer, Erik Peterson. At that time CEDICT had nearly 40k entries, which have since grown to 115k.
+  This is the timespan for which a detailed change log[<a href="#ref08">8</a>] is available.
+</p>
+<figure>
+  <img src="/files/zydeo-blog/cedict-clog-entry.png" alt="." width="1082" height="334" />
+  <figcaption style="text-align: center;">
+    Browser view of a single change log entry
+  </figcaption>
+</figure>
+<p>
+  CC-CEDICT’s editorial process relies on a queue of submissions, where changes come in the form of additions and deletions in the dictionary’s plain text format. Each change needs an editor’s approval to become part of CC-CEDICT; editors may add their own comments and amend or extend the change set itself.
+</p>
+<p>
+  With a slight tweak to the URLs I manually retrieved and saved the entire change history, 5000 changes per page. Once saved locally, it was relatively simple to parse the machine-generated HTML files. I extracted the relevant content and metadata and composed a single plain text file with all the changes.
+</p>
+<p>
+  When a change set affects too many entries, the full list of additions and deletions is only available through the change’s dedicated link. I semi-automatically retrieved and parsed these pages to make sure every single edit is included in my data. There were a bit over 900 such large change sets.
+</p>
+<p>
+  The entire retrieval process finished in a few minutes, but if the MDBG website took a performance hit during that time, I sincerely apologize.
+</p>
+
+<h2>Growth by month</h2>
+<p>
+  The first chart I created shows the number of additions and deletions each month (blue and red), plus the dictionary’s net growth (green).
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-monthly-growth.png" alt="." width="1342" height="859" />
+</p>
+<p>
+  This chart excludes the first two months, in which the bulk of the existing content was imported via a few very large change sets. There appear to be two distinct phases: up to mid-2010, CC-CEDICT evolved intensively, both gaining new content and undergoing far-reaching edits (shown by simultaneously large volumes of additions and deletions). There are many change sets from this period that show an effort to standardize translations and remarks.
+</p>
+<p>
+  From mid-2010 onwards CC-CEDICT has settled into a calmer period of growth.
+</p>
+
+<h2>Editors and contributors</h2>
+<p>
+  But who were the people contributing these changes, and who was contributing how much? I split the
+  originators into editors and contributors through a heuristic. A person becomes an editor when their name first
+  shows up in a change’s <i>processed by</i> field. Each change originates from the name in the
+  <i>submitted by</i> field, and I used the heuristic to decide if the originator herself is an editor or
+  a “mere” contributor.
+</p>
+<p>
+  The chart below shows the number of edits coming from editors and contributors. This time I broke the timeline down into quarters instead of months. Every addition and deletion counts as a separate edit, which means that changing an existing entry shows up as 2 edits, while adding a new entry only shows up as 1 edit.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-quarterly-edits-contributors-editors.png" alt="." width="1153" height="784" />
+</p>
+<p>
+  Now let’s look at the size of the populations submitting these edits. The chart below shows the number of editors and contributors submitting changes in a given quarter.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-quarterly-contributors-editors.png" alt="." width="1148" height="781" />
+</p>
+<p>
+  It’s clear that the proportions are inverted: all that blue sea of changes in the previous chart came from a small team of editors.
+</p>
+<p>
+  But maybe editors are busy correcting recurring errors and submitting other find-replace-style changes, while contributors are submitting smaller changes one word at a time, distorting our view. To compensate, the chart below shows the number of submitted change sets, and not the volume of edits.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-quarterly-changesets-contributors-editors.png" alt="." width="1154" height="785" />
+</p>
+<p>
+  While the blue and orange areas are still far apart, they diverge much less in this new chart. The ratio is also decreasing over time, meaning that submissions from the crowd are becoming proportionally more important.
+</p>
+
+<h2>Loyalty</h2>
+<p>
+  Once someone becomes an editor, how long do they continue contributing? I plotted the activity of CC-CEDICT’s editors in the chart below. Each horizontal swimlane corresponds to an editor, and the blue rectangles show the quarters when they were active. There are no breaks in any of these swimlanes: I considered an editor to be active the whole time between their first and last contribution.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-life-editors.png" alt="." width="1275" height="330" />
+</p>
+<p>
+  How does this compare to the activity, over time, of contributors? The chart below repeats the analysis for them. The number of contributors is much larger, so the entire chart is vertically compressed. Also, with contributors, I allowed interrupted swimlanes when someone didn’t contribute in a given quarter, but contributed again later.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-life-contributors.png" alt="." width="1129" height="1162" />
+</p>
+<p>
+  With a few exceptions, this larger population tends to contribute more on an ad-hoc basis, and in fact many people only contribute in a single quarter and then never return.
+</p>
+<p>
+  If you squint a little, the bottom of the “curve,” which represents the arrival of new contributors, seems to outline three distinct phases. Up to 2009Q1, CC-CEDICT was relatively slow to attract new contributors, but then the pace picked up. This active period lasted until 2011Q2. Since then the project has been adding contributors at a slower, roughly constant rate.
+</p>
+
+<h2>Volume vs rank</h2>
+<p>
+  Let’s now ignore the time axis and take a look at the volume of each individuals’ contributions. Each dot on the chart below is an editor or a contributor. The Y axis shows the number of additions and deletions; the X axis is the person’s rank in the list ordered by total contributions. Both axes use a log scale.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-contrib-ranks.png" alt="." width="1059" height="586" />
+</p>
+<p>
+  Editors show up on the left of the chart: they are few and far between, and they each contribute a lot. From about rank 6 the slope changes, and the larger number of contributors, each adding a smaller number of edits, begin to crowd up.
+</p>
+<p>
+  The top 6 people, or 1% of the entire population (all of them editors), contributed 59,854 edits. The entire population of 577 people contributed 85,231 edits. In other words, 1% of the population contributed 70% of changes. That proportion is strikingly similar to the findings from Wikipedia.
+</p>
+<p>
+  The related chart below, including only contributors and excluding the editors, has a very familiar shape.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-contrib-ranks-noneditors.png" alt="." width="1061" height="585" />
+</p>
+<p>
+  This is a textbook example of the Zipfian distribution.[<a href="#ref09">9</a>]
+  What could be more adequate for a dictionary? In its original form Zipf’s law states that “given some
+  corpus of natural language utterances, the frequency of any word is inversely proportional to its rank
+  in the frequency table.” Clearly, the same is true for the contributors of this open-source repository of knowledge.
+</p>
+
+<h2>Chasing the long tail</h2>
+<p>
+  As a closing exercise, let’s look at the way CC-CEDICT’s lexical coverage evolved over time. I’m repeating a
+  previous analysis[<a href="#ref10">10</a>] here, but with the added dimension of time. The chart
+  below is a histogram: the X axis has 100 distinct points, each representing buckets of 1000 words
+  from a ranked frequency list. The Y axis shows how many of each bucket’s words are present as a
+  headword in CC-CEDICT. The green series is the headword list on April 1, 2007; the purple series is
+  from October 1, 2017.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-two-histograms.png" alt="." width="954" height="474" />
+</p>
+<p>
+  This chart needs a few extra words of explanation, and it comes with some caveats.
+</p>
+<p>
+  The word frequencies are from SUBTLEX-CH, based on a corpus of movie subtitles, published by
+  Brysbaert et al.[<a href="#ref11">11</a>] in 2010. Two ingredients implicitly go into such a frequency
+  list: the underlying corpus, and the segmentation method.
+</p>
+<p>
+  Many things speak for the psycho-linguistic adequacy of a corpus of movie subtitles. The word segmentation
+  of Modern Standard Mandarin (MSM), however, is anything but straightforward. Brysbaert et al. used the
+  ICTCLAS tokenizer[<a href="#ref12">12</a>], which I have been unable to execute. In a separate
+  experiment I found that the output of another tokenizer, Jieba,[<a href="#ref13">13</a>] is
+  significantly different, resulting in a different frequency list and thus also in a different histogram.
+</p>
+<p>
+  Sticking with the SUBTLEX-CH word frequencies, it’s important to keep data scarcity in mind.
+  From about 70k onwards, all the words are hapaxes; words between about 54k and 70k have a frequency of 2.
+  Basically, the entire right half of the chart is made up of two ranges where the specific
+  rank is arbitrary.[<a href="#ref14">14</a>]
+</p>
+<p>
+  Finally, there is script (simplified vs. traditional). The frequency list is simplified, but CC-CEDICT has multiple headwords if either the traditional form or the Pinyin pronunciation is different. For my calculations I merged these entries and only considered CC-CEDICT’s distinct simplified headwords.
+</p>
+<p>
+  Of CC-CEDICT’s 38k headwords in 2007, less than 20k were present on this frequency list; the remaining ones are not attested as tokens in the ICTCLAS-segmented corpus at all. Of the 115k headwords in 2017, nearly 70k are beyond the SUBTLEX-CH frequency list. The chart below illustrates the progress between these two points. The blue series is the total headword count; the green series is the number of headwords not attested on the SUBTLEX-CH frequency list.
+</p>
+<p>
+  <img src="/files/zydeo-blog/cedict-corpus-noncorpus-frequencies.png" alt="." width="791" height="474" />
+</p>
+<p>
+  We can observe two distinct phases. Up to about 2010, during CC-CEDICT’s intensive growth period, the two series grow farther apart. The dictionary accrues both words from the top 100k tokens on the frequency list and words beyond the list’s limits. From 2010 onwards, the two curves are nearly parallel, which means the vocabulary accrued in this phase is mostly beyond the top-100k list.
+</p>
+<p>
+  This phase shift is, doubtless, partly an artefact of MSM tokenization. But it also signals that beyond about 90k headwords, the dictionary has covered the language’s core vocabulary, and the rest of the expansion comes from rare items in the long tail such as proper names, transcriptions, and the naturally slow accumulation of neologisms.
+</p>
+
+
+<h2>References</h2>
+<p>
+  [<a name="ref01">1</a>] Fred Brooks: The Mythical Man-Month:
+  Essays on Software Engineering. <i>Addison-Wesley, 1975. ISBN 0-201-00650-2.</i>
+</p>
+<p>
+  [<a name="ref02">2</a>] Mockus A, Fielding RT, Herbsleb J:
+  A case study of open source software development: The apache server.
+  <i>In: Proceedings of the 22Nd international conference on software engineering.
+  ICSE ’00, ACM, New York, pp 263–272.</i><br/>
+  <a href="http://herbsleb.org/web-pubs/pdfs/mockus-acase-2000.pdf" rel="noreferrer nofollow" target="_blank">herbsleb.org/web-pubs/pdfs/mockus-acase-2000.pdf</a>
+</p>
+<p>
+  [<a name="ref03">3</a>] Sornette D, Maillart T, Ghezzi G: How much is the whole really more than the sum of its parts? 
+  1 + 1 = 2.5: Superlinear productivity in collective group actions. (2014)
+  <i>PLoS ONE 9(8):e103,023.</i>
+</p>
+<p>
+  [<a name="ref04">4</a>] Scholtes et al.: From Aristotle to Ringelmann: A large-scale analysis of team
+  productivity and coordination in open-source software projects. <i>ICSE 2016.</i><br/>
+  <a href="https://www.sg.ethz.ch/media/publication_files/paper_bQeEC8G.pdf" rel="noreferrer nofollow" target="_blank">www.sg.ethz.ch/media/publication_files/paper_bQeEC8G.pdf</a>
+</p>
+<p>
+  [<a name="ref05">5</a>] Daniel Oberhaus: Nearly All of Wikipedia Is Written By Just 1 Percent of Its Editors.
+  <i>Motherboard, Nov 7, 2017.</i><br/>
+  <a href="https://motherboard.vice.com/en_us/article/7x47bb/wikipedia-editors-elite-diversity-foundation" rel="noreferrer nofollow" target="_blank">motherboard.vice.com/en_us/article/7x47bb/wikipedia-editors-elite-diversity-foundation</a>
+</p>
+<p>
+  [<a name="ref06">6</a>] CHDICT Chinese-Hungarian dictionary.<br/>
+  <a href="https://chdict.zydeo.net/en/" rel="noreferrer nofollow" target="_blank">chdict.zydeo.net/</a>
+</p>
+<p>
+  [<a name="ref07">7</a>]
+  <a href="https://www.mdbg.net/chinese/dictionary" rel="noreferrer nofollow" target="_blank">www.mdbg.net/chinese/dictionary</a>
+</p>
+<p>
+  [<a name="ref08">8</a>]
+  <a href="https://cc-cedict.org/editor/editor.php?handler=ListChanges" rel="noreferrer nofollow" target="_blank">cc-cedict.org/editor/editor.php?handler=ListChanges</a>
+</p>
+<p>
+  [<a name="ref09">9</a>]
+  <a href="https://en.wikipedia.org/wiki/Zipf%27s_law" rel="noreferrer nofollow" target="_blank">en.wikipedia.org/wiki/Zipf%27s_law</a>
+</p>
+<p>
+  [<a name="ref10">10</a>] A curious cliff: coincidence, anomaly, or proof of ancestry?<br/>
+  <a href="https://jealousmarkup.xyz/texts/a-curious-cliff/" rel="noreferrer nofollow" target="_blank">jealousmarkup.xyz/texts/a-curious-cliff/</a>
+</p>
+<p>
+  [<a name="ref11">11</a>] Cai, Q., Brysbaert, M.: SUBTLEX-CH: Chinese Word and Character Frequencies Based on Film Subtitles.
+  <i>PLoS ONE 5(6): e10729. doi:10.1371/journal.pone.0010729 (2010)</i>
+  <a href="http://crr.ugent.be/programs-data/subtitle-frequencies/subtlex-ch" rel="noreferrer nofollow" target="_blank">crr.ugent.be/programs-data/subtitle-frequencies/subtlex-ch</a>
+</p>
+<p>
+  [<a name="ref12">12</a>] Zhang Hua-Ping, Yu Hong-Kui, Xiong De-Yi Xiong and Liu Qun: 
+  HHMM-based Chinese Lexical Analyzer ICTCLAS.
+  <i>Proceedings of 2nd SigHan Workshop, July 2003, pp.184-187.</i></br/>
+  <a href="https://github.com/NLPIR-team/NLPIR/tree/master/NLPIR%20SDK/NLPIR-ICTCLAS" rel="noreferrer nofollow" target="_blank">github.com/NLPIR-team/NLPIR/tree/master/NLPIR%20SDK/NLPIR-ICTCLAS</a>
+</p>
+<p>
+  [<a name="ref13">13</a>]
+  <a href="https://github.com/fxsjy/jieba" rel="noreferrer nofollow" target="_blank">github.com/fxsjy/jieba</a>
+  by Sun Junyi <i>(2013)</i>
+</p>
+<p>
+  [<a name="ref14">14</a>] D’Oh! It’s the hapaxes. And how lexicography is an uphill battle.<br/>
+  <a href="https://jealousmarkup.xyz/texts/d-oh-hapaxes-curious-coverage/" rel="noreferrer nofollow" target="_blank">jealousmarkup.xyz/texts/d-oh-hapaxes-curious-coverage/</a>
+</p>
