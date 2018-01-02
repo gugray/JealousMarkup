@@ -134,10 +134,10 @@ namespace JealousSite
         private TextInfo rebuildFile(string srcPath, bool isHomePage)
         {
             // DBG
-            if (srcPath.Contains("catzine-03"))
-            {
-                int fdks = 0;
-            }
+            //if (srcPath.Contains("catzine-03"))
+            //{
+            //    int fdks = 0;
+            //}
 
             TextInfo ti = new TextInfo();
 
