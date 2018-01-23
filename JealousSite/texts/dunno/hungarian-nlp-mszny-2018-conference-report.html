@@ -1,0 +1,303 @@
+﻿<div id="x-rel">/hungarian-nlp-mszny-2018-conference-report</div>
+<div id="x-title">What’s cooking in the Hungarian NLP scene? MSZNY 2018 conference report.</div>
+<div id="x-cats">NLP</div>
+<div id="x-date">2018-01-24</div>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/other/mszny-tik.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<h1>What’s cooking in the Hungarian NLP scene? MSZNY 2018 conference report.</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  I got into 
+  <a href="https://twitter.com/kisb971" rel="noreferrer nofollow" target="_blank">@kisb971</a>’s
+  car last Thursday and we headed down to Szeged to attend the 14<sup>th</sup> conference on Hungarian computational 
+  linguistics.[<a href="#ref1">1</a>] These were two days packed with inspiring presentations and chats, 
+  and I thought I’d write it all up while the impressions are still fresh. What you’re reading below is not 
+  a complete or balanced account; it is biased towards what resonated most with my personal interests.
+</p>
+
+<p>
+  <span class="sharer">
+    <a id="fb-share-link" href="https://facebook.com/sharer/sharer.php?u={{url}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="http://twitter.com/share?text={{share-text}}&url={{url}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{url}}%3F1&title={{short-title}}&summary={{share-text}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  </span>
+</p>
+
+<h2>Sin tax and some antics; plus, speech</h2>
+<p>
+  When I write packed, I really mean packed. The conference’s single track featured 24 talks, 10 posters and roughly 6 demos. The talks were grouped into blocks about Syntax; Semantics and Information Retrieval; Corpora and Basic Infrastructure; Speech; and Multilingual Approaches. In my mind I see patterns that cut right through these topics, so I’ll follow a somewhat different tack here.
+</p>
+<p>
+  I’ll be listing the titles in each section; you can find the referenced papers in the MSZNY 2018 conference 
+  volume.[<a href="#ref2">2</a>] The Hungarian titles’ translations are my own.
+</p>
+<p>
+  Before I delve into the details, two general impressions. First, the presentations were invariably awesome. No death by Powerpoint, no awkward speakers. Seeing so much great delivery in such a short time, I can’t help but remember my own clumsy self years back, before I was hardened by so many product demos and webinars.</p>
+<p>
+  Then, I am impressed by how natural and spontaneous all the talks were. I haven’t been to an academic conference in over ten years; I’ve grown accustomed to the antics of trade shows and industry events. Listening to these talks, I felt they were no different from an informal chat I’d have if I met the presenter on a random train ride or flight, and we just shared news about what we’ve both been up to in our research since we last met. I could spend not two days but weeks with this crowd, and never get bored of it.
+</p>
+<p>
+<p>
+  <img src="/files/other/mszny-tik.jpg" alt="." width="900" height="710" />
+</p>
+
+<h2>The sparse, the dense and the neural</h2>
+<blockquote>
+  <p style="font-style: normal;">
+    <b>Manual evaluation of Hungarian word embedding models</b><br/>
+    <i>Magyar szóbeágyazási modellek kézi kiértékelése</i><br/>
+    Attila Novák, Borbála Novák
+  </p>
+  <p style="font-style: normal;">
+    <b>Towards cross-lingual utilization of sparse word representations</b><br />
+    Gábor Berend
+  </p>
+  <p style="font-style: normal;">
+    <b>Combining machine translation systems through quality evaluation</b><br />
+    <i>Gépi fordítórendszerek kombinálása minőségbecslés segítségével</i><br />
+    László János Laki, Győző Zijian Yang
+  </p>
+  <p style="font-style: normal;">
+    <b>Hyphenation using deep neural networks</b><br />
+    Gergely Dániel Németh, Judit Ács
+  </p>
+  <p style="font-style: normal;">
+    <b>An experimental comparison of the deep neural state transition algorithms of speech recognition systems</b><br />
+    <i>Beszédfelismerők mély neuronhálós állapotkapcsolási algoritmusainak kísérleti összehasonlítása</i><br />
+    László Tóth, Tamás Grósz, Gábor Gosztolya
+  </p>
+  <p style="font-style: normal;">
+    <b>Restoring punctuation in TV subtitles with recurrent neural networks</b><br />
+    <i>Televíziós feliratok írásjeleinek visszaállítása rekurrens neurális hálózatokkal</i><br />
+    Máté Ákos Tündik, Balázs Tarján, György Szaszák
+  </p>
+  <p style="font-style: normal;">
+    <b>Attempts to estimate base frequency with deep neural networks in ultrasound silent speech interfaces</b><br />
+    <i>Kísérletek az alapfrekvencia becslésére mély neuronhálós, ultrahang-alapú némabeszéd-interfészekben</i><br />
+    Tamás Grósz, László Tóth, Gábor Gosztolya, Tamás Gábor Csapó, Alexandra Markó
+  </p>
+</blockquote>
+<p>
+  For my technology-focused mind, the papers that involve word embeddings and neural networks are what stand out most. Clearly these two approaches, which usually go hand in hand, have washed over the NLP scene in the past few years like a tsunami.
+</p>
+<p>
+  The word embedding tide reached Hungary with a negligible delay. By this year, work such as Novák & Novák about manual model evaluation shows that the method has become, erhm, firmly embedded in our toolset. My only wish would be for a gold standard dataset instead of the one-off approach that cannot be automatically reused to evaluate new models.
+</p>
+<p>
+  Berend’s work is an exciting approach to create sparse (or even binary) models from dense ones in a way that preserves the desirable algebraic properties through a linear transformation into a different language’s vector space.
+</p>
+<p>
+  Somewhat surprisingly, there was no report of neural MT this year. Then again, it’s hard to surpass last year’s result by Tihanyi & Oravecz. Laki & Yang showed how to train a quality evaluator to pick the best translation from multiple MT models, leading to a significant improvement in final quality. The approach is not unlike a committee of experts, boosted by hiring a well-trained judge.
+</p>
+<p>
+  The results of Németh & Ács are refreshing because the authors applied neural networks to a task that is <i>not</i> MT: namely, to learn the behavior of an existing, rules-based hyphenator. I’m expecting many similar non-MT applications in the future, hoping in particular for a combined morphology/tagger/lemmatizer that would generalize well to new words and forms.
+</p>
+<p>
+  The section where neural rules supreme this year is clearly speech technology. Half of all the speech papers build heavily on neural networks, and show impressive improvements over pre-neural approaches.
+</p>
+
+<h2>Digital and human</h2>
+<blockquote>
+  <p style="font-style: normal;">
+    <b>Inducing Semantic Micro-Clusters from Deep Multi-View Representations of Novels</b>[<a href="#ref3">3</a>]<br />
+    <i>Minden könyv másképp hasonló – Tartalomalapú, interpretálható szemantikus hasonlóság irodalmi szövegekben</i><br />
+    György Szarvas<br/>
+    -- keynote --
+  </p>
+  <p style="font-style: normal;">
+    <b>Narrative analysis of a Russian corpus (NaRu) with custom-developed sentiment and emotion dictionaries</b><br />
+    <i>Egy orosz nyelvű korpusz (NarRu) narratívaelemzése saját fejlesztésű szentiment- és emóciószótárakkal </i><br />
+    Zsófi Nyíri, Martina Katalin Szabó, Virág Ilyés
+  </p>
+  <p style="font-style: normal;">
+    <b>Fake or not? Automatic identification of fake news articles in Hungarian.</b><br />
+    <i>Kacsa vagy nem kacsa? Magyar nyelvű álhírek automatikus azonosítása</i><br />
+    Veronika Vincze
+  </p>
+  <p style="font-style: normal;">
+    <b>Processing, analyzing and visualizing the Rákosi era’s party records with text-based network analysis</b><br />
+    <i>A Rákosi-éra pártjegyzőkönyveinek feldolgozása, elemzése és vizualizációja szövegalapú kapcsolatháló-elemzési módszerekkel</i><br />
+    Attila Gulyás, Martina Katalin Szabó, István Boros Jr, Gergő Havadi
+  </p>
+  <p style="font-style: normal;">
+    <b>“And they’ve been living happily ever since, singing cheerful songs abut Lenin and Stalin.” An attempt at the genre classification of Soviet propaganda tales.</b><br />
+    <i>„S azóta jól élnek és vidám dalokat énekelnek Leninről és Sztálinról.” Szovjet propagandamesék műfaji azonosításának kísérlete</i><br />
+    Csilla Horváth<br/>
+    -- poster --
+  </p>
+</blockquote>
+<p>
+  This group of papers also comes from different blocks of the conference; what connects them for me is their broader reach towards humanities and social sciences.
+</p>
+<p>
+  Szarvas’s keynote stands out to me the most. It mobilizes impressive research building on top of recent precursors and creates a more refined representation of plots in prose fiction. The outcome of the unsupervised method forms the basis of a thematic recommendation engine that is directly usable in Amazon’s e-commerce business. Also, this mind-blowing chart from the presentation is possibly what made the deepest impression on me in the entire two days. Does anyone have an explanation for this dynamic?
+</p>
+
+<figure>
+  <img src="/files/other/us-nonfiction-titles.jpg" alt="." width="900" height="676" />
+  <figcaption style="text-align: center;">
+    Source: <a href="http://www.thewritermoibrahim.com/2016/09/over-50000-fiction-books-published-per.html" rel="noreferrer nofollow" target="_blank">The Writer Mo Ibrahim</a>
+  </figcaption>
+</figure>
+
+<p>
+  Similar in theme is Nyíri, Szabó & Ilyés’s paper about narrative analysis of Russian novels through emotion and sentiment. I can’t stop thinking about the potential of such approaches for data visualization and literary scholarship. Or even history, as the work about the analysis of Soviet propaganda tales or Rákosi-era party records shows.
+</p>
+<p>
+  A note of incredulity about the latter: this research involves scanning and manually fixing hundreds of pages of low-quality scanned documents. For some unfathomable reason, the Historical Archive seems to believe the privacy of a few potentially surviving Stalinist apparatchiks outweighs the benefits of open discourse about this 70-year-old chapter of history. In other words, after the immense effort put into digitizing this corpus, chances are slim it will ever show up as an accessible source for future research.
+</p>
+<p>
+  Vincze’s work builds a classifier to distinguish fake news articles from real ones. However, “fake news” in this 
+  context really means satire. The tool probably picks up stylistic markers more than anything else, and it’s not 
+  meant to spot fake news in the <i>Russia Today</i> or the Macedonian teenager[<a href="#ref4">4</a>] 
+  sense. Then again, the Silicon Valley giants are not having much luck creating such a tool either, so, hey.
+</p>
+
+<h2>Foundations</h2>
+<blockquote>
+  <p style="font-style: normal;">
+    <b>Mazsola, for everyone</b><br />
+    <i>Mazsola – mindenkinek</i><br />
+    Bálint Sass
+  </p>
+  <p style="font-style: normal;">
+    <b>All crawls lead to the same corpus: corpus building from CommonCrawl’s .hu domains</b><br />
+    <i>Közös crawlnak is egy korpusz a vége -- Korpuszépítés a CommonCrawl .hu domainjából</i><br />
+    Balázs Indig
+  </p>
+  <p style="font-style: normal;">
+    <b>Normo: An automatic normalizatiob tool for Middle Hungarian texts</b><br />
+    <i>Normo: Egy automatikus normalizáló eszköz középmagyar szövegekhez</i><br />
+    Noémi Vadász, Eszter Simon
+  </p>
+  <p style="font-style: normal;">
+    <b>Lemma or not?</b><br />
+    <i>Lemmi vagy nem lemmi</i><br />
+    Attila Novák, Borbála Novák
+  </p>
+  <p style="font-style: normal;">
+    <b>Automatic creation of lexical resources for minority Finno-Ugric languages</b><br />
+    <i>Lexikai erőforrások automatikus előállítása kisebbségi finnugor nyelvekre</i><br />
+    Eszter Simon, Iván Mittelholcz, Zsanett Ferenczi
+  </p>
+  <p style="font-style: normal;">
+    <b>Quality assurance efforts in the transcription and annotation of the HuTongue spontaneous speech corpus</b><br />
+    <i>A HuTongue spontán beszélt nyelvi korpusz leiratozásának és annotálásának minőségbiztosítási munkálatai</i><br />
+    Attila Gulyás, Júlia Galántai, Martina Katalin Szabó, Zea Szebeni<br/>
+    -- poster --
+  </p>
+</blockquote>
+<p>
+  While it’s easy and natural to be impressed by the quantum leap of machine learning driven by high-octane GPUs, it’s great to see that a lot of foundational work also continues. This is all the more important because even the shiniest methods will produce underwhelming results if we don’t have the right amount of data to feed them, and the right <i>quality</i> data.
+</p>
+<p>
+  Corpus-building from CommonCrawl, as presented by Indig, is the macro side of things. But we also have Normo for normalizing Middle Hungarian texts, bringing us closer to a complete diachronic view of Hungarian. I can hardly wait for the day when we have a dictionary with historical word frequency curves, such as this one for German:
+</p>
+
+<figure>
+  <img src="/files/other/dwds-natur.png" alt="." width="1200" height="612" />
+  <figcaption style="text-align: center;">
+    Source: <a href="https://www.dwds.de/r/plot?q=Natur" rel="noreferrer nofollow" target="_blank">DWDS</a>
+  </figcaption>
+</figure>
+
+<p>
+  Going even more micro, Simon, Mittelholcz & Ferenczi are working to record and share the vocabulary of Finno-Ugric languages, often with a vanishingly small population of speakers. I can’t even begin to express the respect I have for this effort, which is a huge contribution to preserving diversity and human cultural heritage in a time of accelerating language extinction.
+</p>
+<p>
+  And then we have tools. Novák & Novák will never stop improving Hungarian morphology, and we’re all the better off 
+  for it. Sass made public the code of <i>Mazsola</i>, a powerful query tool behind the online version of the Hungarian 
+  National Corpus.[<a href="#ref5">5</a>] If you have a large corpus lying around somewhere and you don’t have a way to explore verb arguments, you are now in luck.
+</p>
+
+<h2>Theory</h2>
+<blockquote>
+  <p style="font-style: normal;">
+    <b>Constructing and using a standardized Hungarian verbal argument dictionary</b><br />
+    <i>Egy egységesített magyar igei vonzatkerettár építése és felhasználása</i><br />
+    Noémi Vadász, Ágnes Kalivoda, Balázs Indig
+  </p>
+  <p style="font-style: normal;">
+    <b>Null or nothing? Case disambiguation within the window.</b><br />
+    <i>Nulla vagy semmi? Esetegyértelműsítés az ablakban</i><br />
+    Noémi Ligeti-Nagy, Noémi Vadász, Andrea Dömötör, Balázs Indig
+  </p>
+  <p style="font-style: normal;">
+    <b>Postpositions first! A corpus-driven analysis of postposition-like items.</b><br />
+    <i>Névutók, előre! Korpuszvezérelt elemzés a névutószerű elemekről</i><br />
+    Noémi Ligeti-Nagy
+  </p>
+</blockquote>
+<p>
+  We Hungarians hold theory in high esteem, so it’s no surprise that the talks about syntax had place of honor as the first block of the program. And that’s perfectly right too. I like this reminder that real insight about language still comes from human linguists, and not from the brute-force-on-steroids approaches of black-box machine learning.
+</p>
+<p>
+  Ligeti-Nagy explores the continuum stretching from case markers over postpositions to adverbs with arguments, situating the problem in the context of existing literature. But while previous scholarship primarily relied on speakers’ intuition to decide tests, the approach presented here analyzes and mines a corpus to decide on the basis of concrete attestations. The empirical scientist moans with delight.
+</p>
+<p>
+  Confession time: yours truly missed the train to become a real linguist many years ago. As much as he moaned with empirical postpositional delight, he was at a loss when in a different talk, Ligeti-Nagy was mining the same corpus for a distinction between nothings, null-elements, and null-elements denoted by a different Greek letter. Witty remarks about Chomsky getting intoxicated on <i>pálinka</i> are now officially denied, and I publicly admit to being an unwashed layperson.
+</p>
+
+<h2>The odd ones out</h2>
+<blockquote>
+  <p style="font-style: normal;">
+    <b>The World is Built with our Words to Each Other -- Basic and Fine-Tuned Intensional Profiles in Hungarian</b><br />
+    Anna Szeteli, Gábor Alberti, Judit Kleiber, Mónika Dóla
+  </p>
+  <p style="font-style: normal;">
+    <b>Etudes in Chinese-Hungarian Corpus-Based Lexical Acquisition</b><br />
+    Gábor Ugray
+  </p>
+</blockquote>
+<p>
+  I left two talks that I cannot shoehorn into any comfortable box for the end. The first is the mesmerizing research about intensional profiles in Hungarian. The import of this research is best conveyed in the authors’ own words: <i>[…] we present how speakers with their psychological egos can be separated from linguistically conventionalized addresser roles and how many pragmasemantic phenomena can be captured through pattern matching between addressers’ conventional profiles and the corresponding speakers’ information states, including a few elements of politeness. In short, the program is ultimately designed to simulate human intelligence through modeling human communication and language-based cognition in order to improve our theoretical background on the basis of the functioning of the program.</i>
+</p>
+<p>
+  The second one is my own paper. I explain how I weaponized an eclectic mix of NLP tools, mining a corpus of movie subtitles in order to acquire new vocabulary for my pet project, the CHDICT Chinese-Hungarian dictionary.
+</p>
+
+<h2>Academia and business</h2>
+<p>
+  Most of the MSZNY 2018 participants came from academia, but there was a noticeable cohort of folks from business too. The keynote speaker is now with Amazon, though he is in some ways family, having previously been a research associate at the Hungarian Academy of Sciences and the University of Szeged. Precognox presented in collaboration with academia, and we also spotted Spicy Analytics, SpeechTex, MorphoLogic, and Black Swan Hungary. Balázs and I, of course, proudly sported our metaphorical Kilgray hats.
+</p>
+
+<h2>A thank you note</h2>
+<p>
+  A huge thank you is due to the organizers for a flawless and very rewarding event: Judit Ács, Attila Novák, Eszter Simon, Dávid Sztahó, and Veronika Vincze.
+</p>
+
+<h2>References</h2>
+<p>
+  [<a name="ref1">1</a>]
+  <a href="http://rgai.inf.u-szeged.hu/index.php?lang=hu&page=mszny2018program" rel="noreferrer nofollow" target="_blank">rgai.inf.u-szeged.hu/index.php?lang=hu&page=mszny2018program</a>
+</p>
+<p>
+  [<a name="ref2">2</a>]
+  <a href="http://rgai.inf.u-szeged.hu/project/mszny2018/files/teljesB5.pdf" rel="noreferrer nofollow" target="_blank">rgai.inf.u-szeged.hu/project/mszny2018/files/teljesB5.pdf</a>
+</p>
+<p>
+  [<a name="ref3">3</a>] Lea Frermann, György Szarvas: Inducing Semantic Micro-Clusters from Deep Multi-View Representations of Novels. <i>Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing.</i><br />
+  <a href="https://aclanthology.info/papers/D17-1200/d17-1200" rel="noreferrer nofollow" target="_blank">aclanthology.info/papers/D17-1200/d17-1200</a>
+</p>
+<p>
+  [<a name="ref4">4</a>] Inside The Macedonian Fake-News Complex. <i>By Samanth Subramanian.</i> Wired, February 15, 2017.<br />
+  <a href="https://www.wired.com/2017/02/veles-macedonia-fake-news/" rel="noreferrer nofollow" target="_blank">www.wired.com/2017/02/veles-macedonia-fake-news/</a>
+</p>
+<p>
+  [<a name="ref5">5</a>]
+  <a href="http://corpus.nytud.hu/mazsola/index_eng.html" rel="noreferrer nofollow" target="_blank">corpus.nytud.hu/mazsola/index_eng.html</a>
+</p>
