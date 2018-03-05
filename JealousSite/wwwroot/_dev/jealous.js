@@ -7,21 +7,21 @@ JM.site = (function () {
 
   $(document).ready(function () {
     // Cookie warning
-    var cookies = localStorage.getItem("cookies");
-    if (cookies != "munch") {
-      var html = "<div class='cookies-wrap'><div class='cookies'><img src='/static/cookiemonster-white.svg' /><div>" +
-        "<span class='warning'>Cookies!</span><br />" +
-        "<span class='readMoreCookie'>Grrr?</span>" +
-        "<span class='acceptCookie'>Munch</span>" +
-        "</div></div></div>";
-      $("body").append(html);
-      $(".readMoreCookie").click(function () { window.location.href = "/cookies" });
-      $(".acceptCookie").click(function () {
-        $(".cookies-wrap").remove();
-        localStorage.setItem("cookies", "munch");
-      });
-    }
-    //$("body").append("<div class='cookies'><div><img src='/static/cookiemonster-white.svg'/></div></div>");
+    // Removed: no need after moving to Piwik
+    //var cookies = localStorage.getItem("cookies");
+    //if (cookies != "munch") {
+    //  var html = "<div class='cookies-wrap'><div class='cookies'><img src='/static/cookiemonster-white.svg' /><div>" +
+    //    "<span class='warning'>Cookies!</span><br />" +
+    //    "<span class='readMoreCookie'>Grrr?</span>" +
+    //    "<span class='acceptCookie'>Munch</span>" +
+    //    "</div></div></div>";
+    //  $("body").append(html);
+    //  $(".readMoreCookie").click(function () { window.location.href = "/cookies" });
+    //  $(".acceptCookie").click(function () {
+    //    $(".cookies-wrap").remove();
+    //    localStorage.setItem("cookies", "munch");
+    //  });
+    //}
 
     // Category filter (front page)
     $(".catSelector span").click(function (evt) {

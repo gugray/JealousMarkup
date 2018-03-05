@@ -39,6 +39,20 @@ body {
   background-color: #606060;
   width: auto;
 }
+input::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear {
+  display: none;
+}
+input {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0;
+}
 .content-wrap {
   min-height: 100%;
   height: auto !important;
@@ -371,6 +385,46 @@ body {
 }
 .content .imprint h1 {
   font-size: 1.3rem;
+}
+.content form.newsletter-sub {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+.content form.newsletter-sub label {
+  font-size: 12pt;
+}
+.content form.newsletter-sub input#tlemail {
+  display: inline-block;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  height: 1.3rem;
+  font-size: 12pt;
+  font-family: "Open Sans", sans-serif;
+  background-color: #fbfbfb;
+  width: 12rem;
+  border-bottom: 1pt solid #f0f0f0;
+}
+.content form.newsletter-sub input#tlsubmit {
+  display: inline-block;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  height: 1.3rem;
+  font-size: 12pt;
+  font-family: "Open Sans", sans-serif;
+  color: #b32a0b;
+  cursor: pointer;
+  width: 5rem;
+  background-color: #fbfbfb;
+  border-bottom: 1pt solid #f0f0f0;
+  transition: background-color 0.5s ease;
+}
+.content form.newsletter-sub input#tlsubmit:hover {
+  background-color: #fde0da;
 }
 .content .toc-item {
   margin-bottom: 1.5rem;
