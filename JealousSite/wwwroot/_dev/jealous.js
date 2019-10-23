@@ -22,6 +22,7 @@ JM.site = (function () {
     //    localStorage.setItem("cookies", "munch");
     //  });
     //}
+    //$("body").append("<div class='cookies'><div><img src='/static/cookiemonster-white.svg'/></div></div>");
 
     // Category filter (front page)
     $(".catSelector span").click(function (evt) {
