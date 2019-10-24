@@ -352,6 +352,9 @@ body {
   color: #137600;
   font-weight: 600;
 }
+.content p.small {
+  font-size: 80%;
+}
 .content .sharer {
   display: inline-block;
   width: 1.5rem;

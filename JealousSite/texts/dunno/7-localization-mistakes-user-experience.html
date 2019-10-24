@@ -1,0 +1,209 @@
+﻿<div id="x-rel">/7-localization-mistakes-user-experience</div>
+<div id="x-title">7 ways to ruin user experience through bad localization</div>
+<div id="x-cats">Language, Localization, UX & Design</div>
+<div id="x-date">2018-05-07</div>
+<meta name="description" content="A naïve approach to localization can instantly cancel out all your hard-won gains in user experience." />
+<meta name="keywords" content="user experience, UX, localization, best practices, common mistakes" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/other/despaired-user.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<h1>7 ways to ruin user experience through bad localization</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  This is an unedited version of an article I wrote for the March 5, 2018 issue of UX matters magazine.[<a href="#ref1">1</a>]
+</p>
+
+<p>
+  <span class="sharer">
+    <a id="fb-share-link" href="https://facebook.com/sharer/sharer.php?u={{url}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="http://twitter.com/share?text={{share-text}}&url={{url}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{url}}%3F1&title={{short-title}}&summary={{share-text}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  </span>
+</p>
+
+<figure>
+  <img src="/files/other/despaired-user.jpg" alt="User's day ruined by bad UX" width="1418" height="710" />
+  <figcaption style="text-align: right; font-size: 70%;">
+    Image by <a href="https://pixabay.com/users/www_slon_pics-5203613/" rel="noreferrer nofollow" target="_blank">www_slon_pics</a>
+  </figcaption>
+</figure>
+
+<p>
+  Competition for the attention of customers is fiercer than ever. In such a highly competitive marketplace, a flawless user experience is
+  not a luxury; it is central to your product’s adoption and success. We invest heavily into optimizing our products’ design and work to
+  squeeze the last bit of efficiency out of web forms, microcopy and the color of that proverbial <b>Check Out</b> button. Every possible improvement
+  is explored, tested and measured.
+</p>
+<p>
+  Then the day comes when it’s time to enter a new, non-English-speaking market. Many businesses realize too late that a naïve approach to
+  localization will instantly cancel out all those hard-won gains in user experience.
+</p>
+<p>
+  After helping many companies create a successful localization experience and reduce expenses along the way, I collected the seven most
+  common pitfalls. This text is a tongue-in-cheek exploration of what to do if you want to ruin your user experience through bad localization.
+</p>
+
+<h2>1: Build an unlocalizable product</h2>
+<p>
+  This is a trivial mistake, but maybe just because it’s so trivial, it’s the one I see most often.
+</p>
+<p>
+  The biggest part of localization involves language. Messages, labels, calls-to-action – they are all text, and need to be translated.
+  But as you initially build a product from the bottom up, it’s easy to forget about localization and hard-wire all the text into markup
+  and code. Unless you make sure from the beginning that these assets are neatly factored out, it will be expensive to even discover them
+  when you need to add the first localized language.
+</p>
+<p>
+  A particularly notorious offender is code that glues together messages programmatically. <i>“You have ” + x + “ items in your “ + y + “.”.</i>
+  There is virtually no language on the planet other than English where it’s possible to just translate <i>“You have”</i>, <i>“ items in your “</i>
+  and <i>“.”</i> and expect the result to make sense.
+</p>
+<p>
+  If your product is not engineered to be localizable, all your efforts are doomed to fail. An early investment into making the product
+  localizable will pay for itself several times over down the road.
+</p>
+
+
+<h2>2: Use machine translation</h2>
+<p>
+  Machine translation (MT) has profited immensely from the ongoing deep learning revolution. It has seen an unprecedented breakthrough in
+  quality over the last two years alone.
+</p>
+<p>
+  While MT has crossed a threshold where it now enables humans to truly grasp the meaning of a text in a different language, it is essential
+  to remember that MT is not human intelligence. It lacks understanding, empathy and nuance. Its output is always ungrammatical, imprecise,
+  or at the very least, unnatural. Just plugging machine-translated copy into a product is guaranteed to alienate the people engaging with it.
+  Using machine-translated text will inevitably make the product cryptic or downright unusable.
+</p>
+<p>
+  If you are tempted to use MT to save costs, remember the impact that replacing <b>Submit</b> with <b>Buy now</b> can have on conversion rates.
+  MT loses all of that nuance, and a lot more.
+</p>
+
+
+<h2>3: Provide no context for translators</h2>
+<p>
+  Part of the reason today’s MT systems cannot hope to achieve human quality is their lack of context. There’s no way to tell an MT system
+  that a particular instance of “Check out” is on a purchase button and not on a hotel room door.
+</p>
+<p>
+  Even when you’ve made the right choice and hired a professional translator, they cannot deliver the desired outcome if they lack context.
+  Throwing an Excel sheet with row after row of isolated user interface strings at them is a sure way to get inadequate translations.
+</p>
+<p>
+  The lowest-hanging fruit is to provide meaningful identifiers that help place every piece of text in the product’s context. For the best
+  outcome, you can invest in technology that allows translators to view the actual app or website and see every label, message and tooltip
+  as it appears to end users.
+</p>
+
+
+<h2>4: Ignore dates, measurements and other variables</h2>
+<p>
+  So far I have focused on translation, but localization has other aspects too. In a messaging app, what format do you use to show dates and
+  times? In a weather app, do you display the temperature in Fahrenheit or Celsius? On an e-commerce site, what currency do you show prices in?
+</p>
+<p>
+  These are cultural and geographical variables, not linguistic ones. Your product can detect them from the device’s locale or the user’s preferences,
+  or make intelligent guesses from other factors such as geolocation.
+</p>
+<p>
+  Finding the right defaults and exposing preferences without getting in the user’s way is as much art as science. In any case, you need to be
+  mindful of this dimension when making basic design decisions.
+</p>
+<p>
+
+
+  <h2>5: Do not adapt personality and tone of voice</h2>
+<p>
+  Color choice, visual style, illustrations, tone of voice, the phrasing of error messages, microinteractions – literally every design decision you
+  make contributes to the personality of your product, and by extension, of your brand.
+</p>
+<p>
+  Unfortunately, some of these decisions do not translate automatically into other cultures.
+</p>
+<p>
+  Most languages force you to make decisions that are not applicable to English. Do you use formal or informal language to address users? Can you
+  use the first person, the royal “we,” or are you forced to formulate impersonal messages? An online banking site that addresses a German audience
+  with the informal “du” is a sure-fire way to destroy confidence right at the landing page.
+</p>
+<p>
+  As a designer you are in a privileged position to make your client or boss aware of these factors and start a conversation. What are the values
+  underlying the original product’s personality? How do those values translate to the target culture? What personality will best reflect them,
+  and what are the consequences all the way down to the smallest decisions?
+</p>
+<p>
+  Naturally, no UX expert can be expected to become a universal translator. It is crucial to work with local experts. But as a professional, you are
+  the only one who can integrate these considerations into the design process as a whole.
+</p>
+
+
+<h2>6: Do not use technology</h2>
+<p>
+  If you have ticked all the boxes above, there is still one danger looming. With so many things to pay attention to, it is easy to end up
+  with a very labor-intensive and cumbersome process. Once your organization is aware of the challenges involved in localization, translation
+  technology can make an immense difference.
+</p>
+<p>
+  For efficiency, these tools will eliminate the most error-prone and repetitive steps. In the extreme, they allow you to hook up to commits
+  or check-ins. They will automatically distribute work among dozens of translation vendors, and check the translations back in as soon as they are done.
+</p>
+<p>
+  For quality, they allow linguists to work together in real time and stay consistent while working on different parts of the content. This
+  parallelization of work is essential to support agile workflows with frequent updates and short turnaround times.
+</p>
+<p>
+  Finally, translation technology allows you to take ownership of your multilingual assets. For instance, if you are forced to replace a vendor, you
+  will still have access to all the translations that you have paid for in the past.
+</p>
+
+
+<h2>7: Assume your audience is monolingual</h2>
+<p>
+  When people talk about localization, you often hear the phrase <i>translate into somebody’s language</i>. There is a false assumption
+  underlying this idea.
+</p>
+<p>
+  An estimated 60%[<a href="#ref2">2</a>] of the world’s population is multilingual. Bilinguals alone outnumber monolinguals (43% vs. 40%).
+  The rest speak even more languages. As a rule, there is no such thing as “somebody’s language” in the singular.
+</p>
+<p>
+  If you are a streaming service like Netflix, you might assume that on your German site, you need to offer all movies dubbed in German.
+  But a large share of the audience in that country is made up of people who, although they are fluent in German, would prefer to watch
+  movies in Turkish, Arabic, English, or some other language.
+</p>
+<p>
+  Remember how much effort we are investing into sensible defaults and into auto-filling fields with information that is available
+  from the context. Contrast that with the frustration of a person who must override the default language every single time they
+  visit a website because it picks the wrong one based on their IP address. This person is not the exception. The majority of the
+  world’s population is like that.
+</p>
+
+
+<h2>A short conclusion</h2>
+<p>
+  To achieve great global outcomes, it pays off to treat localization as a first-class design citizen. If you apply the same
+  attention and empirical rigor to it as to the classic aspects of user experience, you will have an edge over competitors
+  trapped in a monolingual and mono-cultural view of the world.
+</p>
+
+
+<h2>References</h2>
+<p>
+  [<a name="ref1">1</a>]
+  <a href="https://www.uxmatters.com/mt/archives/2018/03/7-ways-bad-localization-can-ruin-the-user-experience.php" rel="noreferrer nofollow" target="_blank">www.uxmatters.com/mt/archives/2018/03/7-ways-bad-localization-can-ruin-the-user-experience.php</a>
+</p>
+<p>
+  [<a name="ref2">2</a>]
+  <a href="http://ilanguages.org/bilingual.php" rel="noreferrer nofollow" target="_blank">ilanguages.org/bilingual.php</a>
+</p>
