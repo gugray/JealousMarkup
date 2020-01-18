@@ -1,0 +1,360 @@
+﻿<div id="x-rel">/pinyin-transcription-test-google-key5</div>
+<div id="x-title">Is automatic Pinyin transcription feasible? I tested Google MT and Key5.</div>
+<div id="x-cats">Chinese, NLP</div>
+<div id="x-date">2020-01-19</div>
+<div id="x-noindex">true</div>
+<meta name="description" content="Automatic Pinyin transcription is good enough to make Chinese text accessible if you can’t fluently read Hanzi yet. I tested the two best tools, Google MT and Key5, and compared their error profiles." />
+<meta name="keywords" content="Pinyin, Hanzi, transcription, annotation, Key5" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/zydeo-blog/dazhung-bao.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<h1>Is automatic Pinyin transcription feasible? I tested Google MT and Key5.</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  TL;DR: Machine-generated transcriptions are good enough to make Chinese text accessible, by and large, if you can’t fluently read Hanzi yet.
+  Key5 and Google MT both bring their own idiosyncratic error profile to the table. I provide a qualitative comparison and a word-by-word
+  evaluation on a sample text.
+</p>
+
+<p>
+  <span class="sharer">
+    <a id="fb-share-link" href="https://facebook.com/sharer/sharer.php?u={{url}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="http://twitter.com/share?text={{share-text}}&url={{url}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{url}}%3F1&title={{short-title}}&summary={{share-text}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  </span>
+</p>
+
+<p>
+  The Chinese script poses a well-known challenge for learners of Mandarin as a second language. A large number of symbols needs to be
+  memorized, and the script encodes phonetic information in a way that makes it impossible, in practice, to read unknown characters.
+</p>
+<p>
+  Pinyin[<a href="#ref01">1</a>]
+  is a romanization and orthography for writing Mandarin phonetically, with Latin letters. For details, Mark Swofford’s
+  website[<a href="#ref02">2</a>]
+  is a great resource. Pinyin has been in use in the PRC since the 1950s, but in practice its usage has remained limited to the
+  first years of primary school, teaching Chinese as a second language, and the transliteration of proper names, e.g., on street signs.
+  Consequently, no significant corpora exist in Pinyin, let alone parallel corpora with both characters and Pinyin.
+</p>
+<figure>
+  <img src="/files/zydeo-blog/pyx-3text.png" alt="Hanzi, Pinyin, and annotated text." width="950" height="848" />
+  <figcaption style="text-align: center;">
+    The same text in characters, Pinyin, and both.
+  </figcaption>
+</figure>
+<p>
+  This is where the automatic transcription of character text into proper Pinyin comes into play. If there is a way to reliably
+  do that, then as a learner I can leave the somewhat artificial world of textbooks and graded readers and go straight to real-life
+  content. This is what I do with every other foreign language that I learn: closely read a lot of interesting and fresh real-life
+  text, without expending most of the effort on the script instead of the language.
+</p>
+
+<h2>The challenge</h2>
+<p>
+  The automatic transcription of Chinese character text is difficult for two main reasons.
+</p>
+<p>
+  <b>Word boundaries.</b> Character text does not indicate them, but Pinyin does. Chinese word segmentation is a whole science unto
+  itself,[<a href="#ref03">3</a>]
+  relevant for a variety of purposes such as search, indexing, or machine translation. It is also a subset of the Pinyin transcription problem.
+</p>
+<p>
+  <b>Phonetic ambiguity.</b> Many characters, including some of the most frequent ones, are phonetically ambiguous: they have two or
+  more alternative readings, only one of which is correct in any given context.
+</p>
+<p>
+  Conventional approaches rely fundamentally on dictionaries, which contain a large part of the vocabulary along with the transcription
+  of each word. Dictionaries are complemented by heuristics and hand-crafted rules to obtain the best word segmentation; to choose the
+  most likely reading of ambiguous characters; to recognize proper names; and to observe the finer points of Pinyin orthography, e.g.,
+  regarding measure words and
+  particles.[<a href="#ref04">4</a>][<a href="#ref05">5</a>]
+</p>
+<p>
+  A straightforward machine learning approach would train a model from a few million sentence pairs in characters and in Pinyin.
+  Should there be no such character/Pinyin parallel corpus available, but at least we had large amounts of separate character and
+  Pinyin texts somewhere, then there are still unsupervised or adversarial learning approaches
+  available.[<a href="#ref06">6</a>]
+  In reality, there are no multimillion-sentence Pinyin corpora anywhere in existence. Today’s AI approaches appear to be at a
+  disadvantage for the Pinyin transcription problem.
+</p>
+
+<h2>Experiment design</h2>
+<p>
+  <b>The tools tested.</b> The two tools I decided to compare are
+  Key5[<a href="#ref07">7</a>]
+  and the embedded transcription feature of Google Translate. Looking for other alternatives, a quick search yields several
+  websites claiming to transcribe or annotate Chinese text. I failed to find even a single one, however, that appears to do
+  more than naïve dictionary-based segmentation. The output of such an approach is too bad even to serve as a baseline for
+  the real tools. If you are aware of other tools worthy of a close look, please let me know.
+</p>
+<p>
+  Key5 is a desktop tool for the PC and Mac that has been developed by S., P. Leimbigler, W. McKee and W. Zhang since 2000.
+  It comes recommended by Victor Mair; in fact, I learned about Key5 from a Language Log
+  post.[<a href="#ref08">8</a>]
+</p>
+<figure>
+  <img src="/files/zydeo-blog/pyx-key5-pinyin-format.png" alt="Pinyin annotation options in Key5" width="1297" height="862" />
+  <figcaption style="text-align: center;">
+    A screenshot of Key5 with sample text and part of the relevant options dialog
+  </figcaption>
+</figure>
+<p>
+  To add Pinyin with proper word-segmentation and capitalization in Key5, I paste character text into a new document; select all text;
+  click Format / Hanzi with Pinyin; and choose the Pinyin option as shown in the screenshot. This is when the magic happens and Key5
+  annotates the text with word-segmented, phonetically disambiguated Pinyin. The annotated file can then be saved as Unicode UTF-8 text:
+  it will contain two lines per paragraph, one with Pinyin, one with characters.
+</p>
+<p>
+  The other tool is Google Translate’s browser-based interface. If you paste Chinese into the source box, then along with the
+  translation on the right, you also get to read a Pinyin transcription under the source text. From the browser’s Developer Console,
+  this can conveniently be copied, and then pasted into a text file.
+</p>
+<figure>
+  <img src="/files/zydeo-blog/pyx-gtt-annotate.png" alt="Pinyin transcription in Google MT" width="1313" height="1074" />
+  <figcaption style="text-align: center;">
+    Google Translate with sample text, Pinyin transcription, and the Developer Console open at the element holding the transcription
+  </figcaption>
+</figure>
+<p>
+  <b>Dataset and annotation.</b> I used two short chapters from a work of fiction for the purpose of this experiment.
+  The chapters are from a published translation of Agota Kristof’s novel Le grand cahier (The Notebook) into Chinese
+  (simplified characters). I produced a Pinyin transcription using both tools as described above, and manually created a
+  “ground truth” version by a close reading of the two automatic transcriptions, paying attention to the correct reading
+  of each character, tones, and proper word segmentation. I do not investigate punctuation and capitalization in this experiment.
+</p>
+<p>
+  You can view the ground truth as a PDF file via
+  <a href="/files/zydeo-blog/pyx-files/eval-ground-truth.pdf" target="_blank">this link</a>.
+  I share all data files at the bottom of this post. I’m happy to share the scripts I used to produce them upon request.
+</p>
+
+<h2>Evaluation: the numbers</h2>
+<p>
+  In order to make the tools’ outputs comparable, I defined various word segmentation and phonetic transcription errors.
+  Each of these errors is defined on a syllable level; a syllable is defined as one non-punctuation Chinese character.
+  (The data has 6 occurrences of erhua 儿 in 2234 characters, which means equating syllables with characters is an acceptable
+  generalization that adds only negligible error.)
+</p>
+<p>
+  Segmentation errors:
+</p>
+<ul>
+  <li>
+    <b>Incorrectly glued</b>: the tool joined a syllable with the following syllable, but they ought to be written separately.<br />
+    Example: 一本 → <span style="color:#c00000;">yī</span>běn instead of <span style="color:#538135;">yī</span> běn
+  </li>
+  <li>
+    <b>Incorrectly split</b>: the tool did not join a syllable with the following syllable, but they ought to be written together.<br />
+    Example: 来自 → <span style="color:#c00000;">lái</span> zì instead of <span style="color:#538135;">lái</span>zì
+  </li>
+</ul>
+<p>
+  Phonetic transcription errors:
+</p>
+<ul>
+  <li>
+    <b>Should be neutral tone</b>: A syllable should have neutral tone, but the tool assigned a full tone to it, while otherwise picking
+    the correct Pinyin syllable.<br />
+    Example: 母亲 → mǔ<span style="color:#c00000;">qīn</span> instead of mǔ<span style="color:#538135;">qin</span>
+  </li>
+  <li>
+    <b>Wrong neutral tone</b>: A syllable should have a full tone, but the tool assigned neutral tone to it, while otherwise picking the
+    correct Pinyin syllable.<br />
+    Example: 里 → <span style="color:#c00000;">li</span> instead of <span style="color:#538135;">lǐ</span> (in a specific context)
+  </li>
+  <li>
+    <b>Wrong Pinyin</b>: The tool picked a wrong reading for the character in the specific context where it occurs.<br />
+    Example: 的 → <span style="color:#c00000;">dì</span> instead of <span style="color:#538135;">de</span> (in a specific context)
+  </li>
+</ul>
+<p>
+  Defining the problems on a syllable level makes it possible to calculate comparable error percentages, even if word segmentation is
+  different across the tools. You can view the entire output of both tools, with problems highlighted inline, via these two links:
+</p>
+<p>
+  <a href="/files/zydeo-blog/pyx-files/eval-GoogleMT-comp.html" target="_blank">Detailed evaluation of Google MT’s Pinyin transcription</a><br />
+  <a href="/files/zydeo-blog/pyx-files/eval-Key5-comp.html" target="_blank">Detailed evaluation of Key5’s Pinyin transcription</a><br />
+</p>
+<p>
+  The table below shows the summary results for Google MT and Key5.
+</p>
+<div class="centeredContent">
+  <table class="styleA">
+    <tr class="header">
+      <td class="rowHeader">Metric</td>
+      <td>Google MT</td>
+      <td>Key5</td>
+    </tr>
+    <tr>
+      <td class="rowHeader">Hanzi count</td>
+      <td>2234</td>
+      <td>2234</td>
+    <tr>
+    <tr class="dottedBottom">
+      <td class="rowHeader">Word count</td>
+      <td>1478</td>
+      <td>1478</td>
+    <tr>
+    <tr>
+      <td class="rowHeader">Incorrectly glued</td>
+      <td>24 (1.07%)</td>
+      <td>133 (5.95%)</td>
+    <tr>
+    <tr>
+      <td class="rowHeader">Incorrectly split</td>
+      <td>105 (4.70%)</td>
+      <td>59 (2.64%)</td>
+    <tr>
+    <tr class="dottedBottom">
+      <td class="rowHeader"><i>Total segmentation errors</i></td>
+      <td><i>129 (5.77%)</i></td>
+      <td><i>192 (8.59%)</i></td>
+    <tr>
+    <tr>
+      <td class="rowHeader">Should be neutral tone</td>
+      <td>68 (3.04%)</td>
+      <td>10 (0.45%)</td>
+    <tr>
+    <tr>
+      <td class="rowHeader">Wrong neutral tone</td>
+      <td>5 (0.22%)</td>
+      <td>40 (1.79%)</td>
+    <tr>
+    <tr>
+      <td class="rowHeader">Wrong pinyin</td>
+      <td>28 (1.25%)</td>
+      <td>13 (0.58%)</td>
+    <tr>
+  </table>
+</div>
+
+<h2>Evaluation: subjective notes</h2>
+<p>
+  I’ve used both tools extensively to annotate Chinese text for myself. The numbers above, together with the annotated samples,
+  confirm the impressions I have gathered along the way.
+</p>
+<p>
+  Google MT is more inclined to split words that should be written together; Key5, conversely, is a bit over-eager to join what
+  doesn’t belong together. Overall, Key5’s segmentation is a bit more off that Google’s.
+</p>
+<p>
+  Most segmentation errors are fairly innocuous, involving particles glued to the preceding word and the like. Often, as far as I
+  can tell, Pinyin’s orthographic rules are not completely clear either, and for lack of an extensive orthographic dictionary, it’s
+  hard to decide whether a given combination is a compound word that should be written together, or just a random encounter.
+</p>
+<p>
+  Some incorrectly joined syllables, however, are really bizarre, e.g.:
+</p>
+<p style="text-align:center;">
+  长什么模样我都不知道<br />
+  zhǎng shénme <span style="color:#c00000;">múyàngwǒ</span> dōu bù zhīdào
+</p>
+<p>
+  Key5’s decision to join múyàng with wǒ is hard to explain with either a heuristic or a wrong dictionary entry.
+  While both tools produce this type of error, overall Key5’s output is less pleasant to read because of them.
+</p>
+<p>
+  A frequent, innocuous phonetic transcription error is using a full tone where neutral tone is warranted, or vice versa.
+  Google appears to err on the side of full tones, while Key5 chooses the neutral tone more often. Neither of these affect very many
+  syllables, though.
+</p>
+<p>
+  A more annoying transcription error is choosing a rare, wrong pronunciation for some of the frequent particles: e.g.,
+  的 (<span style="color:#c00000;">dì</span> instead of <span style="color:#538135;">de</span>)
+  or 着 (<span style="color:#c00000;">zháo</span> instead of <span style="color:#538135;">zhe</span>).
+  Google is definitely the worse offender here. Although the percentage of this type or error is quite low in the evaluated sample,
+  these errors are particularly jarring; in my subjective perception, they appear more prevalent than they really are.
+</p>
+<p>
+  Curiously, Google occasionally throws in an incorrect syllable that comes completely out of the blue, a syllable that is not even
+  among the character’s possible readings at all. This includes
+  道 as <span style="color:#c00000;">dáo</span>, with the second tone, or, even more bizarrely, 啜 as <span style="color:#c00000;">chuài</span>
+  (instead of <span style="color:#538135;">chuò</span>). It is extremely unlikely that such false readings were introduced into Google MT
+  from any existing dataset like a dictionary or the Unihan database. Where they come from is just as mysterious as the full algorithm
+  behind Google MT’s Pinyin transcriptions.
+</p>
+<p>
+  For my practical purposes, I can obtain the best outcome by combining the two tools: use Key5’s output for pronunciation, but Google’s
+  output for word segmentation. This combined result needs perceivably less human verification and editing.
+</p>
+
+<h2>Data</h2>
+<p>
+  <a href="/files/zydeo-blog/pyx-files/eval-interlaced.txt" target="_blank">eval-interlaced.txt</a>
+  contains the unsegmented Hanzi that was the input of both tools, interlaced with the Pinyin transcription that is the ground truth
+  for the evaluation. eval-ground-truth.pdf is a more human-readable form of this exact file.<br />
+  <a href="/files/zydeo-blog/pyx-files/eval-GoogleMT.txt" target="_blank">eval-GoogleMT.txt</a> and
+  <a href="/files/zydeo-blog/pyx-files/eval-Key5.txt" target="_blank">eval-Key5.txt</a>
+  are the outputs of the two tools being tested.
+</p>
+
+
+
+
+
+
+
+
+
+<h2>References</h2>
+<p>
+  [<a name="ref01">1</a>]
+  <a href="https://en.wikipedia.org/wiki/Pinyin" rel="noreferrer nofollow" target="_blank">en.wikipedia.org/wiki/Pinyin</a>
+</p>
+<p>
+  [<a name="ref02">2</a>]
+  <a href="http://www.pinyin.info/index.html" rel="noreferrer nofollow" target="_blank">www.pinyin.info/index.html</a>
+</p>
+<p>
+  [<a name="ref03">3</a>] The best tool out there, as far as I can tell, is ICTLAS. To get a grasp of the problem of Chinese word
+  segmentation, skim the original paper. It's not exactly new, but apparently some things age really well.<br />
+  Hua-Ping Zhang, Hong-Kui Yu, De-Yi Xiong, Qun Liu: <i>HHMM-based Chinese Lexical Analyzer ICTCLAS</i>.
+  Proceedings of the Second SIGHAN Workshop on Chinese Language Processing, Sapporo, Japan, 2003.
+  [<a href="https://www.aclweb.org/anthology/W03-1730/" rel="noreferrer nofollow" target="_blank">PDF</a>].
+</p>
+<p>
+  [<a name="ref04">4</a>] Jun Xu, Guohong Fu and Haizhou Li:
+  <i>Grapheme-to-Phoneme Conversion for Chinese Text-to-Speech.</i>
+  In: INTERSPEECH 2004 - ICSLP, 8th International Conference on Spoken Language Processing, 2004.
+  [<a href="https://pdfs.semanticscholar.org/f37c/662898f3e028f62189e8575167f003c259b3.pdf" rel="noreferrer nofollow" target="_blank">PDF</a>]
+  <br /><br />
+  Just the abstract of the paper below gives a great glimpse into the problem of Pinyin transcription.<br />
+  <i>
+    Several methods were developed to improve grapheme-to-phoneme (G2P) conversion models for Chinese text-to-speech (TTS) systems.
+    The critical problem of data sparsity was handled by combining approaches. First, a text-selection method was designed to cover as many
+    G2P text corpus contexts as possible. Then, various data-driven modeling methods were used with comparisons to select the best method for
+    each polyphonic word. Finally, independent models were used for some neutral tone words in addition to the normal G2P models to achieve more
+    compact and flexible G2P models. Tests show that these methods reduce the relative errors by 50% for both normal polyphonic words and Chinese
+    neutral tones.
+  </i><br />
+  Lifu Yi, Jian Li, Jie Hao, Ziyu Xiong: <i>Improved grapheme-to-phoneme conversion for mandarin TTS.</i>
+  In: Tsinghua Science and Technology (Vol. 14, Issue 5, Oct 2009)<br />
+  <a href="https://ieeexplore.ieee.org/document/6076259 " rel="noreferrer nofollow" target="_blank">ieeexplore.ieee.org/document/6076259 </a>
+</p>
+<p>
+  [<a name="ref05">5</a>] Personal communication from Key5's Will McKee.
+</p>
+<p>
+  [<a name="ref06">6</a>] A similar approach is used to train machine translation engines for underresourced language pairs. E.g.:
+  Mikel Artetxe, Gorka Labaka, Eneko Agirre, Kyunghyun Cho: <i>Unsupervised Neural Machine Translation.</i> In: ICLR 2018 proceedings.
+  <a href="https://arxiv.org/abs/1710.11041" rel="noreferrer nofollow" target="_blank">arxiv.org/abs/1710.11041</a>
+</p>
+<p>
+  [<a name="ref07">7</a>]
+  <a href="https://cjkware.com/" rel="noreferrer nofollow" target="_blank">cjkware.com</a>
+</p>
+<p>
+  [<a name="ref08">8</a>]
+  <a href="https://languagelog.ldc.upenn.edu/nll/?p=40446" rel="noreferrer nofollow" target="_blank">Pinyin for phonetic annotation</a>.
+  Victor Mair on Language Log, October 27, 2018.
+</p>
