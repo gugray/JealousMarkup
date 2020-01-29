@@ -28,7 +28,8 @@ body {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  background-image: url("/bg.png");
+  background-color: white;
+  /*background-image: url("/bg.png");*/
 }
 .debug {
   display: none;
@@ -97,8 +98,8 @@ body {
   margin: 0 auto;
   height: auto;
   overflow-y: auto;
-  background-color: #fbfbfb;
-  padding: 1rem 1rem 2rem 1rem;
+  background-color: white;
+  padding: 1rem 0 2rem 0;
 }
 .content-wrap .push {
   height: 3rem;
@@ -189,6 +190,8 @@ body {
   }
   .content-wrap .content {
     width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .cookies-wrap {
     bottom: 0;
@@ -256,6 +259,11 @@ body {
 .content table {
   margin-bottom: 0.8rem;
 }
+.content figure {
+  position: relative;
+  float: left;
+  width: 100%;
+}
 .content p.lede {
   font-style: italic;
   margin-bottom: 2rem;
@@ -284,15 +292,16 @@ body {
 }
 .content img {
   display: block;
-  margin: 0 auto;
+  margin: 0;
   max-width: 100%;
+  width: 100%;
   height: auto;
   padding: 5px;
   border: 2px solid #e6e6e6;
   box-sizing: border-box;
 }
 .content figcaption {
-  text-align: center;
+  text-align: left;
   font-style: italic;
 }
 .content span.photocredit {
@@ -312,7 +321,7 @@ body {
   padding: 0.5rem 0 0.5rem 3rem;
   font-size: 95%;
   font-style: italic;
-  background-color: #f3f3f3;
+  background-color: #f7f7f7;
   margin-bottom: 1rem;
   border-left: 2px solid #b32a0b;
   overflow-y: hidden;
@@ -335,7 +344,7 @@ body {
   font-size: 70%;
   white-space: pre-wrap;
   padding: 0.5rem;
-  background-color: #f3f3f3;
+  background-color: #f7f7f7;
 }
 .content p.code b {
   color: #b32a0b;
@@ -485,6 +494,7 @@ table.styleA tr.solidBottom td {
 .catzine img {
   background-color: white;
   max-width: 28rem;
+  margin: 0 auto;
 }
 .catzine .socialshares {
   text-transform: uppercase;
@@ -582,7 +592,7 @@ table.styleA tr.solidBottom td {
   background-color: #feece8;
 }
 #localizationQuiz .qpage.solved .option:hover {
-  background-color: #fbfbfb;
+  background-color: white;
 }
 #localizationQuiz .qpage.solved .option.chosen {
   color: #b32a0b;
