@@ -1,0 +1,439 @@
+﻿<div id="x-rel">/mob-programming</div>
+<div id="x-title">Five introverts hop on a bus: my first brush with mob programming</div>
+<div id="x-cats">Stuff, Software</div>
+<div id="x-date">2021-03-01</div>
+<meta name="description" content="" />
+<meta name="keywords" content="mob programming, agile, introverts" />
+<meta property="og:image" content="https://jealousmarkup.xyz/files/other/mob-programming/berlin-faces-graffitti.jpg" />
+
+<meta property="og:title" content="{{short-title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<h1>Five introverts hop on a bus: my first brush with mob programming</h1>
+<p class="meta">{{meta}}</p>
+
+<p class="lede">
+  ~~ Artifical Intelligence as a metaphor of unchecked capitalism ~~
+</p>
+
+<p>
+  <span class="sharer">
+    <a id="fb-share-link" href="https://facebook.com/sharer/sharer.php?u={{url}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="http://twitter.com/share?text={{share-text}}&url={{url}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  </span>
+  <span class="sharer">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{url}}%3F1&title={{short-title}}&summary={{share-text}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  </span>
+</p>
+
+<figure>
+  <img src="/files/other/mob-programming/berlin-faces-graffitti.jpg" alt="Berlin graffitti showing four angry faces" width="1200" height="631" />
+  <figcaption>
+    These are not actual developers.
+  </figcaption>
+</figure>
+
+<p>
+  Last Saturday was the year’s first bright and sunny day here in Berlin, so I decided to spend it in front of a screen, participating in my
+  first-ever mob programming
+  retreat.[*]
+  Huge thanks to the hosts, Dimitry Polivaev
+  <a href="https://twitter.com/dimitrypolivaev" rel="noreferrer nofollow" target="_blank">@dimitrypolivaev</a> and Harald Reingruber
+  <a href="https://twitter.com/Harald3DCV" rel="noreferrer nofollow" target="_blank">@Harald3DCV</a> for dedicating a full day of their own life to this event!
+</p>
+<p>
+  If you’re like I was before the retreat, you must now be wondering: what <i>is</i> mob programming? Dimitry has created and shared a great slide
+  deck[*]
+  explaining it, along with the structure of the retreat. The images and tables below are from this presentation.
+</p>
+
+<h2>What is mob programming?</h2>
+<p>
+  Mob programming is a form of collaborative software development where a group of 4 or 5 people work together, creating software with test-driven development and refactoring. In this one-day retreat, the teams explored changing constraints around collaboration over the course of four sessions.
+</p>
+<p>
+  The group works on a single computer at a time, with only one person typing; the others are all watching the typist’s shared screen.
+</p>
+<p>
+  There are three roles in the group:
+</p>
+<ul>
+  <li>
+    The <i>driver</i> is the person who does the typing. I keep getting confused by the names, so I personally ended up calling this role the
+    <i>typist</i>. They only type whatever they are told by the <i>navigator</i>.
+  </li>
+  <li>The <i>navigator</i> tells the driver what to type.</li>
+  <li>Everyone else is a <i>mobber</i>.</li>
+</ul>
+<p>
+  Exactly what each role does depends on the mobbing style. Because Dimitry’s slides explain this so well, I will just use them and breeze over the four styles below. But first, a few more things to explain.
+</p>
+<ul>
+  <li>
+    The roles are rotated on a tight schedule, every 4 minutes. This is driven by an online collaborative
+    timer[*]
+    that provides the rhythm and tracks the rotation of the roles.
+  </li>
+  <li>In the online retreat, each group had their own Zoom breakout room, and whoever was the driver shared their screen.</li>
+  <li>
+    We used cyber-dojo[*]
+    for real-time collaborative coding in the browser.
+  </li>
+  <li>After each full cycle through the team, we used one round as a mini-retrospective. In this 4-minute round the typist wrote notes into a markdown file instead of writing a test or code.</li>
+  <li>
+    Two full rotations made up a session (about 45 minutes). The next session was then dedicated to a different mobbing style. Each session (2 in the morning, 2 in the afternoon) was sandwiched between time spent in the main Zoom call. These were used by Dimitry to explain what’s going to happen next, and provided room to exchange impressions, clarify things etc.
+  </li>
+</ul>
+<p>
+  The retreat had over 20 participants (4 groups), which all independently worked on the same task, the elevator
+  kata.[*]
+  The audience was very heterogenous, so each group started out by choosing a programming language to work in.
+</p>
+
+<h2>The four mobbing styles</h2>
+
+<p><b>Style 1: Navigator as a <u>soloist</u></b>: leads strong</p>
+
+<figure>
+  <img src="/files/other/mob-programming/mobbing-style-soloist.jpg" alt="." width="900" height="505" />
+  <figcaption>
+    Source: Dimitry Polivaev's
+    <a href="https://docs.google.com/presentation/d/18nyk8HeQxFfAPzvq7vV1TnZH3JxyhpRdgcs-3zsqz0w/edit#slide=id.p" rel="noreferrer nofollow" target="_blank">slide deck</a> (CC-BY)
+  </figcaption>
+</figure>
+
+<table class="styleB">
+  <tr class="header">
+    <td valign="top"></td>
+    <td valign="top" style="color: #004176;">PRACTICE</td>
+    <td valign="top" style="color: #137600;">DO</td>
+    <td valign="top" style="color: #b32a0b;">DON'T</td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Navigator<br /><i>Commander</i></td>
+    <td valign="top">
+      Lead, find solutions, speak to the group, communicate goals (what to achieve) and reasons (why that), give instructions to DRIVER (what to implement) at the level they are able to execute (“intention - location - details”), ask for help, listen
+    </td>
+    <td valign="top">
+      <p>Tell DRIVER what to do based on your choices. You are the decider.</p>
+      <p>Whenever you need, ask for suggestions from the MOB.</p>
+    </td>
+    <td valign="top"></td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Driver</td>
+    <td valign="top">Listen to the NAVIGATOR, ask for clarification or technical help</td>
+    <td valign="top">
+      <p>Follow NAVIGATOR instructions</p>
+      <p>Ask NAVIGATOR questions</p>
+    </td>
+    <td valign="top">
+      <p>Type anything before being told by the NAVIGATOR</p>
+      <p>Argue. The navigator decides.</p>
+    </td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Mob</td>
+    <td valign="top">
+      Listen, be patient, respond to NAVIGATOR, find solutions
+    </td>
+    <td valign="top">
+      <p>Allow the navigator’s vision to play out. Create a space for learning. This may prove difficult</p>
+    </td>
+    <td valign="top">
+      <p>Ask NAVIGATOR questions or offer suggestions before the NAVIGATOR request</p>
+    </td>
+  </tr>
+</table>
+
+<p><b>Style 2: Navigator as a <u>conductor</u></b>: moderates and decides</p>
+
+<figure>
+  <img src="/files/other/mob-programming/mobbing-style-conductor.jpg" alt="." width="900" height="503" />
+  <figcaption>
+    Source: Dimitry Polivaev's
+    <a href="https://docs.google.com/presentation/d/18nyk8HeQxFfAPzvq7vV1TnZH3JxyhpRdgcs-3zsqz0w/edit#slide=id.p" rel="noreferrer nofollow" target="_blank">slide deck</a> (CC-BY)
+  </figcaption>
+</figure>
+
+<table class="styleB">
+  <tr class="header">
+    <td valign="top"></td>
+    <td valign="top" style="color: #004176;">PRACTICE</td>
+    <td valign="top" style="color: #137600;">DO</td>
+    <td valign="top" style="color: #b32a0b;">DON'T</td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Mob</td>
+    <td valign="top">
+      <span style="color: #aa7e05;">Offer suggestions, ask questions</span>, listen
+    </td>
+    <td valign="top">
+      <p style="color: #aa7e05;">When intending to speak let the navigator know and wait for the moment when the floor is given to you</p>
+    </td>
+    <td valign="top">
+      <p>No one may interrupt another</p>
+    </td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Navigator<br /><i>Chair</i></td>
+    <td valign="top">
+      <span style="color: #aa7e05;">
+        Moderate the MOB,
+        create safe environment,
+        ask open questions,
+        encourage everybody to contribute,
+      </span>
+      make final decisions, give instructions to the DRIVER
+    </td>
+    <td valign="top">
+      <p style="color: #aa7e05;">Give word to the members of the MOB</p>
+      <p style="color: #aa7e05;">Listen to the MOB before doing the next step</p>
+      <p style="color: #aa7e05;">Ask open questions to help the MOB (what, how, etc),</p>
+      <p>Tell DRIVER what to do <span style="color: #aa7e05;">based on ideas coming from the MOB</span></p>
+    </td>
+    <td valign="top">
+      <p>Tell DRIVER what to do based on own ideas not coming from the MOB</p>
+      <p>Ask closed questions (A or B, YES or NO etc)</p>
+    </td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Driver</td>
+    <td valign="top">
+      <span style="color: #aa7e05;">Offer suggestions like a mobber</span>, listen, follow NAVIGATOR instructions, ask for clarification or technical help
+    </td>
+    <td valign="top">
+      <p style="color: #aa7e05;">Always raise hands and wait for permission before you talk</p>
+      <p>Follow NAVIGATOR instructions</p>
+    </td>
+    <td valign="top">
+      <p>Type anything before being told by the NAVIGATOR</p>
+    </td>
+  </tr>
+</table>
+
+<p><b>Style 3: Navigator as a <u>sound engineer</u></b>: listens and decides</p>
+
+<figure>
+  <img src="/files/other/mob-programming/mobbing-style-sound-engineer.jpg" alt="." width="900" height="507" />
+  <figcaption>
+    Source: Dimitry Polivaev's
+    <a href="https://docs.google.com/presentation/d/18nyk8HeQxFfAPzvq7vV1TnZH3JxyhpRdgcs-3zsqz0w/edit#slide=id.p" rel="noreferrer nofollow" target="_blank">slide deck</a> (CC-BY)
+  </figcaption>
+</figure>
+
+<table class="styleB">
+  <tr class="header">
+    <td valign="top"></td>
+    <td valign="top" style="color: #004176;">PRACTICE</td>
+    <td valign="top" style="color: #137600;">DO</td>
+    <td valign="top" style="color: #b32a0b;">DON'T</td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Mob</td>
+    <td valign="top">
+      <p style="color: #aa7e05;">Elaborate goals and implementation details without a moderator</p>
+    </td>
+    <td valign="top">
+      <p style="color: #aa7e05;">Make suggestions, express support or disagreement or ask questions any time</p>
+    </td>
+    <td valign="top">
+      <p>Talk over one another</p>
+    </td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Navigator<br /><i>Arbitrator</i></td>
+    <td valign="top">
+      <span style="color: #aa7e05;">Listen to the MOB</span>, make and explain decisions, give instructions to the DRIVER
+    </td>
+    <td valign="top">
+      <p>Always wait for the MOB suggestions before doing the next step</p>
+      <p>Tell DRIVER what to do based on ideas discussed with the MOB</p>
+    </td>
+    <td valign="top">
+      <p>Tell DRIVER what to do based on ideas before they have been discussed by the MOB</p>
+    </td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Driver</td>
+    <td valign="top">
+      Listen to the NAVIGATOR, ask for clarification or technical help
+    </td>
+    <td valign="top">
+      <p>Ask NAVIGATOR questions</p>
+    </td>
+    <td valign="top">
+      <p>Offer ideas</p>
+      <p style="color: #aa7e05;">Participate in the discussions</p>
+      <p>Type anything before being told by the NAVIGATOR</p>
+    </td>
+  </tr>
+</table>
+
+<p><b>Style 4: Self-organized mob</b>: no navigator</p>
+
+<figure>
+  <img src="/files/other/mob-programming/mobbing-style-self-organized.jpg" alt="." width="900" height="506" />
+  <figcaption>
+    Source: Dimitry Polivaev's
+    <a href="https://docs.google.com/presentation/d/18nyk8HeQxFfAPzvq7vV1TnZH3JxyhpRdgcs-3zsqz0w/edit#slide=id.p" rel="noreferrer nofollow" target="_blank">slide deck</a> (CC-BY)
+  </figcaption>
+</figure>
+
+<table class="styleB">
+  <tr class="header">
+    <td valign="top"></td>
+    <td valign="top" style="color: #004176;">PRACTICE</td>
+    <td valign="top" style="color: #137600;">DO</td>
+    <td valign="top" style="color: #b32a0b;">DON'T</td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Mob</td>
+    <td valign="top">
+      Listen, discuss goals, <span style="color: #aa7e05;">communicate intent and instruct the DRIVER</span>
+    </td>
+    <td valign="top">
+      <p>Make suggestions, express support or disagreement or ask questions any time</p>
+      <p style="color: #aa7e05;">Establish consensus or consent (no disagreement)</p>
+      <p style="color: #aa7e05;">Tell DRIVER what to try at the level they are able to execute</p>
+    </td>
+    <td valign="top">
+      <p>Talk over one another</p>
+    </td>
+  </tr>
+  <tr class="dottedBottom">
+    <td valign="top">Driver</td>
+    <td valign="top">
+      Listen, <span style="color: #aa7e05;">implement ideas coming from the MOB</span>, ask for clarification or technical help
+    </td>
+    <td valign="top">
+      <p>Ask the  MOB for clarification</p>
+      <p style="color: #aa7e05;">Offer ideas to the MOB when needed</p>
+    </td>
+    <td valign="top">
+      <p>Type anything before being instructed by the MOB</p>
+    </td>
+  </tr>
+</table>
+
+<h2>First impressions</h2>
+<p>
+  Come 5 o’clock I felt... Exhilarated! And also, incredibly exhausted. This retreat was one heck of a ride.
+</p>
+
+<figure>
+  <img src="/files/other/mob-programming/zoom-retreat.jpg" alt="." width="1200" height="770" />
+  <figcaption>
+    Archival snapshot for a happier age when "kids these days" no longer know what a virtual event in a so-called Zoom video conference
+    looked like. Participants'  webcams on the right have been blurred on purpose. In reality, we were all very sharp people.
+  </figcaption>
+</figure>
+
+
+<p>
+  It’s safe to assume that everyone who participated is essentially a developer, which means we spend our workdays working from home, sitting in front of a screen. If these folks decide to spend their <i>Saturday</i> sitting in front of a screen to try something new, that’s a massive level of dedication. That’s a great premise to start from, and it guarantees, at the very least, that this day is going to produce lots of new insight.
+</p>
+<p>
+  Also, workshops like this tend to cost a ton of money, and here the organizers were giving it away for free.
+</p>
+<p>
+  What struck me (and I’m being provocative here) is how little each group got done after having four or five smart people work on a toy exercise for a full day. We all had a handful of tests for an average of one tiny class, which was typically riddled with a deep conceptual misunderstanding. Individually, each of us could have solved the task at hand two or three times over in the same time.
+</p>
+<p>
+  To which it’s fair to point out, as people did in the closing all-hands retrospective, that each team actually achieved a lot, if we just look at it from the right perspective:
+</p>
+<ul>
+  <li>We had to juggle a novel and complex tech setup involving Zoom, the online timer and the online code editor.</li>
+  <li>We also had to understand, internalize and perform the new and unusual theater of the mob programming roles and styles.</li>
+  <li>There was a lot of diversity in programming experience, knowledge of the chosen programming language, and English proficiency. Heck, when was the last time you were giving or receiving micro-editing instructions about indenting code, opening parentheses, closing curly brackets and the like?</li>
+  <li>In spite of all this, the teams actually ended up with a shared understanding of the problem and the seed of a potential solution.</li>
+</ul>
+<p>
+  It is very hard to carry on a single line of thought over two or more role-switches and get something done over a longer arch. A few times this flow happened during the day, and when it did, the endorphine kick was massive.
+</p>
+<p>
+  I would be totally up to trying this out this over more than just a single day.
+</p>
+
+<h2>The million dollar question: Isn’t this super inefficient?</h2>
+<p>
+  Before lunch break a minor controversy emerged around test-driven development, with the predictable extremes of “I never write tests
+  and I don’t see the point” and “Code without tests is not even code, it’s just scribbles on a napkin.” The hosts quickly and decisively
+  steered the crowd away from that fruitless debate, which left the room open for the other nagging question:
+  <i>But... is this even feasible? How is this efficient? Isn’t it just a waste of five people’s time?</i>
+</p>
+<p>
+  That’s a great question, and I’d love to know the answer.
+</p>
+<p>
+  Mob programming lives under the broader agile umbrella, and contrary to popular belief, the point of agile is to make teams slower, not faster. A big part of agile discipline is to limit the amount of work items on the board, and to timebox efforts into two or three-week sprints. Before, we had scope creep, missed deadlines, recurring conflicts between stakeholders, unpredictability, pressure, and burnout. Agile’s promise is to have less of all that.
+</p>
+<p>
+  Every kind of knowledge work is fiercely hard to scale beyond one brain, and most methodologies are essentially modern implementations of
+  the (supposedly African) proverb, <i>If you want to go fast, go alone; if you want to go far, go together</i>.
+</p>
+<p>
+  If that’s the goal, I can see how mob programming might deliver. Its main promise, after all, is to improve the bus factor in organizations, i.e., the minimum number of people whose disappearance (by way of getting hit by a bus) would kill the project because of the knowledge/skills/competence they, and only they, possess. It’s about never having irreplaceable people.
+</p>
+<p>
+  While that sounds intuitively true, there are other promises where I am sitting on the fence. Does the wisdom of the crowd lead to better solutions and better quality? Or does it mean that teams settle on the lowest common denominator? Are mobs ultimately faster because their joint wisdom avoids pitfalls, or does the overhead end up making them less efficient than asynchronous forms of collaboration?
+</p>
+<p>
+  It appears that there aren’t any compelling, evidence-based answers to these questions in the literature. That is in itself a fascinating fact, but I’ll have to leave that for another time.
+</p>
+
+<h2>Other takeaways</h2>
+<p>
+  The day brought a couple of highlights for me that are not strictly about mob programming.
+</p>
+<p>
+  Tooling matters. No, seriously, <i>tooling matters</i>. The setup with screen sharing, the online timer and cyber-dojo was incredibly efficient, and yet even this way, every handover took at least 30 seconds. Half a minute out of every 4 minutes is a serious overhead. People who have done this in real-life remote settings said they had used a Git commit/push/pull workflow, which was even more overhead, forcing them to extend the cycle to up to 15 minutes.
+</p>
+<p>
+  With the right tooling, this works, if only barely. Without the right tooling, it’s unimaginable.
+</p>
+<p>
+  The lack of a proper IDE was another striking experience. IntelliSense, auto-formatting, refactoring tools like
+  <i>Rename, Find references, Go to definition</i>, powerful editing features like block insertion, syntax highlighting &ndash; creature comforts like these represent several multiples of developer productivity. Cyber-dojo is an amazing browser-based tool, but in comparison to a proper IDE, working in it felt genuinely crippling. Oh, did I mention the lack of debugging?
+</p>
+<p>
+  Language also matters. I mean human language: if you’re in a collaborative setting that focuses 100% on verbal communication, using a language where someone is not entirely fluent is a severe limitation. You need to keep this in mind if you’re thinking of trying mob programming in a real-life situation. It limits your options with regards to team composition.
+</p>
+<p>
+  It felt not entirely right to have an event without a clear, explicit commitment to inclusivity and a code of conduct. The Berlin Code of
+  Conduct[*]
+  could be a readily availably option that’s already worked out and well established; it is used by various other meetups.
+  Four out of the twenty-plus participants were women, and their voice was almost entirely suppressed by three or four loud men in the
+  shared discussions. Moderation is a tough activity and the hosts did their best, but more emphasis would be useful in future events.
+</p>
+
+<h2>The introvert factor</h2>
+<p>
+  There’s a psychological angle that’s been with me ever since the retreat, and for me it’s perhaps the biggest question mark about mob programming. Obviously I’m thinking about this because I’m a typical member of the introvert tribe myself.
+</p>
+<p>
+  Compared to the general population, an outsized proportion of programmers are introverts. Is it a case that programming just happened to be populated by introverts, and so it’s become an introverts’ field? Or is there something about programming as an activity that by its nature attracts introverts? However that may be, a lot of the talent in software are just introverts.
+</p>
+<p>
+  If you’re an introvert that means you recharge when you are alone, and your energy is drained when you are in interaction with others. Mob programming? 100% interaction. Just as I wrote, it was a thrilling day, but for me, it was also incredibly exhausting. I could do this for a week, maybe for a stretch of two weeks, but I cannot permanently exist with this level of people interaction.
+</p>
+<p>
+  In other words, my main doubt is: aside from occasional timeboxed settings, can a methodology like mob programming that is 100% interaction be a good match for a population with an exceptionally high need for solitude? Would we be doing ourselves a favor by putting our charmingly introverted programmers in a setting that’s permanently draining for them?
+</p>
+<p>
+  The race to find the best way to make teams slower is still on.
+</p>
+
+
+
+<h2>References</h2>
+<p>
+  [<a name="ref1">1</a>]
+  <a href="https://www.kalzumeus.com/2014/11/07/doing-business-in-japan/" rel="noreferrer nofollow" target="_blank">kalzumeus.com/2014/11/07/doing-business-in-japan</a>
+</p>
